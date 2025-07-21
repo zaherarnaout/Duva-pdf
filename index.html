@@ -14,10 +14,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <!-- ✅ Use the exact same structure as Webflow template -->
-  <div id="pdf-container" class="pdf-export-wrapper hidden">
-    <div class="docraptor-header"></div>
-    <div class="main-content">
+  <div id="pdf-container">
+    <div class="docraptor-header">
+      <!-- Move all header content here (logo, product name, icons, etc.) -->
       <div class="header-wrapper">
         <div class="header-left-wrapper">
           <div class="div-block-4"></div>
@@ -52,6 +51,9 @@
         </div>
       </div>
       <div class="left-divider"></div>
+    </div>
+    <!-- Main content goes here (hero-section, specifications, accessories, etc.) -->
+    <div class="main-content">
       <div class="hero-section w-row">
         <div class="left-section">
           <div class="left-hero-wrapper">
@@ -151,14 +153,16 @@
         </div>
       </div>
     </div>
-    <div class="footer-wrapper">
-      <div>
-        <div class="text-block-17">www.duvalighting.com</div>
-        <div class="text-block-18">Important Notice<br>Dimensions are not to scale.<br>Specifications and technical data are subject to change without prior notice.</div>
-  </div>
-      <div class="div-block-4"></div>
-  </div>
-  <div class="docraptor-footer"></div>
+    <div class="docraptor-footer">
+      <!-- Move all footer content here (footer-wrapper, copyright, etc.) -->
+      <div class="footer-wrapper">
+        <div>
+          <div class="text-block-17">www.duvalighting.com</div>
+          <div class="text-block-18">Important Notice<br>Dimensions are not to scale.<br>Specifications and technical data are subject to change without prior notice.</div>
+        </div>
+        <div class="div-block-4"></div>
+      </div>
+    </div>
   </div>
   
   <!-- ✅ Add the same inline styles as Webflow template -->
