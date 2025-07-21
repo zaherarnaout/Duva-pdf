@@ -2142,3 +2142,25 @@ function injectPdfImages() {
     console.log('⚠️ Photometric image source or container not found');
   }
 }
+
+function styleSpecLabelsAndValues() {
+  const specBlocks = document.querySelectorAll('#pdf-container .specifications-full-width .text-block-16');
+  specBlocks.forEach(block => {
+    // Split by <br> or line break
+    const html = block.innerHTML.trim();
+    const parts = html.split(/<br\s*\/?>(.*)/i);
+    if (parts.length >= 2) {
+      const label = parts[0].replace(/<[^>]+>/g, '').trim();
+      const value = parts[1].replace(/<[^>]+>/g, '').trim();
+      block.innerHTML = `<span class='label'>${label}</span><br><span class='value'>${value}</span>`;
+    }
+  });
+}
+// Call this after PDF content is injected
+if (typeof injectPdfContent === 'function') {
+  const originalInjectPdfContent = injectPdfContent;
+  injectPdfContent = function() {
+    originalInjectPdfContent.apply(this, arguments);
+    styleSpecLabelsAndValues();
+  };
+}
