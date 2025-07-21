@@ -2658,3 +2658,7 @@ opacity: 1 !important;
 #pdf-container {
   color: #212121 !important;
 }
+#pdf-container .product-code,
+#pdf-container .product-code * {
+  color: #C0392B !important;
+}
