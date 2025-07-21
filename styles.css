@@ -2011,22 +2011,14 @@ opacity: 1 !important;
 
 /* Header pinned at top */
 .pdf-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: running(header);
   height: 100px;
-  padding: 20px 40px;
 }
 
 /* Footer pinned at bottom */
 .pdf-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  padding: 20px 40px;
+  position: running(footer);
+  height: 80px;
 }
 
 /* Page content fits between header and footer */
@@ -2698,11 +2690,22 @@ opacity: 1 !important;
   position: relative;
 }
 @page {
+  margin: 100px 40px 80px 40px;
+}
+.pdf-header {
+  position: running(header);
+  height: 100px;
+}
+.pdf-footer {
+  position: running(footer);
+  height: 80px;
+}
+@page {
   @top-center {
-    content: element(docraptor-header);
+    content: element(header);
   }
   @bottom-center {
-    content: element(docraptor-footer);
+    content: element(footer);
   }
 }
 #pdf-container {
