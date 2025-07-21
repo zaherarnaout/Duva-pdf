@@ -2546,3 +2546,20 @@ opacity: 1 !important;
 }
 
 /* === End FINAL BULLETPROOF TWO-COLUMN LAYOUT === */
+
+/* === PDF Icon Sizing and Spacing === */
+#pdf-container .pdf-cms-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 3px !important;
+  margin-left: 3px !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+#pdf-container .pdf-cms-icon img {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
