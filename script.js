@@ -2023,12 +2023,14 @@ function updateProductCodeInjection() {
   
   if (cmsProductCode && codeTarget) {
     codeTarget.textContent = cmsProductCode;
+    codeTarget.style.color = '#C0392B'; // Force red color
     console.log("Product code injected from CMS:", cmsProductCode);
   } else if (codeTarget) {
     // Fallback to static source if CMS element not found
     const codeSource = document.getElementById("product-code");
     if (codeSource) {
       codeTarget.textContent = codeSource.textContent;
+      codeTarget.style.color = '#C0392B'; // Force red color
       console.log("Product code injected from static source:", codeSource.textContent);
     }
   }
