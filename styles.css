@@ -2637,14 +2637,24 @@ opacity: 1 !important;
 }
 #pdf-container .product-code {
   color: #C0392B !important;
-}
-#pdf-container .generated-code {
+  font-weight: 700 !important;
   font-size: 15px !important;
-  font-weight: 400 !important;
   margin-bottom: 8px !important;
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
   max-width: 100% !important;
+}
+#pdf-container .generated-code {
   color: #111 !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  margin-bottom: 8px !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+}
+#pdf-container {
+  color: #212121 !important;
 }
