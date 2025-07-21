@@ -2568,6 +2568,8 @@ opacity: 1 !important;
   box-sizing: border-box !important;
   flex: 0 0 40px !important;
   padding: 0 !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
 }
 #pdf-container .pdf-cms-icon img {
   width: 100% !important;
@@ -2590,6 +2592,8 @@ opacity: 1 !important;
 }
 #pdf-container .logo-img img {
   width: 110px !important;
+  min-width: 110px !important;
+  max-width: 110px !important;
   height: 40px !important;
   object-fit: contain !important;
   display: block !important;
