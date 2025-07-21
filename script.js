@@ -2082,29 +2082,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // === Inject PDF Icons from CMS to #pdf-container ===
 function injectPdfIcons() {
-  // Find actual CMS icons from the main page (outside PDF container)
+  // Find all CMS icons for this product (from the main page, not PDF container)
   const cmsIcons = document.querySelectorAll('#pdf-icons .pdf-cms-icon');
   const targetContainer = document.querySelector('#pdf-container .header-right-wrapper');
+  const logo = targetContainer ? targetContainer.querySelector('.logo-img') : null;
 
-  if (!cmsIcons.length || !targetContainer) {
-    console.log('⚠️ No CMS icons found or target container missing.');
+  if (!cmsIcons.length) {
+    console.log('⚠️ No CMS icons found in #pdf-icons for this product.');
+    return;
+  }
+  if (!targetContainer || !logo) {
+    console.log('⚠️ PDF icon target container or logo not found.');
     return;
   }
 
-  // Clear ALL existing icon-cms elements in PDF container to prevent repetition
-  const existingIcons = targetContainer.querySelectorAll('.pdf-cms-icon');
-  existingIcons.forEach(icon => {
-    icon.remove();
+  // Remove all existing icons in the PDF container (but NOT the logo)
+  targetContainer.querySelectorAll('.pdf-cms-icon').forEach(icon => icon.remove());
+
+  // Inject all icons before the logo
+  cmsIcons.forEach((icon, i) => {
+    const clone = icon.cloneNode(true);
+    clone.removeAttribute('id');
+    targetContainer.insertBefore(clone, logo);
+    console.log(`✅ Injected icon #${i+1}:`, clone);
   });
 
-  // Add CMS icons before the logo
-  cmsIcons.forEach(icon => {
-    const cloned = icon.cloneNode(true);
-    cloned.removeAttribute('id');
-    targetContainer.insertBefore(cloned, targetContainer.querySelector('.logo-img'));
-  });
-
-  console.log('✅ PDF icons injected successfully from CMS:', cmsIcons.length, 'icons');
+  console.log(`✅ Injected ${cmsIcons.length} icons into PDF container.`);
 }
 
 // === Inject Product, Dimension, and Photometric Images into PDF ===
