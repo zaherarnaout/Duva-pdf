@@ -2665,6 +2665,11 @@ opacity: 1 !important;
 #pdf-container .specifications-full-width .text-block-16 {
   color: #C0392B !important;
 }
+#pdf-container .specifications-full-width .text-block-16 .label {
+  color: #212121 !important;
+  font-weight: 500 !important;
+}
 #pdf-container .specifications-full-width .text-block-16 .value {
   color: #C0392B !important;
+  font-weight: 500 !important;
 }
