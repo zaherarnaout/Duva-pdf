@@ -2552,14 +2552,37 @@ opacity: 1 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin-right: 3px !important;
-  margin-left: 3px !important;
+  margin: 0 3px !important;
   width: 32px !important;
   height: 32px !important;
+  flex: 0 0 32px !important;
 }
 #pdf-container .pdf-cms-icon img {
   width: 32px !important;
   height: 32px !important;
   object-fit: contain !important;
   display: block !important;
+}
+
+/* === PDF Header Logo and Divider Styling === */
+#pdf-container .logo-img {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  height: 40px !important;
+  margin-left: 12px !important;
+}
+#pdf-container .logo-img img {
+  width: 110px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+#pdf-container .logo-divider {
+  width: 3px !important;
+  height: 40px !important;
+  background: #C0392B !important;
+  border-radius: 2px !important;
+  margin-right: 12px !important;
+  display: inline-block !important;
 }
