@@ -16,6 +16,10 @@
 <body>
   <!-- ✅ Use the exact same structure as Webflow template -->
   <div id="pdf-container" class="pdf-export-wrapper hidden">
+    <div class="docraptor-header">
+      <img src="https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/687deba9ee422418f2183bd6_Duva-logo-Dark.png" alt="DUVA Logo" style="height: 30px; vertical-align: middle;">
+      <span style="font-size: 16px; font-weight: bold; margin-left: 12px;">Product Datasheet</span>
+    </div>
     <div class="header-wrapper">
       <div class="header-left-wrapper">
         <div class="div-block-4"></div>
@@ -155,7 +159,11 @@
   </div>
       <div class="div-block-4"></div>
   </div>
+  <div class="docraptor-footer">
+    <span class="footer-page-box"><span class="pageNumber"></span></span>
+    <span style="font-size: 12px; color: #888;">© 2024 DUVA Lighting &nbsp;|&nbsp; Page <span class="pageNumber"></span> of <span class="totalPages"></span></span>
   </div>
+</div>
   
   <!-- ✅ Add the same inline styles as Webflow template -->
   <div class="w-embed">
@@ -547,5 +555,21 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://docraptor.com/docraptor-1.0.0.js"></script>
+  <script>
+function downloadDocRaptorPDF() {
+  DocRaptor.createAndDownloadDoc({
+    user_credentials: "iXZ7LF8qTVH-4Jz4QYFC", // Production API key
+    test: false, // Production mode
+    type: "pdf",
+    name: "duva-product-datasheet.pdf",
+    document_content: document.documentElement.outerHTML,
+    javascript: true,
+    prince_options: {
+      media: "print"
+    }
+  });
+}
+</script>
 </body>
 </html>
