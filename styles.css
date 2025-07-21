@@ -2577,9 +2577,7 @@ opacity: 1 !important;
 #pdf-container .logo-img {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
-  height: 40px !important;
-  margin-left: 12px !important;
+  flex-direction: row !important;
 }
 #pdf-container .logo-img img {
   width: 110px !important;
@@ -2609,4 +2607,19 @@ opacity: 1 !important;
   vertical-align: middle !important;
   box-sizing: border-box !important;
   content: '';
+}
+#pdf-container .logo-series-divider {
+  width: 2px !important;
+  min-width: 2px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  background: #C0392B !important;
+  border-radius: 0 !important;
+  margin-right: 12px !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  content: '';
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  border: 1px solid blue !important; /* DEBUG: Remove after confirming visibility */
 }
