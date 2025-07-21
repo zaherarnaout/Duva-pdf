@@ -2586,3 +2586,12 @@ opacity: 1 !important;
   margin-right: 12px !important;
   display: inline-block !important;
 }
+
+#pdf-container .logo-img .left-divider {
+  width: 4px !important;
+  height: 40px !important;
+  background: #C0392B !important;
+  border-radius: 2px !important;
+  margin-right: 12px !important;
+  display: inline-block !important;
+}
