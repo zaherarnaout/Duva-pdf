@@ -2558,19 +2558,28 @@ opacity: 1 !important;
 
 /* === PDF Icon Sizing and Spacing === */
 #pdf-container .pdf-cms-icon {
-  display: inline-flex !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin: 0 3px !important;
-  width: 32px !important;
-  height: 32px !important;
-  flex: 0 0 32px !important;
+  margin: 0 2px !important;
+  background: none !important;
+  box-sizing: border-box !important;
+  flex: 0 0 40px !important;
+  padding: 0 !important;
 }
 #pdf-container .pdf-cms-icon img {
-  width: 32px !important;
-  height: 32px !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
   object-fit: contain !important;
   display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-sizing: border-box !important;
 }
 
 /* === PDF Header Logo and Divider Styling === */
