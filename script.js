@@ -1758,6 +1758,8 @@ function injectPdfContent() {
   if (featuresSource && featuresTarget) {
     featuresTarget.innerHTML = featuresSource.innerHTML;
   }
+  injectPdfIcons();
+  injectPdfImages();
 }
 
 function generatePDF() {
@@ -2081,7 +2083,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // === Inject PDF Icons from CMS to #pdf-container ===
 function injectPdfIcons() {
   // Find actual CMS icons from the main page (outside PDF container)
-  const cmsIcons = document.querySelectorAll('.icon-cms:not(#pdf-container .icon-cms)');
+  const cmsIcons = document.querySelectorAll('#pdf-icons .pdf-cms-icon');
   const targetContainer = document.querySelector('#pdf-container .header-right-wrapper');
 
   if (!cmsIcons.length || !targetContainer) {
@@ -2090,7 +2092,7 @@ function injectPdfIcons() {
   }
 
   // Clear ALL existing icon-cms elements in PDF container to prevent repetition
-  const existingIcons = targetContainer.querySelectorAll('.icon-cms');
+  const existingIcons = targetContainer.querySelectorAll('.pdf-cms-icon');
   existingIcons.forEach(icon => {
     icon.remove();
   });
@@ -2108,7 +2110,7 @@ function injectPdfIcons() {
 // === Inject Product, Dimension, and Photometric Images into PDF ===
 function injectPdfImages() {
   // Product Image
-  const productSource = document.querySelector('#product-image-source img');
+  const productSource = document.querySelector('#main-lightbox-trigger.product-image');
   const pdfImageContainer = document.querySelector('#pdf-container .main-product-pdf-img');
   if (productSource && pdfImageContainer) {
     pdfImageContainer.innerHTML = `<img src="${productSource.src}" style="max-width: 100%; height: auto; width: 180px; height: 180px; object-fit: contain;">`;
@@ -2118,7 +2120,7 @@ function injectPdfImages() {
   }
 
   // Dimension Image
-  const dimensionSource = document.querySelector('#dimension-image-source img');
+  const dimensionSource = document.querySelector('#diagram.dimension');
   const pdfDimContainer = document.querySelector('#pdf-container .diagram-pdf-img');
   if (dimensionSource && pdfDimContainer) {
     pdfDimContainer.innerHTML = `<img src="${dimensionSource.src}" style="max-width: 100%; height: auto; width: 180px; height: 180px; object-fit: contain;">`;
@@ -2128,7 +2130,7 @@ function injectPdfImages() {
   }
 
   // Photometric Image
-  const photometricSource = document.querySelector('#photometric-image-source img');
+  const photometricSource = document.querySelector('#Photometric.photometric');
   const pdfPhotoContainer = document.querySelector('#pdf-container .photometric-pdf-img');
   if (photometricSource && pdfPhotoContainer) {
     pdfPhotoContainer.innerHTML = `<img src="${photometricSource.src}" style="max-width: 100%; height: auto; width: 180px; height: 180px; object-fit: contain;">`;
