@@ -1501,6 +1501,15 @@ opacity: 1 !important;
   background-color: #C0392B;
 }
 
+.logo-series-divider {
+  width: 2px !important;
+  height: 40px !important;
+  background-color: #C0392B !important;
+  border-radius: 0 !important;
+  margin-right: 12px !important;
+  display: inline-block !important;
+}
+
 /* === Center Section === */
 .header-center {
   flex: 1;
