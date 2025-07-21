@@ -2690,15 +2690,14 @@ opacity: 1 !important;
   position: relative;
 }
 @page {
-  margin: 100px 40px 80px 40px;
+  size: A4;
+  margin: 30mm 20mm;
 }
-.pdf-header {
+.docraptor-header {
   position: running(header);
-  height: 100px;
 }
-.pdf-footer {
+.docraptor-footer {
   position: running(footer);
-  height: 80px;
 }
 @page {
   @top-center {
