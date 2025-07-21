@@ -2662,3 +2662,9 @@ opacity: 1 !important;
 #pdf-container .product-code * {
   color: #C0392B !important;
 }
+#pdf-container .specifications-full-width .text-block-16 {
+  color: #C0392B !important;
+}
+#pdf-container .specifications-full-width .text-block-16 .value {
+  color: #C0392B !important;
+}
