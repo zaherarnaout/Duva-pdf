@@ -2621,5 +2621,4 @@ opacity: 1 !important;
   content: '';
   flex-shrink: 0 !important;
   flex-grow: 0 !important;
-  border: 1px solid blue !important; /* DEBUG: Remove after confirming visibility */
 }
