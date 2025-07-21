@@ -2635,3 +2635,16 @@ opacity: 1 !important;
   flex-shrink: 0 !important;
   flex-grow: 0 !important;
 }
+#pdf-container .product-code {
+  color: #C0392B !important;
+}
+#pdf-container .generated-code {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  margin-bottom: 8px !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  color: #111 !important;
+}
