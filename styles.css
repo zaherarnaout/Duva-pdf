@@ -1923,42 +1923,7 @@ opacity: 1 !important;
   margin-top: 24px;
 }
 
-.div-block-5 {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.div-block-6 img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  margin-right: 12px;
-}
-
-.div-block-7 {
-  display: flex;
-  flex-direction: column;
-}
-
-.text-block-19 {
-  font-size: 14px;
-  font-weight: bold;
-  color: #C0392B;
-}
-
-.text-block-20 {
-  font-size: 13px;
-  font-weight: 600;
-  color: #222;
-}
-
-.text-block-21 {
-  font-size: 12px;
-  color: #444;
-}
+/* Old accessory classes removed - now using dynamic injection */
 
 .footer-wrapper {
   display: flex;
