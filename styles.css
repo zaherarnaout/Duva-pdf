@@ -1502,8 +1502,8 @@ opacity: 1 !important;
   width: 4px;
   height: 40px;
   background-color: #C0392B;
-  margin-top: 12px !important;
-  margin-bottom: 12px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 .logo-series-divider {
@@ -1512,8 +1512,8 @@ opacity: 1 !important;
   background-color: #C0392B !important;
   border-radius: 0 !important;
   margin-right: 12px !important;
-  margin-top: 12px !important;
-  margin-bottom: 12px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   display: inline-block !important;
 }
 
@@ -1901,8 +1901,8 @@ opacity: 1 !important;
   background-color: #212121 !important;
   width: 2px !important;
   height: 40px !important;
-  margin-top: 12px !important;
-  margin-bottom: 12px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   margin-right: 20px !important;
   display: block !important;
 }
@@ -2537,15 +2537,15 @@ opacity: 1 !important;
 
 /* === PDF Icon Sizing and Spacing === */
 #pdf-container .pdf-cms-icon {
-  width: 30px !important;
-  height: 30px !important;
+  width: 18px !important;
+  height: 18px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   margin: 0 1px !important;
   background: none !important;
   box-sizing: border-box !important;
-  flex: 0 0 30px !important;
+  flex: 0 0 18px !important;
   padding: 0 !important;
   border: 1px solid #ccc !important;
   border-radius: 4px !important;
@@ -2553,8 +2553,8 @@ opacity: 1 !important;
 #pdf-container .pdf-cms-icon img {
   width: 100% !important;
   height: 100% !important;
-  max-width: 30px !important;
-  max-height: 30px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
   object-fit: contain !important;
   display: block !important;
   margin: 0 !important;
