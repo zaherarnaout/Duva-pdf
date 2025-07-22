@@ -1947,7 +1947,6 @@ function styleSpecLabelsAndValues() {
  * Sends the PDF's HTML content to the Java backend to generate a PDF with DocRaptor.
  */
 function downloadPdfViaBackend() {
-    console.log("Starting PDF generation via backend...");
     const pdfContainer = document.getElementById('pdf-container');
     if (!pdfContainer) {
         console.error('PDF container not found!');
@@ -1957,94 +1956,59 @@ function downloadPdfViaBackend() {
 
     // Clone the node to avoid modifying the live DOM
     const pdfContentClone = pdfContainer.cloneNode(true);
-    
-    // Ensure all images are loaded (if any are dynamically added and might not be ready)
-    // This is a simple check; a more robust solution would use Promises on image.onload
-    const images = pdfContentClone.getElementsByTagName('img');
-    let imagesLoaded = true;
-    for (let img of images) {
-        if (!img.complete) {
-            imagesLoaded = false;
-            break;
-        }
-    }
-    
-    if (!imagesLoaded) {
-        console.warn("Images are not fully loaded. PDF generation might be incomplete.");
-    }
-    
-    // Create a full HTML document to send to DocRaptor
-    const pdfBodyHtml = pdfContentClone.outerHTML;
-    const stylesheetUrl = "https://duva-pdf.pages.dev/styles.css";
-    
-    // The Webflow JavaScript files are required for layout and dynamic data.
-    // We use the full, absolute URLs to avoid any issues with relative paths.
-    const jQueryScript = `<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=684a5d9b82bae84c8dbeb42f" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>`;
-    const webflowScript = `<script src="https://duva-lighting.webflow.io/js/webflow.js" type="text/javascript"></script>`;
 
-    const htmlContent = `
+    // --- Ensure all images use absolute URLs ---
+    const imgs = pdfContentClone.querySelectorAll('img');
+    imgs.forEach(img => {
+        // If the src is relative, convert it to absolute using the current location
+        if (img.src && !img.src.startsWith('http')) {
+            const a = document.createElement('a');
+            a.href = img.src;
+            img.src = a.href;
+        }
+    });
+
+    // --- Build the full HTML document ---
+    const stylesheetUrl = "https://duva-pdf.pages.dev/styles.css";
+    const fullHTML = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
-            <meta charset="UTF-8">
-            <title>DUVA Product Datasheet</title>
-            <link rel="stylesheet" href="${stylesheetUrl}">
+            <meta charset="UTF-8" />
+            <title>DUVA PDF</title>
+            <link rel="stylesheet" href="${stylesheetUrl}" />
         </head>
         <body>
-            ${pdfBodyHtml}
-
-            ${jQueryScript}
-            ${webflowScript}
+            ${pdfContentClone.outerHTML}
         </body>
         </html>
     `;
 
-    // The URL of your running Java backend
-    const backendUrl = 'http://localhost:8080/generate-pdf';
-
-    console.log("Sending HTML to backend at:", backendUrl);
-    
-    fetch(backendUrl, {
+    // --- Send to backend ---
+    fetch('http://localhost:8080/generate-pdf', {
         method: 'POST',
         headers: {
-            'Content-Type': 'text/html',
+            'Content-Type': 'text/html'
         },
-        body: htmlContent,
+        body: fullHTML
     })
     .then(response => {
-        if (!response.ok) {
-            // If response is not OK, throw an error to be caught by the catch block
-            throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
-        }
-        console.log("Received successful response from backend.");
-        return response.blob(); // Get the PDF data as a Blob
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.blob();
     })
     .then(blob => {
-        console.log("PDF blob received, creating download link...");
-        // Create a temporary URL for the blob
         const url = window.URL.createObjectURL(blob);
-        
-        // Create a temporary link element to trigger the download
         const a = document.createElement('a');
-        a.style.display = 'none';
         a.href = url;
-        
-        // Use the product code for the filename if available
-        const productCodeElement = document.querySelector('.product-code');
-        const fileName = productCodeElement ? `${productCodeElement.textContent.trim()}.pdf` : 'duva-datasheet.pdf';
-        a.download = fileName;
-        
+        a.download = 'DUVA-product.pdf';
         document.body.appendChild(a);
         a.click();
-        
-        // Clean up by revoking the temporary URL
+        a.remove();
         window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        console.log("Download triggered successfully.");
     })
     .catch(error => {
         console.error('Error generating PDF:', error);
-        alert('Failed to generate PDF. Make sure your local backend is running and check the console for errors.');
+        alert('Failed to generate PDF. Make sure your backend is running and accessible.');
     });
 }
 
