@@ -1960,7 +1960,6 @@ function downloadPdfViaBackend() {
     // --- Ensure all images use absolute URLs ---
     const imgs = pdfContentClone.querySelectorAll('img');
     imgs.forEach(img => {
-        // If the src is relative, convert it to absolute using the current location
         if (img.src && !img.src.startsWith('http')) {
             const a = document.createElement('a');
             a.href = img.src;
@@ -1984,16 +1983,20 @@ function downloadPdfViaBackend() {
         </html>
     `;
 
-    // --- Send to backend ---
+    // DEBUG LOG — See what's being sent
+    console.log("Sending full HTML to backend:");
+    console.log(fullHTML);
+
+    // --- Send to backend as JSON ---
     fetch('http://localhost:8080/generate-pdf', {
         method: 'POST',
         headers: {
-            'Content-Type': 'text/html'
+            'Content-Type': 'application/json'
         },
-        body: fullHTML
+        body: JSON.stringify({ html: fullHTML })
     })
     .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) throw new Error('PDF generation failed');
         return response.blob();
     })
     .then(blob => {
@@ -2008,7 +2011,7 @@ function downloadPdfViaBackend() {
     })
     .catch(error => {
         console.error('Error generating PDF:', error);
-        alert('Failed to generate PDF. Make sure your backend is running and accessible.');
+        alert('Failed to generate PDF. Check console and backend.');
     });
 }
 
