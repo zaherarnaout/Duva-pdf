@@ -2202,14 +2202,19 @@ function injectSelectedAccessories() {
     const code = accessoryItem.querySelector('.acc-code')?.textContent?.trim() || '';
     const title = accessoryItem.querySelector('.acc-title')?.textContent?.trim() || '';
     const description = accessoryItem.querySelector('.acc-description')?.textContent?.trim() || '';
-    const image = accessoryItem.querySelector('.accessory-image .acc-img');
-    const imageSrc = image?.src || '';
+    
+    // Get image - try multiple selectors
+    const image = accessoryItem.querySelector('.accessory-image .acc-img, .accessory-image img, .acc-img');
+    const imageSrc = image?.src || image?.getAttribute('src') || '';
+    
+    console.log(`🔍 Accessory ${index + 1} image src:`, imageSrc);
 
     // Create accessory HTML for PDF
     const accessoryHTML = `
       <div class="accessory-item">
         <div class="accessory-image">
-          <img src="${imageSrc}" alt="${title}" style="width: 80px; height: 60px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+          ${imageSrc ? `<img src="${imageSrc}" alt="${title}" style="width: 80px; height: 60px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; display: block;">` : 
+          `<div style="width: 80px; height: 60px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;">No Image</div>`}
         </div>
         <div class="accessory-details">
           <div class="accessory-code">${code}</div>
