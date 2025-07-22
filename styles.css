@@ -2540,7 +2540,7 @@ opacity: 1 !important;
   width: 25px !important;
   height: 25px !important;
   display: flex !important;
-  align-items: flex-start !important;
+  align-items: center !important;
   justify-content: center !important;
   margin: 0 1px !important;
   background: none !important;
