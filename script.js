@@ -1930,23 +1930,103 @@ function injectPdfImages() {
 }
 
 function styleSpecLabelsAndValues() {
-  const specBlocks = document.querySelectorAll('#pdf-container .specifications-full-width .text-block-16');
-  specBlocks.forEach(block => {
-    // Split by <br> or line break
-    const html = block.innerHTML.trim();
-    const parts = html.split(/<br\s*\/?>(.*)/i);
-    if (parts.length >= 2) {
-      const label = parts[0].replace(/<[^>]+>/g, '').trim();
-      const value = parts[1].replace(/<[^>]+>/g, '').trim();
-      block.innerHTML = `<span class='label'>${label}</span><br><span class='value'>${value}</span>`;
+    const specLabels = document.querySelectorAll('#pdf-container .text-block-16');
+    specLabels.forEach(element => {
+        const text = element.innerHTML;
+        // Check if we haven't already wrapped it
+        if (!text.includes('<span class="label">')) {
+            const parts = text.split(':');
+            if (parts.length === 2) {
+                element.innerHTML = `<span class="label">${parts[0].trim()}:</span> <span class="value">${parts[1].trim()}</span>`;
+            }
+        }
+    });
+}
+
+/**
+ * Sends the PDF's HTML content to the Java backend to generate a PDF with DocRaptor.
+ */
+function downloadPdfViaBackend() {
+    console.log("Starting PDF generation via backend...");
+    const pdfContainer = document.getElementById('pdf-container');
+    if (!pdfContainer) {
+        console.error('PDF container not found!');
+        alert('Error: Could not find PDF content.');
+        return;
     }
-  });
+
+    // Clone the node to avoid modifying the live DOM
+    const pdfContentClone = pdfContainer.cloneNode(true);
+    
+    // Ensure all images are loaded (if any are dynamically added and might not be ready)
+    // This is a simple check; a more robust solution would use Promises on image.onload
+    const images = pdfContentClone.getElementsByTagName('img');
+    let imagesLoaded = true;
+    for (let img of images) {
+        if (!img.complete) {
+            imagesLoaded = false;
+            break;
+        }
+    }
+    
+    if (!imagesLoaded) {
+        console.warn("Images are not fully loaded. PDF generation might be incomplete.");
+    }
+    
+    const htmlContent = pdfContentClone.outerHTML;
+
+    // The URL of your running Java backend
+    const backendUrl = 'http://localhost:8080/generate-pdf';
+
+    console.log("Sending HTML to backend at:", backendUrl);
+    
+    fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/html',
+        },
+        body: htmlContent,
+    })
+    .then(response => {
+        if (!response.ok) {
+            // If response is not OK, throw an error to be caught by the catch block
+            throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
+        }
+        console.log("Received successful response from backend.");
+        return response.blob(); // Get the PDF data as a Blob
+    })
+    .then(blob => {
+        console.log("PDF blob received, creating download link...");
+        // Create a temporary URL for the blob
+        const url = window.URL.createObjectURL(blob);
+        
+        // Create a temporary link element to trigger the download
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        
+        // Use the product code for the filename if available
+        const productCodeElement = document.querySelector('.product-code');
+        const fileName = productCodeElement ? `${productCodeElement.textContent.trim()}.pdf` : 'duva-datasheet.pdf';
+        a.download = fileName;
+        
+        document.body.appendChild(a);
+        a.click();
+        
+        // Clean up by revoking the temporary URL
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        console.log("Download triggered successfully.");
+    })
+    .catch(error => {
+        console.error('Error generating PDF:', error);
+        alert('Failed to generate PDF. Make sure your local backend is running and check the console for errors.');
+    });
 }
-// Call this after PDF content is injected
-if (typeof injectPdfContent === 'function') {
-  const originalInjectPdfContent = injectPdfContent;
-  injectPdfContent = function() {
-    originalInjectPdfContent.apply(this, arguments);
-    styleSpecLabelsAndValues();
-  };
-}
+
+
+// Final setup logic
+document.addEventListener('DOMContentLoaded', (event) => {
+    // This function now just sets up the initial state
+    // The actual generation is handled by the button click
+});
