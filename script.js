@@ -1978,9 +1978,9 @@ function downloadPdfViaBackend() {
     const stylesheetUrl = "https://duva-pdf.pages.dev/styles.css";
     
     // The Webflow JavaScript files are required for layout and dynamic data.
-    // Note: The relative 'js/webflow.js' works because we set a 'baseurl' in the Java backend.
+    // We use the full, absolute URLs to avoid any issues with relative paths.
     const jQueryScript = `<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=684a5d9b82bae84c8dbeb42f" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>`;
-    const webflowScript = `<script src="js/webflow.js" type="text/javascript"></script>`;
+    const webflowScript = `<script src="https://duva-lighting.webflow.io/js/webflow.js" type="text/javascript"></script>`;
 
     const htmlContent = `
         <!DOCTYPE html>
