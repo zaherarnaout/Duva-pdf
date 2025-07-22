@@ -2027,6 +2027,18 @@ function downloadPdfViaBackend() {
 
 // Final setup logic
 document.addEventListener('DOMContentLoaded', (event) => {
-    // This function now just sets up the initial state
-    // The actual generation is handled by the button click
+    // Find the download button by its unique ID
+    const downloadButton = document.getElementById('download-pdf-button');
+
+    if (downloadButton) {
+        // When the button is clicked, run our function
+        downloadButton.addEventListener('click', function(e) {
+            // Prevent the default link behavior (e.g., navigating to '#')
+            e.preventDefault();
+            downloadPdfViaBackend();
+        });
+    } else {
+        // This message helps with debugging if the ID is wrong or missing
+        console.error('Error: Download button with ID "download-pdf-button" was not found.');
+    }
 });
