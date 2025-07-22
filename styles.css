@@ -1920,7 +1920,14 @@ opacity: 1 !important;
 }
 
 .accessories-pdf-section {
-  margin-top: 24px;
+  margin-top: 24px !important;
+  margin-left: 24px !important;
+  margin-right: 24px !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  max-width: 100% !important;
 }
 
 /* Old accessory classes removed - now using dynamic injection */
@@ -2642,17 +2649,19 @@ opacity: 1 !important;
 /* === PDF Accessory Styling (Override Conflicts) === */
 #pdf-container .accessories-pdf-section .accessory-item {
   display: flex !important;
-  align-items: flex-start !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   margin-bottom: 16px !important;
-  gap: 12px !important;
+  gap: 16px !important;
   border: none !important;
   background: none !important;
   padding: 0 !important;
 }
-
 #pdf-container .accessories-pdf-section .accessory-image {
   flex: 0 0 80px !important;
   width: 80px !important;
+  max-width: 80px !important;
   height: 60px !important;
   display: flex !important;
   align-items: center !important;
@@ -2662,40 +2671,19 @@ opacity: 1 !important;
   overflow: hidden !important;
   background: #f8f8f8 !important;
 }
-
-#pdf-container .accessories-pdf-section .accessory-image img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  display: block !important;
-  border: none !important;
-  border-radius: 0 !important;
-}
-
 #pdf-container .accessories-pdf-section .accessory-details {
-  flex: 1 !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
   display: flex !important;
   flex-direction: column !important;
+  justify-content: center !important;
   gap: 4px !important;
+  overflow: hidden !important;
 }
-
-#pdf-container .accessories-pdf-section .accessory-code {
-  font-size: 14px !important;
-  font-weight: bold !important;
-  color: #C0392B !important;
-  margin: 0 !important;
-}
-
-#pdf-container .accessories-pdf-section .accessory-title {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #222 !important;
-  margin: 0 !important;
-}
-
+#pdf-container .accessories-pdf-section .accessory-code,
+#pdf-container .accessories-pdf-section .accessory-title,
 #pdf-container .accessories-pdf-section .accessory-description {
-  font-size: 12px !important;
-  color: #444 !important;
-  margin: 0 !important;
-  line-height: 1.4 !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
 }
