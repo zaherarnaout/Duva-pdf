@@ -2179,6 +2179,13 @@ function injectSelectedAccessories() {
   // Find all selected accessories (checkboxes that are active/checked)
   const selectedAccessories = document.querySelectorAll('.accessory-checkbox.active, .accessory-checkbox.checked, .accessory-checkbox[data-selected="true"]');
   
+  console.log('🔍 Found selected accessories:', selectedAccessories.length);
+  selectedAccessories.forEach((acc, i) => {
+    console.log(`  ${i + 1}. Checkbox:`, acc);
+    console.log(`     Classes:`, acc.className);
+    console.log(`     Parent item:`, acc.closest('.accessory-item'));
+  });
+  
   if (selectedAccessories.length === 0) {
     // Hide accessories section if none selected
     pdfAccessoriesContainer.style.display = 'none';
@@ -2191,17 +2198,23 @@ function injectSelectedAccessories() {
   
   // Clear existing accessories in PDF
   const existingAccessories = pdfAccessoriesContainer.querySelectorAll('.accessory-item');
+  console.log('🧹 Clearing existing accessories:', existingAccessories.length);
   existingAccessories.forEach(item => item.remove());
 
   // Inject each selected accessory
   selectedAccessories.forEach((checkbox, index) => {
     const accessoryItem = checkbox.closest('.accessory-item');
-    if (!accessoryItem) return;
+    if (!accessoryItem) {
+      console.log(`⚠️ No accessory item found for checkbox ${index + 1}`);
+      return;
+    }
 
     // Collect accessory data
     const code = accessoryItem.querySelector('.acc-code')?.textContent?.trim() || '';
     const title = accessoryItem.querySelector('.acc-title')?.textContent?.trim() || '';
     const description = accessoryItem.querySelector('.acc-description')?.textContent?.trim() || '';
+    
+    console.log(`📋 Accessory ${index + 1} data:`, { code, title, description });
     
     // Get image - try multiple selectors
     const image = accessoryItem.querySelector('.accessory-image .acc-img, .accessory-image img, .acc-img');
