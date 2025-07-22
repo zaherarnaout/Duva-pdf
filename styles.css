@@ -2673,3 +2673,64 @@ opacity: 1 !important;
   color: #C0392B !important;
   font-weight: 500 !important;
 }
+
+/* === PDF Accessory Styling (Override Conflicts) === */
+#pdf-container .accessories-pdf-section .accessory-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-bottom: 16px !important;
+  gap: 12px !important;
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-image {
+  flex: 0 0 80px !important;
+  width: 80px !important;
+  height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  background: #f8f8f8 !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-details {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-code {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #C0392B !important;
+  margin: 0 !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-title {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #222 !important;
+  margin: 0 !important;
+}
+
+#pdf-container .accessories-pdf-section .accessory-description {
+  font-size: 12px !important;
+  color: #444 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
