@@ -1246,7 +1246,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
  
 
-document.addEventListener("DOMContentLoaded", function () { 
+document.addEventListener('DOMContentLoaded', function () { 
 
  
 
@@ -1669,7 +1669,221 @@ document.querySelectorAll('.accessory-checkbox').forEach(box => {
 }); 
 
 // === PDF Export Logic for DUVA ===
-// All html2pdf.js and generatePDF() logic removed. Only DocRaptor PDF export should be used.
+let isExporting = false; // Guard to prevent double export
+function showPDFContainer() {
+  const pdfContainer = document.querySelector('#pdf-container');
+  if (pdfContainer) {
+    pdfContainer.classList.remove('hidden');
+    pdfContainer.style.display = 'block';
+    pdfContainer.style.visibility = 'visible';
+    pdfContainer.style.opacity = '1';
+    pdfContainer.style.position = 'relative';
+    pdfContainer.style.left = '0';
+    pdfContainer.style.width = '100vw';
+  }
+}
+function hidePDFContainer() {
+  const pdfContainer = document.querySelector('#pdf-container');
+  if (pdfContainer) {
+    pdfContainer.classList.add('hidden');
+    pdfContainer.style.display = 'none';
+    pdfContainer.style.visibility = 'hidden';
+    pdfContainer.style.opacity = '0';
+    pdfContainer.style.position = '';
+    pdfContainer.style.top = '';
+    pdfContainer.style.left = '';
+    pdfContainer.style.width = '';
+  }
+}
+
+function waitForImagesToLoad(container, callback) {
+  if (!container) return callback(); // If container is null, just proceed
+  const images = container.querySelectorAll('img');
+  let loaded = 0;
+  if (images.length === 0) return callback();
+  images.forEach(img => {
+    if (img.complete) {
+      loaded++;
+      if (loaded === images.length) callback();
+    } else {
+      img.onload = img.onerror = () => {
+        loaded++;
+        if (loaded === images.length) callback();
+      };
+    }
+  });
+}
+
+function injectPdfOrderingCode() {
+  // === Inject Generated Ordering Code into PDF ===
+  const orderingCode = document.querySelector('#ordering-code-value');
+  const pdfCodeTarget = document.querySelector('#pdf-container .generated-code');
+  if (orderingCode && pdfCodeTarget) {
+    pdfCodeTarget.textContent = orderingCode.textContent.trim();
+  }
+}
+
+function injectPdfContent() {
+  // === Inject Family Name - Updated for vertical layout ===
+  const familyName = document.querySelector('.product-title-source');
+  const pdfFamilyNameContainer = document.querySelector('#pdf-container .family-name');
+  
+  if (familyName && pdfFamilyNameContainer) {
+    const familyText = familyName.textContent.trim();
+    
+    // Clear existing family name elements
+    pdfFamilyNameContainer.innerHTML = '';
+    
+    // Create vertical family name elements based on the family name
+    // For "ELDORA", we'll create vertical text elements
+    const familyWords = familyText.split(' ');
+    familyWords.forEach(word => {
+      const verticalElement = document.createElement('div');
+      verticalElement.className = 'family-name-vertical';
+      verticalElement.textContent = word;
+      pdfFamilyNameContainer.appendChild(verticalElement);
+    });
+  }
+
+  // === Inject Product Description - Updated for Webflow template structure ===
+  const desc = document.querySelector('.product-description-source');
+  const pdfDesc = document.querySelector('#pdf-container .text-block-14');
+  if (desc && pdfDesc) {
+    pdfDesc.textContent = desc.textContent.trim();
+  }
+
+  // === Inject Feature Key / Key Features - Updated for Webflow template structure ===
+  const featuresSource = document.querySelector('.product-features');
+  const featuresTarget = document.querySelector('#pdf-container .key-features');
+  if (featuresSource && featuresTarget) {
+    featuresTarget.innerHTML = featuresSource.innerHTML;
+  }
+  injectPdfIcons();
+  injectPdfImages();
+}
+
+function generatePDF() {
+  if (isExporting) return; // Prevent double export
+  isExporting = true;
+  // --- Accessories block temporarily removed for testing ---
+  // const pdfAccessories = document.querySelector('.pdf-accessories');
+  // if (pdfAccessories) {
+  //   pdfAccessories.innerHTML = '';
+  // }
+  // document.querySelectorAll('.accessory-checkbox.active').forEach(box => {
+  //   const accessoryItem = box.closest('.accessory-item');
+  //   if (!accessoryItem) return;
+  //   const imageEl = accessoryItem.querySelector('.accessory-image img, img.accessory-image');
+  //   const titleEl = accessoryItem.querySelector('.accessory-title');
+  //   const descEl  = accessoryItem.querySelector('.accessory-desc');
+  //   if (imageEl?.src && !imageEl.src.includes('undefined') && titleEl) {
+  //     const wrapper = document.createElement('div');
+  //     wrapper.className = 'accessory-item';
+  //     wrapper.innerHTML = `
+  //       <img src="${imageEl.src}" class="accessory-image">
+  //       <div class="accessory-title">${titleEl.textContent}</div>
+  //       <div class="accessory-desc">${descEl?.textContent || ''}</div>
+  //     `;
+  //     pdfAccessories.appendChild(wrapper);
+  //   }
+  // });
+  // --- End accessories block ---
+  // 3. Show the PDF container (off-screen but rendered)
+  showPDFContainer();
+  // 4. Prepare PDF export
+  const element = document.querySelector('#pdf-container');
+  
+  // Get the generated code for filename
+  const orderingCodeElement = document.querySelector('.ordering-code-value');
+  let code = 'file'; // default fallback
+  
+  if (orderingCodeElement) {
+    // Get the plain text content (without HTML styling)
+    const plainText = orderingCodeElement.textContent || orderingCodeElement.innerText;
+    code = plainText.trim();
+    
+    // Sanitize filename for file system compatibility
+    code = code.replace(/[<>:"/\\|?*]/g, '_'); // Replace invalid characters
+    code = code.replace(/\s+/g, '_'); // Replace spaces with underscores
+    code = code.replace(/\.+/g, '.'); // Replace multiple dots with single dot
+    
+    console.log('📄 PDF filename will be:', code);
+  } else {
+    console.log('⚠️ Ordering code element not found, using default filename');
+  }
+  
+  if (!element) {
+    hidePDFContainer();
+    alert('PDF container not found!');
+    isExporting = false;
+    return;
+  }
+  // === Inject Product Image Dynamically ===
+  const imageElement = document.querySelector('#product-image img'); // or your actual main image selector
+  const pdfImageContainer = document.querySelector('#pdf-container .main-product-pdf-img');
+  if (imageElement && pdfImageContainer) {
+    const imageUrl = imageElement.src;
+    pdfImageContainer.innerHTML = `<img src="${imageUrl}" style="max-width: 100%; height: auto;">`;
+  }
+  // === Inject Product, Dimension, and Photometric Images into PDF ===
+  injectPdfImages();
+  // === Inject Generated Ordering Code into PDF ===
+  injectPdfOrderingCode();
+  // === Inject Product Code into PDF ===
+  updateProductCodeInjection();
+  // === Inject Generated Code into PDF ===
+  updateGeneratedCodeInjection();
+  // === Update Specifications Table ===
+  updateSpecsTable();
+  // === Inject Family Name, Subtitle, Description, and Features into PDF ===
+  injectPdfContent();
+  // 5. Export PDF
+  waitForImagesToLoad(document.querySelector('#pdf-container .header-right-wrapper'), function() {
+    injectPdfIcons(); // Inject icons into PDF container
+    html2pdf()
+      .from(element)
+      .set({
+        margin: 0,
+        filename: `${code}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          width: 794,
+          height: 1123,
+          useCORS: true
+        },
+        jsPDF: { 
+          unit: 'px', 
+          format: [794, 1123], 
+          orientation: 'portrait' 
+        }
+      })
+      .save()
+      .then(() => {
+        // 6. Cleanup after export
+        // if (pdfAccessories) {
+        //   pdfAccessories.innerHTML = '';
+        // }
+        hidePDFContainer();
+        isExporting = false;
+      })
+      .catch(() => {
+        isExporting = false;
+      });
+  });
+}
+// === PDF Download Button Binding by Class ===
+document.addEventListener("DOMContentLoaded", function () {
+  const downloadBtn = document.querySelector(".download-arrow");
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", function () {
+      generatePDF(); // Make sure this function exists
+    });
+  } else {
+    console.warn("Download arrow button not found!");
+  }
+});
+// === End PDF Download Button Binding ===
 
 // === Utility: Ensure Product Code is Set from DOM ===
 function ensureProductCode() {
@@ -1930,106 +2144,23 @@ function injectPdfImages() {
 }
 
 function styleSpecLabelsAndValues() {
-    const specLabels = document.querySelectorAll('#pdf-container .text-block-16');
-    specLabels.forEach(element => {
-        const text = element.innerHTML;
-        // Check if we haven't already wrapped it
-        if (!text.includes('<span class="label">')) {
-            const parts = text.split(':');
-            if (parts.length === 2) {
-                element.innerHTML = `<span class="label">${parts[0].trim()}:</span> <span class="value">${parts[1].trim()}</span>`;
-            }
-        }
-    });
-}
-
-/**
- * Sends the PDF's HTML content to the Java backend to generate a PDF with DocRaptor.
- */
-function downloadPdfViaBackend() {
-    const pdfContainer = document.getElementById('pdf-container');
-    if (!pdfContainer) {
-        console.error('PDF container not found!');
-        alert('Error: Could not find PDF content.');
-        return;
+  const specBlocks = document.querySelectorAll('#pdf-container .specifications-full-width .text-block-16');
+  specBlocks.forEach(block => {
+    // Split by <br> or line break
+    const html = block.innerHTML.trim();
+    const parts = html.split(/<br\s*\/?>(.*)/i);
+    if (parts.length >= 2) {
+      const label = parts[0].replace(/<[^>]+>/g, '').trim();
+      const value = parts[1].replace(/<[^>]+>/g, '').trim();
+      block.innerHTML = `<span class='label'>${label}</span><br><span class='value'>${value}</span>`;
     }
-
-    // Clone the node to avoid modifying the live DOM
-    const pdfContentClone = pdfContainer.cloneNode(true);
-
-    // --- Ensure all images use absolute URLs ---
-    const imgs = pdfContentClone.querySelectorAll('img');
-    imgs.forEach(img => {
-        if (img.src && !img.src.startsWith('http')) {
-            const a = document.createElement('a');
-            a.href = img.src;
-            img.src = a.href;
-        }
-    });
-
-    // --- Build the full HTML document ---
-    const stylesheetUrl = "https://duva-pdf.pages.dev/styles.css";
-    const fullHTML = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <title>DUVA PDF</title>
-            <link rel="stylesheet" href="${stylesheetUrl}" />
-        </head>
-        <body>
-            ${pdfContentClone.outerHTML}
-        </body>
-        </html>
-    `;
-
-    // DEBUG LOG — See what's being sent
-    console.log("Sending full HTML to backend:");
-    console.log(fullHTML);
-
-    // --- Send to backend as JSON ---
-    fetch('http://localhost:8080/generate-pdf', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ html: fullHTML })
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('PDF generation failed');
-        return response.blob();
-    })
-    .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'DUVA-product.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-    })
-    .catch(error => {
-        console.error('Error generating PDF:', error);
-        alert('Failed to generate PDF. Check console and backend.');
-    });
+  });
 }
-
-
-// Final setup logic
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Find the download button by its unique ID
-    const downloadButton = document.getElementById('download-pdf-button');
-
-    if (downloadButton) {
-        // When the button is clicked, run our function
-        downloadButton.addEventListener('click', function(e) {
-            // Prevent the default link behavior (e.g., navigating to '#')
-            e.preventDefault();
-            downloadPdfViaBackend();
-        });
-    } else {
-        // This message helps with debugging if the ID is wrong or missing
-        console.error('Error: Download button with ID "download-pdf-button" was not found.');
-    }
-});
+// Call this after PDF content is injected
+if (typeof injectPdfContent === 'function') {
+  const originalInjectPdfContent = injectPdfContent;
+  injectPdfContent = function() {
+    originalInjectPdfContent.apply(this, arguments);
+    styleSpecLabelsAndValues();
+  };
+}
