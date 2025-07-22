@@ -1973,7 +1973,23 @@ function downloadPdfViaBackend() {
         console.warn("Images are not fully loaded. PDF generation might be incomplete.");
     }
     
-    const htmlContent = pdfContentClone.outerHTML;
+    // Create a full HTML document to send to DocRaptor
+    const pdfBodyHtml = pdfContentClone.outerHTML;
+    const stylesheetUrl = "https://duva-pdf.pages.dev/styles.css";
+
+    const htmlContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>DUVA Product Datasheet</title>
+            <link rel="stylesheet" href="${stylesheetUrl}">
+        </head>
+        <body>
+            ${pdfBodyHtml}
+        </body>
+        </html>
+    `;
 
     // The URL of your running Java backend
     const backendUrl = 'http://localhost:8080/generate-pdf';
