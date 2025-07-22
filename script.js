@@ -2213,8 +2213,7 @@ function injectSelectedAccessories() {
     const accessoryHTML = `
       <div class="accessory-item">
         <div class="accessory-image">
-          ${imageSrc ? `<img src="${imageSrc}" alt="${title}" style="width: 80px; height: 60px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; display: block;">` : 
-          `<div style="width: 80px; height: 60px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;">No Image</div>`}
+          ${imageSrc ? `<img src="${imageSrc}" alt="${title}" style="width: 80px; height: 60px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; display: block;">` : ''}
         </div>
         <div class="accessory-details">
           <div class="accessory-code">${code}</div>
