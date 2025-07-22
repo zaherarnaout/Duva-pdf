@@ -11,157 +11,83 @@
   <link href="css/duva-lighting.webflow.css" rel="stylesheet" type="text/css">
   
   <!-- ✅ Load html2pdf.js for better layout preservation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <div id="pdf-container">
-    <div class="docraptor-header">
-      <!-- Move all header content here (logo, product name, icons, etc.) -->
-      <div class="header-wrapper">
-        <div class="header-left-wrapper">
-          <div class="div-block-4"></div>
-          <div class="family-name">
-            <div class="family-name-vertical">Res B</div>
-            <div class="family-name-vertical">Arumu</div>
-            <div class="family-name-vertical">srol</div>
-            <div class="family-name-vertical">af uk</div>
-            <div class="family-name-vertical">tanh</div>
-            <div class="family-name-vertical">ict e</div>
-            <div class="family-name-vertical">I eea</div>
-            <div class="family-name-vertical">e-dd</div>
-          </div>
-        </div>
-        <div class="header-right-wrapper">
-          <div class="icon-cms pdf-cms-icon">
-            <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">1</div>
-          </div>
-          <div class="icon-cms pdf-cms-icon">
-            <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">2</div>
-          </div>
-          <div class="icon-cms pdf-cms-icon">
-            <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">3</div>
-          </div>
-          <div class="icon-cms pdf-cms-icon">
-            <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">4</div>
-          </div>
-          <div class="logo-img">
-            <div class="logo-series-divider"></div>
-            <img src="https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/687deba9ee422418f2183bd6_Duva-logo-Dark.png" alt="DUVA Logo" style="width: 110px; height: 40px; object-fit: contain; display: block;">
-          </div>
-        </div>
-      </div>
-      <div class="left-divider"></div>
-    </div>
-    <!-- Main content goes here (hero-section, specifications, accessories, etc.) -->
-    <div class="main-content">
-      <div class="hero-section w-row">
-        <div class="left-section">
-          <div class="left-hero-wrapper">
-            <div class="product-code">C327</div>
-            <div class="generated-code">C327.XX.XX.XX.XX.XX</div>
-            <div class="overview-header">Versatile Surface-Mounted Bulkhead Light<br>Elegant | Robust | Streamlined</div>
-            <div class="title-text">Overview</div>
-            <div class="text-block-14">The DUVA Lucero Mini is a compact, surface-mounted LED downlight tailored for residential and general indoor applications. Designed with a minimal aesthetic and a precision reflector, it delivers efficient beam control and soft, uniform illumination. Constructed from durable aluminum and finished with anti-rust powder coating, it ensures long-term performance with a clean cylindrical profile. Tool-free ceiling installation and optional reflector finishes make Lucero Mini ideal for corridors, retail, and hospitality spaces.</div>
-            <div class="title-text">Feature key:</div>
-            <div class="key-features">Light Source: COB LED<br>Body: Aluminum alloy<br>Coating: Powder-coated<br>Diffuser: Polycarbonate<br>Operating Temp: -20°C to +50°C<br>Input Voltage: 230V AC (36V LED Driver)<br>Dimensions: Ø80 × 105 mm<br>Location: Outdoor</div>
-          </div>
-        </div>
-        <div class="right-section">
-          <div class="right-hero-wrapper">
-            <div class="main-product-pdf-img">
-              <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Product Image<br>180×180px</div>
-            </div>
-            <div class="diagram-pdf-img">
-              <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Dimension Diagram<br>180×180px</div>
-            </div>
-            <div class="photometric-pdf-img">
-              <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Photometric Diagram<br>180×180px</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="specifications-divider"></div>
-      <div class="specifications-full-width">
-        <div class="title-text">Specifications</div>
-        <div class="specifications">
-          <div class="w-layout-grid grid">
-            <div class="wattage">
-              <div class="text-block-16">Wattage<br>12W</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="lumen">
-              <div class="text-block-16">Lumen<br>1900lm</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="cct">
-              <div class="text-block-16">CCT<br>3000K</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="cri">
-              <div class="text-block-16">CRI<br>&gt;80</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="beam-angle">
-              <div class="text-block-16">Beam<br>24°</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="ip-rating">
-              <div class="text-block-16">IP<br>65</div>
-              <div class="divider-specific"></div>
-            </div>
-            <div class="finish-volor">
-              <div class="text-block-16">Finish<br>White</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="accessories-pdf-section">
-        <div class="title-text">Accessories</div>
-        <div class="div-block-5">
-          <div class="div-block-6">
-            <div style="width: 80px; height: 60px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">ACC 1</div>
-          </div>
-          <div class="div-block-7">
-            <div class="text-block-19">WE-005</div>
-            <div class="text-block-20">Wireless Earbuds</div>
-            <div class="text-block-21">Experience high-quality sound with these wireless earbuds, perfect for music lovers and on-the-go lifestyles.</div>
-          </div>
-        </div>
-      </div>
-      <div class="accessories-pdf-section">
-        <div class="div-block-5">
-          <div class="div-block-6">
-            <div style="width: 80px; height: 60px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">ACC 2</div>
-          </div>
-          <div class="div-block-7">
-            <div class="text-block-19">WE-005</div>
-            <div class="text-block-20">Wireless Earbuds</div>
-            <div class="text-block-21">Experience high-quality sound with these wireless earbuds, perfect for music lovers and on-the-go lifestyles.</div>
-          </div>
-        </div>
-      </div>
-      <div class="accessories-pdf-section">
-        <div class="div-block-5">
-          <div class="div-block-6">
-            <div style="width: 80px; height: 60px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">ACC 3</div>
-          </div>
-          <div class="div-block-7">
-            <div class="text-block-19">WE-005</div>
-            <div class="text-block-20">Wireless Earbuds</div>
-            <div class="text-block-21">Experience high-quality sound with these wireless earbuds, perfect for music lovers and on-the-go lifestyles.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="docraptor-footer">
-      <!-- Move all footer content here (footer-wrapper, copyright, etc.) -->
-      <div class="footer-wrapper">
-        <div>
-          <div class="text-block-17">www.duvalighting.com</div>
-          <div class="text-block-18">Important Notice<br>Dimensions are not to scale.<br>Specifications and technical data are subject to change without prior notice.</div>
-        </div>
+  <!-- ✅ Use the exact same structure as Webflow template -->
+  <div id="pdf-container" class="pdf-export-wrapper hidden">
+    <div class="header-wrapper">
+      <div class="header-left-wrapper">
         <div class="div-block-4"></div>
+        <div class="family-name">
+          <div class="family-name-vertical">Res B</div>
+          <div class="family-name-vertical">Arumu</div>
+          <div class="family-name-vertical">srol</div>
+          <div class="family-name-vertical">af uk</div>
+          <div class="family-name-vertical">tanh</div>
+          <div class="family-name-vertical">ict e</div>
+          <div class="family-name-vertical">I eea</div>
+          <div class="family-name-vertical">e-dd</div>
+        </div>
+      </div>
+      <div class="header-right-wrapper">
+        <div class="icon-cms pdf-cms-icon">
+          <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">1</div>
+        </div>
+        <div class="icon-cms pdf-cms-icon">
+          <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">2</div>
+        </div>
+        <div class="icon-cms pdf-cms-icon">
+          <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">3</div>
+        </div>
+        <div class="icon-cms pdf-cms-icon">
+          <div style="width: 25px; height: 25px; background-color: #888; border-radius: 1px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">4</div>
+        </div>
+        <div class="logo-img">
+          <div class="logo-series-divider"></div>
+          <img src="https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/687deba9ee422418f2183bd6_Duva-logo-Dark.png" alt="DUVA Logo" style="width: 110px; height: 40px; object-fit: contain; display: block;">
+        </div>
       </div>
     </div>
+    <div class="left-divider"></div>
+    <div class="hero-section w-row">
+      <div class="left-section">
+        <div class="left-hero-wrapper">
+          <div class="product-code">C327</div>
+          <div class="generated-code">C327.XX.XX.XX.XX.XX</div>
+          <div class="overview-header">Versatile Surface-Mounted Bulkhead Light<br>Elegant | Robust | Streamlined</div>
+          <div class="title-text">Overview</div>
+          <div class="text-block-14">The DUVA Lucero Mini is a compact, surface-mounted LED downlight tailored for residential and general indoor applications. Designed with a minimal aesthetic and a precision reflector, it delivers efficient beam control and soft, uniform illumination. Constructed from durable aluminum and finished with anti-rust powder coating, it ensures long-term performance with a clean cylindrical profile. Tool-free ceiling installation and optional reflector finishes make Lucero Mini ideal for corridors, retail, and hospitality spaces.</div>
+          <div class="title-text">Feature key:</div>
+          <div class="key-features">Light Source: COB LED<br>Body: Aluminum alloy<br>Coating: Powder-coated<br>Diffuser: Polycarbonate<br>Operating Temp: -20°C to +50°C<br>Input Voltage: 230V AC (36V LED Driver)<br>Dimensions: Ø80 × 105 mm<br>Location: Outdoor</div>
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="right-hero-wrapper">
+          <div class="main-product-pdf-img">
+            <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Product Image<br>180×180px</div>
+          </div>
+          <div class="diagram-pdf-img">
+            <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Dimension Diagram<br>180×180px</div>
+          </div>
+          <div class="photometric-pdf-img">
+            <div style="width: 180px; height: 180px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px;">Photometric Diagram<br>180×180px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="specifications-divider"></div>
+    <div class="accessories-pdf-section">
+      <div class="title-text">Accessories</div>
+      <!-- Accessories will be dynamically injected here by JavaScript -->
+    </div>
+    <div class="footer-wrapper">
+      <div>
+        <div class="text-block-17">www.duvalighting.com</div>
+        <div class="text-block-18">Important Notice<br>Dimensions are not to scale.<br>Specifications and technical data are subject to change without prior notice.</div>
+  </div>
+      <div class="div-block-4"></div>
+  </div>
   </div>
   
   <!-- ✅ Add the same inline styles as Webflow template -->
@@ -552,21 +478,7 @@
     <img src="images/IES.png" loading="lazy" alt="Photometric Diagram">
   </div>
   
-  <script src="https://docraptor.com/docraptor-1.0.0.js"></script>
-  <script>
-function downloadDocRaptorPDF() {
-  DocRaptor.createAndDownloadDoc({
-    user_credentials: "iXZ7LF8qTVH-4Jz4QYFC", // Production API key
-    test: false, // Production mode
-    type: "pdf",
-    name: "duva-product-datasheet.pdf",
-    document_content: document.documentElement.outerHTML,
-    javascript: true,
-    prince_options: {
-      media: "print"
-    }
-  });
-}
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
