@@ -1760,11 +1760,13 @@ function injectPdfContent() {
   }
   injectPdfIcons();
   injectPdfImages();
+  injectSelectedAccessories();
 }
 
 function generatePDF() {
   if (isExporting) return; // Prevent double export
   isExporting = true;
+  
   // --- Accessories block temporarily removed for testing ---
   // const pdfAccessories = document.querySelector('.pdf-accessories');
   // if (pdfAccessories) {
@@ -2163,4 +2165,64 @@ if (typeof injectPdfContent === 'function') {
     originalInjectPdfContent.apply(this, arguments);
     styleSpecLabelsAndValues();
   };
+}
+
+// === Accessory Injection for PDF ===
+function injectSelectedAccessories() {
+  // Find the PDF accessories container
+  const pdfAccessoriesContainer = document.querySelector('#pdf-container .accessories-pdf-section');
+  if (!pdfAccessoriesContainer) {
+    console.log('⚠️ PDF accessories container not found');
+    return;
+  }
+
+  // Find all selected accessories (checkboxes that are active/checked)
+  const selectedAccessories = document.querySelectorAll('.accessory-checkbox.active, .accessory-checkbox.checked, .accessory-checkbox[data-selected="true"]');
+  
+  if (selectedAccessories.length === 0) {
+    // Hide accessories section if none selected
+    pdfAccessoriesContainer.style.display = 'none';
+    console.log('ℹ️ No accessories selected, hiding accessories section');
+    return;
+  }
+
+  // Show accessories section
+  pdfAccessoriesContainer.style.display = 'block';
+  
+  // Clear existing accessories in PDF
+  const existingAccessories = pdfAccessoriesContainer.querySelectorAll('.accessory-item');
+  existingAccessories.forEach(item => item.remove());
+
+  // Inject each selected accessory
+  selectedAccessories.forEach((checkbox, index) => {
+    const accessoryItem = checkbox.closest('.accessory-item');
+    if (!accessoryItem) return;
+
+    // Collect accessory data
+    const code = accessoryItem.querySelector('.acc-code')?.textContent?.trim() || '';
+    const title = accessoryItem.querySelector('.acc-title')?.textContent?.trim() || '';
+    const description = accessoryItem.querySelector('.acc-description')?.textContent?.trim() || '';
+    const image = accessoryItem.querySelector('.accessory-image .acc-img');
+    const imageSrc = image?.src || '';
+
+    // Create accessory HTML for PDF
+    const accessoryHTML = `
+      <div class="accessory-item">
+        <div class="accessory-image">
+          <img src="${imageSrc}" alt="${title}" style="width: 80px; height: 60px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div class="accessory-details">
+          <div class="accessory-code">${code}</div>
+          <div class="accessory-title">${title}</div>
+          <div class="accessory-description">${description}</div>
+        </div>
+      </div>
+    `;
+
+    // Add to PDF container
+    pdfAccessoriesContainer.insertAdjacentHTML('beforeend', accessoryHTML);
+    console.log(`✅ Injected accessory ${index + 1}: ${title}`);
+  });
+
+  console.log(`✅ Total accessories injected: ${selectedAccessories.length}`);
 }
