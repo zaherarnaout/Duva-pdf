@@ -2011,14 +2011,22 @@ opacity: 1 !important;
 
 /* Header pinned at top */
 .pdf-header {
-  position: running(header);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 100px;
+  padding: 20px 40px;
 }
 
 /* Footer pinned at bottom */
 .pdf-footer {
-  position: running(footer);
-  height: 80px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 20px 40px;
 }
 
 /* Page content fits between header and footer */
@@ -2550,15 +2558,15 @@ opacity: 1 !important;
 
 /* === PDF Icon Sizing and Spacing === */
 #pdf-container .pdf-cms-icon {
-  width: 25px !important;
-  height: 25px !important;
+  width: 30px !important;
+  height: 30px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   margin: 0 1px !important;
   background: none !important;
   box-sizing: border-box !important;
-  flex: 0 0 25px !important;
+  flex: 0 0 30px !important;
   padding: 0 !important;
   border: 1px solid #ccc !important;
   border-radius: 4px !important;
@@ -2566,8 +2574,8 @@ opacity: 1 !important;
 #pdf-container .pdf-cms-icon img {
   width: 100% !important;
   height: 100% !important;
-  max-width: 25px !important;
-  max-height: 25px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
   object-fit: contain !important;
   display: block !important;
   margin: 0 !important;
@@ -2664,58 +2672,4 @@ opacity: 1 !important;
 #pdf-container .specifications-full-width .text-block-16 .value {
   color: #C0392B !important;
   font-weight: 500 !important;
-}
-.docraptor-header, .docraptor-footer {
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  color: #888;
-}
-.footer-page-box {
-  display: inline-block;
-  background: #C0392B;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 4px;
-  padding: 2px 8px;
-  margin-right: 16px;
-  position: absolute;
-  left: 32px;
-  bottom: 12px;
-  min-width: 24px;
-  text-align: center;
-}
-.docraptor-footer {
-  position: relative;
-}
-@page {
-  size: A4;
-  margin: 30mm 20mm;
-}
-.docraptor-header {
-  position: running(header);
-}
-.docraptor-footer {
-  position: running(footer);
-}
-@page {
-  @top-center {
-    content: element(header);
-  }
-  @bottom-center {
-    content: element(footer);
-  }
-}
-#pdf-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-#pdf-container .main-content {
-  flex: 1 0 auto;
-}
-#pdf-container .footer {
-  flex-shrink: 0;
-  margin-top: auto;
 }
