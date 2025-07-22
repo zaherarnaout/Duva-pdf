@@ -913,8 +913,11 @@ opacity: 1 !important;
 #pdf-container .main-product-pdf-img,
 #pdf-container .diagram-pdf-img,
 #pdf-container .photometric-pdf-img {
-  width: 180px !important;
-  height: 180px !important;
+  width: 160px !important;
+  max-width: 160px !important;
+  height: 160px !important;
+  min-height: 160px !important;
+  max-height: 160px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -927,8 +930,8 @@ opacity: 1 !important;
 #pdf-container .main-product-pdf-img img,
 #pdf-container .diagram-pdf-img img,
 #pdf-container .photometric-pdf-img img {
-  width: 100% !important;
-  height: 100% !important;
+  width: 160px !important;
+  height: 160px !important;
   object-fit: contain !important;
   display: block !important;
 }
@@ -2312,11 +2315,11 @@ opacity: 1 !important;
 .right-hero-wrapper .main-product-pdf-img,
 .right-hero-wrapper .diagram-pdf-img,
 .right-hero-wrapper .photometric-pdf-img {
-  width: 180px !important;
-  max-width: 180px !important;
-  height: 180px !important;
-  min-height: 180px !important;
-  max-height: 180px !important;
+  width: 160px !important;
+  max-width: 160px !important;
+  height: 160px !important;
+  min-height: 160px !important;
+  max-height: 160px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -2338,10 +2341,10 @@ opacity: 1 !important;
 .right-hero-wrapper .main-product-pdf-img img,
 .right-hero-wrapper .diagram-pdf-img img,
 .right-hero-wrapper .photometric-pdf-img img {
-  width: 180px !important;
-  height: 180px !important;
-  max-width: 180px !important;
-  max-height: 180px !important;
+  width: 160px !important;
+  height: 160px !important;
+  max-width: 160px !important;
+  max-height: 160px !important;
   object-fit: contain !important;
   display: block !important;
   margin: 0 !important;
