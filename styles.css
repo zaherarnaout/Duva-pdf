@@ -1499,6 +1499,8 @@ opacity: 1 !important;
   width: 4px;
   height: 40px;
   background-color: #C0392B;
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
 }
 
 .logo-series-divider {
@@ -1507,6 +1509,8 @@ opacity: 1 !important;
   background-color: #C0392B !important;
   border-radius: 0 !important;
   margin-right: 12px !important;
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
   display: inline-block !important;
 }
 
@@ -1894,8 +1898,8 @@ opacity: 1 !important;
   background-color: #212121 !important;
   width: 2px !important;
   height: 40px !important;
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
   margin-right: 20px !important;
   display: block !important;
 }
