@@ -2570,6 +2570,7 @@ opacity: 1 !important;
   display: flex !important;
   align-items: center !important;
   flex-direction: row !important;
+  gap: 12px !important;
 }
 #pdf-container .logo-img img {
   width: 110px !important;
