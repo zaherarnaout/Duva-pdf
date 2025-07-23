@@ -2086,26 +2086,25 @@ document.addEventListener('DOMContentLoaded', function() {
 function injectPdfIcons() {
   // Find all CMS icons for this product (from the main page, not PDF container)
   const cmsIcons = document.querySelectorAll('#pdf-icons .pdf-cms-icon');
-  const targetContainer = document.querySelector('#pdf-container .header-right-wrapper');
-  const logo = targetContainer ? targetContainer.querySelector('.logo-img') : null;
+  const targetContainer = document.querySelector('#pdf-container .header-icons-wrapper');
 
   if (!cmsIcons.length) {
     console.log('⚠️ No CMS icons found in #pdf-icons for this product.');
     return;
   }
-  if (!targetContainer || !logo) {
-    console.log('⚠️ PDF icon target container or logo not found.');
+  if (!targetContainer) {
+    console.log('⚠️ PDF icon target container not found.');
     return;
   }
 
-  // Remove all existing icons in the PDF container (but NOT the logo)
-  targetContainer.querySelectorAll('.pdf-cms-icon').forEach(icon => icon.remove());
+  // Clear existing icons
+  targetContainer.innerHTML = '';
 
-  // Inject all icons before the logo
+  // Inject all icons into the icons wrapper
   cmsIcons.forEach((icon, i) => {
     const clone = icon.cloneNode(true);
     clone.removeAttribute('id');
-    targetContainer.insertBefore(clone, logo);
+    targetContainer.appendChild(clone);
     console.log(`✅ Injected icon #${i+1}:`, clone);
   });
 
