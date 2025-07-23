@@ -1802,14 +1802,14 @@ opacity: 1 !important;
   font-size: 18px;
   font-weight: 500;
   color: #212121;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 /* Override for PDF container - more specific */
 #pdf-container .overview-header {
   font-size: 15px !important;
   font-weight: 500 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
@@ -1820,21 +1820,21 @@ opacity: 1 !important;
 .overview-header {
   font-size: 15px;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .title-text {
   font-size: 15px;
   font-weight: bold;
-  margin-top: 18px;
-  margin-bottom: 12px;
+  margin-top: 8px;
+  margin-bottom: 6px;
 }
 
 /* Override for PDF container - more specific */
 #pdf-container .text-block-14 {
   font-size: 13px !important;
   color: #222 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
@@ -1845,14 +1845,14 @@ opacity: 1 !important;
 .text-block-14 {
   font-size: 13px;
   color: #222;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 /* Override for PDF container - more specific */
 #pdf-container .key-features {
   font-size: 13px !important;
   color: #222 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
@@ -1863,22 +1863,22 @@ opacity: 1 !important;
 .key-features {
   font-size: 13px;
   color: #222;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 /* Override for PDF container - more specific */
 #pdf-container .left-divider {
   background-color: #ccc !important;
   height: 1px !important;
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
   border: none !important;
 }
 
 /* Original styles for non-PDF elements */
 .left-divider {
   border-bottom: 1px solid #ccc;
-  margin: 16px 0;
+  margin: 8px 0;
 }
 
 .specifications {
