@@ -1613,7 +1613,7 @@ opacity: 1 !important;
       .specifications-divider {
         display: block !important;
         border-bottom: 1px solid #ccc !important;
-        margin: 24px 40px !important;
+        margin: 12px 40px !important;
         height: 1px !important;
         background: #ccc !important;
       }
@@ -1621,7 +1621,7 @@ opacity: 1 !important;
       #pdf-container .specifications-divider {
         display: block !important;
         border-bottom: 1px solid #ccc !important;
-        margin: 24px 40px !important;
+        margin: 12px 40px !important;
         height: 1px !important;
         background: #ccc !important;
       }
@@ -1630,7 +1630,7 @@ opacity: 1 !important;
       .footer-divider {
         display: block !important;
         border-bottom: 1px solid #ccc !important;
-        margin: 24px 40px !important;
+        margin: 12px 40px !important;
         height: 1px !important;
         background: #ccc !important;
       }
@@ -1638,7 +1638,7 @@ opacity: 1 !important;
       #pdf-container .footer-divider {
         display: block !important;
         border-bottom: 1px solid #ccc !important;
-        margin: 24px 40px !important;
+        margin: 12px 40px !important;
         height: 1px !important;
         background: #ccc !important;
       }
