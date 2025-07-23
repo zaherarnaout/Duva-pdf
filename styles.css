@@ -1825,7 +1825,7 @@ opacity: 1 !important;
   font-size: 15px;
   font-weight: bold;
   margin-top: 18px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 /* Override for PDF container - more specific */
@@ -1880,7 +1880,7 @@ opacity: 1 !important;
 }
 
 .specifications {
-  margin-top: 8px;
+  margin-top: 0px;
   margin-bottom: 16px;
 }
 
