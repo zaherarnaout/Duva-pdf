@@ -2292,8 +2292,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // === Setup Lightbox Layout ===
 function setupLightboxLayout() {
-  // Find the lightbox image
-  const lightboxImage = document.querySelector('.w-lightbox-image img, .w-lightbox-image');
+  // Find the lightbox image container
+  const lightboxImage = document.querySelector('.w-lightbox-image img, .w-lightbox-image, .w-lightbox-frame, .w-lightbox-img');
   if (lightboxImage) {
     // Set fixed dimensions
     lightboxImage.style.width = '400px';
@@ -2301,6 +2301,7 @@ function setupLightboxLayout() {
     lightboxImage.style.objectFit = 'contain';
     lightboxImage.style.borderRadius = '8px';
     lightboxImage.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+    lightboxImage.style.position = 'relative';
     lightboxImage.style.maxWidth = '90vw';
     lightboxImage.style.maxHeight = '90vh';
     
@@ -2314,7 +2315,18 @@ function setupLightboxLayout() {
       leftArrow.style.left = '20px';
       leftArrow.style.top = '50%';
       leftArrow.style.transform = 'translateY(-50%)';
-      leftArrow.style.zIndex = '10';
+      leftArrow.style.zIndex = '9999';
+      leftArrow.style.background = '#bf3b2b';
+      leftArrow.style.color = 'white';
+      leftArrow.style.width = '48px';
+      leftArrow.style.height = '48px';
+      leftArrow.style.border = 'none';
+      leftArrow.style.borderRadius = '4px';
+      leftArrow.style.cursor = 'pointer';
+      leftArrow.style.display = 'flex';
+      leftArrow.style.alignItems = 'center';
+      leftArrow.style.justifyContent = 'center';
+      leftArrow.style.fontSize = '0';
     }
     
     if (rightArrow) {
@@ -2322,14 +2334,37 @@ function setupLightboxLayout() {
       rightArrow.style.right = '20px';
       rightArrow.style.top = '50%';
       rightArrow.style.transform = 'translateY(-50%)';
-      rightArrow.style.zIndex = '10';
+      rightArrow.style.zIndex = '9999';
+      rightArrow.style.background = '#bf3b2b';
+      rightArrow.style.color = 'white';
+      rightArrow.style.width = '48px';
+      rightArrow.style.height = '48px';
+      rightArrow.style.border = 'none';
+      rightArrow.style.borderRadius = '4px';
+      rightArrow.style.cursor = 'pointer';
+      rightArrow.style.display = 'flex';
+      rightArrow.style.alignItems = 'center';
+      rightArrow.style.justifyContent = 'center';
+      rightArrow.style.fontSize = '0';
     }
     
     if (closeButton) {
       closeButton.style.position = 'absolute';
       closeButton.style.top = '20px';
       closeButton.style.right = '20px';
-      closeButton.style.zIndex = '10';
+      closeButton.style.zIndex = '9999';
+      closeButton.style.background = '#bf3b2b';
+      closeButton.style.color = 'white';
+      closeButton.style.width = '36px';
+      closeButton.style.height = '36px';
+      closeButton.style.border = 'none';
+      closeButton.style.borderRadius = '4px';
+      closeButton.style.cursor = 'pointer';
+      closeButton.style.display = 'flex';
+      closeButton.style.alignItems = 'center';
+      closeButton.style.justifyContent = 'center';
+      closeButton.style.fontSize = '18px';
+      closeButton.style.fontWeight = 'bold';
     }
   }
 }
