@@ -743,7 +743,7 @@ display: none !important;
   grid-row-gap: 16px;
   border: 1px solid var(--border-main-color);
   border-radius: var(--border-4px-cornner);
-  box-shadow: 0 2px 5px 0 var(--border-main-shadow);
+  box-shadow: none;
   background-color: #fff;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr 1fr;
@@ -753,8 +753,12 @@ display: none !important;
   display: block;
   max-height: 0; 
   overflow: hidden; 
-  transition: max-height 0.4s ease; 
+  transition: max-height 0.4s ease, box-shadow 0.4s ease; 
   margin: 0; 
+}
+
+.accessories-wrapper.open {
+  box-shadow: 0 2px 5px 0 var(--border-main-shadow);
 } 
 
 
