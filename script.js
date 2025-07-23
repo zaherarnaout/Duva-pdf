@@ -698,7 +698,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* === Main Image Thumbnail Click Logic === */ 
 
-  const mainImage = document.getElementById("main-lightbox-trigger"); 
+  const mainImage = document.getElementById("lightbox-trigger"); 
 
   const thumbnails = document.querySelectorAll(".thumbnail-image"); 
 
@@ -2074,7 +2074,7 @@ function injectPdfIcons() {
 // === Inject Product, Dimension, and Photometric Images into PDF ===
 function injectPdfImages() {
   // Product Image
-  const productSource = document.querySelector('#main-lightbox-trigger.product-image');
+  const productSource = document.querySelector('#lightbox-trigger.product-image');
   const pdfImageContainer = document.querySelector('#pdf-container .main-product-pdf-img');
   if (productSource && pdfImageContainer) {
     pdfImageContainer.innerHTML = `<img src="${productSource.src}" style="max-width: 100%; height: auto; width: 180px; height: 180px; object-fit: contain;">`;
