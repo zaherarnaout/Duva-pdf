@@ -2305,66 +2305,85 @@ function setupLightboxLayout() {
     lightboxImage.style.maxWidth = '90vw';
     lightboxImage.style.maxHeight = '90vh';
     
-    // Position arrows relative to the image
-    const leftArrow = document.querySelector('.w-lightbox-left');
-    const rightArrow = document.querySelector('.w-lightbox-right');
-    const closeButton = document.querySelector('.w-lightbox-close');
-    
-    if (leftArrow) {
-      leftArrow.style.position = 'absolute';
-      leftArrow.style.left = '20px';
-      leftArrow.style.top = '50%';
-      leftArrow.style.transform = 'translateY(-50%)';
-      leftArrow.style.zIndex = '9999';
-      leftArrow.style.background = '#bf3b2b';
-      leftArrow.style.color = 'white';
-      leftArrow.style.width = '48px';
-      leftArrow.style.height = '48px';
-      leftArrow.style.border = 'none';
-      leftArrow.style.borderRadius = '4px';
-      leftArrow.style.cursor = 'pointer';
-      leftArrow.style.display = 'flex';
-      leftArrow.style.alignItems = 'center';
-      leftArrow.style.justifyContent = 'center';
-      leftArrow.style.fontSize = '0';
-    }
-    
-    if (rightArrow) {
-      rightArrow.style.position = 'absolute';
-      rightArrow.style.right = '20px';
-      rightArrow.style.top = '50%';
-      rightArrow.style.transform = 'translateY(-50%)';
-      rightArrow.style.zIndex = '9999';
-      rightArrow.style.background = '#bf3b2b';
-      rightArrow.style.color = 'white';
-      rightArrow.style.width = '48px';
-      rightArrow.style.height = '48px';
-      rightArrow.style.border = 'none';
-      rightArrow.style.borderRadius = '4px';
-      rightArrow.style.cursor = 'pointer';
-      rightArrow.style.display = 'flex';
-      rightArrow.style.alignItems = 'center';
-      rightArrow.style.justifyContent = 'center';
-      rightArrow.style.fontSize = '0';
-    }
-    
-    if (closeButton) {
-      closeButton.style.position = 'absolute';
-      closeButton.style.top = '20px';
-      closeButton.style.right = '20px';
-      closeButton.style.zIndex = '9999';
-      closeButton.style.background = '#bf3b2b';
-      closeButton.style.color = 'white';
-      closeButton.style.width = '36px';
-      closeButton.style.height = '36px';
-      closeButton.style.border = 'none';
-      closeButton.style.borderRadius = '4px';
-      closeButton.style.cursor = 'pointer';
-      closeButton.style.display = 'flex';
-      closeButton.style.alignItems = 'center';
-      closeButton.style.justifyContent = 'center';
-      closeButton.style.fontSize = '18px';
-      closeButton.style.fontWeight = 'bold';
-    }
+    // Force create visible navigation icons
+    createVisibleIcons();
+  }
+}
+
+// === Force Create Visible Icons ===
+function createVisibleIcons() {
+  // Remove existing icons first
+  const existingIcons = document.querySelectorAll('.duva-lightbox-icon');
+  existingIcons.forEach(icon => icon.remove());
+  
+  // Create close button
+  const closeButton = document.querySelector('.w-lightbox-close');
+  if (closeButton) {
+    closeButton.innerHTML = '<span class="duva-lightbox-icon">✕</span>';
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '20px';
+    closeButton.style.right = '20px';
+    closeButton.style.width = '40px';
+    closeButton.style.height = '40px';
+    closeButton.style.background = '#bf3b2b';
+    closeButton.style.color = 'white';
+    closeButton.style.border = '2px solid white';
+    closeButton.style.borderRadius = '50%';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.display = 'block';
+    closeButton.style.textAlign = 'center';
+    closeButton.style.lineHeight = '36px';
+    closeButton.style.zIndex = '99999';
+    closeButton.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+    closeButton.style.fontSize = '20px';
+    closeButton.style.fontWeight = 'bold';
+  }
+  
+  // Create left arrow
+  const leftArrow = document.querySelector('.w-lightbox-left');
+  if (leftArrow) {
+    leftArrow.innerHTML = '<span class="duva-lightbox-icon">◀</span>';
+    leftArrow.style.position = 'absolute';
+    leftArrow.style.left = '20px';
+    leftArrow.style.top = '50%';
+    leftArrow.style.transform = 'translateY(-50%)';
+    leftArrow.style.width = '50px';
+    leftArrow.style.height = '50px';
+    leftArrow.style.background = '#bf3b2b';
+    leftArrow.style.color = 'white';
+    leftArrow.style.border = '2px solid white';
+    leftArrow.style.borderRadius = '50%';
+    leftArrow.style.cursor = 'pointer';
+    leftArrow.style.display = 'block';
+    leftArrow.style.textAlign = 'center';
+    leftArrow.style.lineHeight = '46px';
+    leftArrow.style.zIndex = '99999';
+    leftArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+    leftArrow.style.fontSize = '24px';
+    leftArrow.style.fontWeight = 'bold';
+  }
+  
+  // Create right arrow
+  const rightArrow = document.querySelector('.w-lightbox-right');
+  if (rightArrow) {
+    rightArrow.innerHTML = '<span class="duva-lightbox-icon">▶</span>';
+    rightArrow.style.position = 'absolute';
+    rightArrow.style.right = '20px';
+    rightArrow.style.top = '50%';
+    rightArrow.style.transform = 'translateY(-50%)';
+    rightArrow.style.width = '50px';
+    rightArrow.style.height = '50px';
+    rightArrow.style.background = '#bf3b2b';
+    rightArrow.style.color = 'white';
+    rightArrow.style.border = '2px solid white';
+    rightArrow.style.borderRadius = '50%';
+    rightArrow.style.cursor = 'pointer';
+    rightArrow.style.display = 'block';
+    rightArrow.style.textAlign = 'center';
+    rightArrow.style.lineHeight = '46px';
+    rightArrow.style.zIndex = '99999';
+    rightArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+    rightArrow.style.fontSize = '24px';
+    rightArrow.style.fontWeight = 'bold';
   }
 }
