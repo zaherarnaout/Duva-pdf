@@ -1499,15 +1499,15 @@ opacity: 1 !important;
 }
 
 .series-divider {
-  width: 4px;
-  height: 40px;
+  width: 3px;
+  height: 35px;
   background-color: #C0392B;
   margin: 0 !important;
 }
 
 .logo-red-divider {
-  width: 4px;
-  height: 40px;
+  width: 3px;
+  height: 35px;
   background-color: #C0392B;
   margin: 0 !important;
 }
