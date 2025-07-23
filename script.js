@@ -2242,3 +2242,45 @@ function injectSelectedAccessories() {
 
   console.log(`✅ Total accessories injected: ${selectedAccessories.length}`);
 }
+
+// === Lightbox Scroll Prevention ===
+document.addEventListener('DOMContentLoaded', function() {
+  // Watch for lightbox opening
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.classList && node.classList.contains('w-lightbox-backdrop')) {
+            // Lightbox opened - prevent scroll
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.top = '0';
+            document.body.style.left = '0';
+          }
+        });
+        
+        mutation.removedNodes.forEach(function(node) {
+          if (node.classList && node.classList.contains('w-lightbox-backdrop')) {
+            // Lightbox closed - restore scroll
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+          }
+        });
+      }
+    });
+  });
+  
+  // Start observing
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+});
