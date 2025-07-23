@@ -245,10 +245,26 @@ body.w-lightbox-noscroll {
   top: 50% !important;
   transform: translateY(-50%) !important;
   z-index: 10 !important;
-  background: rgba(191, 59, 43, 0.9) !important;
-  backdrop-filter: blur(5px) !important;
-  -webkit-backdrop-filter: blur(5px) !important;
+  background: #bf3b2b !important;
+  color: white !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
 } 
+
+.w-lightbox-left::before {
+  content: "‹" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
 
 .w-lightbox-right {
   position: absolute !important;
@@ -256,9 +272,25 @@ body.w-lightbox-noscroll {
   top: 50% !important;
   transform: translateY(-50%) !important;
   z-index: 10 !important;
-  background: rgba(191, 59, 43, 0.9) !important;
-  backdrop-filter: blur(5px) !important;
-  -webkit-backdrop-filter: blur(5px) !important;
+  background: #bf3b2b !important;
+  color: white !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
+}
+
+.w-lightbox-right::before {
+  content: "›" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
 }
 
 .w-lightbox-close {
@@ -266,79 +298,39 @@ body.w-lightbox-noscroll {
   top: 20px !important;
   right: 20px !important;
   z-index: 10 !important;
-  background: rgba(191, 59, 43, 0.9) !important;
-  backdrop-filter: blur(5px) !important;
-  -webkit-backdrop-filter: blur(5px) !important;
+  background: #bf3b2b !important;
+  color: white !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
 }
 
-.w-lightbox-left::before, 
-.w-lightbox-right::before { 
-  display: none !important;
-} 
-
-
-
-
-
-
+.w-lightbox-close::before {
+  content: "×" !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+}
 
 /* === Lightbox Image Size === */ 
 
- 
-
 .w-lightbox-frame, 
-
 .w-lightbox-img { 
-
-  width: 600px !important; 
-
-  height: 600px !important; 
-
+  width: 400px !important; 
+  height: 400px !important; 
   object-fit: contain; 
-
   margin: 0 auto; 
-
-} 
-
-
-
-/* === DUVA Lightbox Navigation Arrows Styling (Bottom) === */ 
-
-.w-lightbox-left { 
-
-  bottom: 40px !important; 
-
-  top: auto !important; 
-
-  background-image: url('./arrow-red-left-white.svg') !important;
-
-  background-repeat: no-repeat !important;
-
-  background-position: center !important;
-
-  background-size: 48px 48px !important;
-
-  background-color: transparent !important;
-
-  width: 48px !important; 
-
-  height: 48px !important; 
-
-  border: none !important;
-
-  display: flex !important; 
-
-  align-items: center; 
-
-  justify-content: center; 
-
-  z-index: 9999; 
-
-  color: transparent !important; 
-
-  cursor: pointer !important;
-
-} 
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+}
 
 .w-lightbox-right { 
 
@@ -570,18 +562,16 @@ body.w-lightbox-noscroll {
   object-fit: cover !important;
   border-radius: 4px !important;
   cursor: pointer !important;
-  transition: transform 0.3s ease, border 0.3s ease !important;
-  border: 2px solid transparent !important;
+  transition: border 0.3s ease !important;
+  border: 1px solid #d8d8d8 !important;
 }
 
 .w-lightbox-thumbnail:hover {
-  transform: scale(1.05) !important;
   border-color: #bf3b2b !important;
 }
 
 .w-lightbox-thumbnail.w-lightbox-active {
-  border: 2px solid #bf3b2b !important;
-  transform: scale(1.1) !important;
+  border: 1px solid #c0392b !important;
 }
 
 /* === Lightbox Thumbnail Container === */
