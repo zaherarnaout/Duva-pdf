@@ -636,35 +636,58 @@ body.w-lightbox-noscroll {
   position: relative !important;
 }
 
-/* === Lightbox Navigation Icons - Alternative Solution === */
+/* === Lightbox Navigation Icons - Pure CSS Solution === */
 .w-lightbox-close {
   position: absolute !important;
   top: 20px !important;
   right: 20px !important;
-  width: 40px !important;
-  height: 40px !important;
+  width: 36px !important;
+  height: 36px !important;
   background: #bf3b2b !important;
   color: white !important;
-  border: 2px solid white !important;
-  border-radius: 50% !important;
+  border: none !important;
+  border-radius: 4px !important;
   font-size: 0 !important;
   font-weight: bold !important;
   z-index: 99999 !important;
   cursor: pointer !important;
-  display: block !important;
-  text-align: center !important;
-  line-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   text-decoration: none !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.w-lightbox-close:hover {
+  background: #a03020 !important;
+  transform: scale(1.1) !important;
+}
+
+.w-lightbox-close::before {
+  content: "" !important;
+  width: 16px !important;
+  height: 16px !important;
+  position: relative !important;
+  display: block !important;
+}
+
+.w-lightbox-close::before {
+  content: "" !important;
+  width: 16px !important;
+  height: 2px !important;
+  background: white !important;
+  position: absolute !important;
+  transform: rotate(45deg) !important;
 }
 
 .w-lightbox-close::after {
-  content: "✕" !important;
-  font-size: 20px !important;
-  font-weight: bold !important;
-  color: white !important;
-  display: block !important;
-  line-height: 36px !important;
+  content: "" !important;
+  width: 16px !important;
+  height: 2px !important;
+  background: white !important;
+  position: absolute !important;
+  transform: rotate(-45deg) !important;
 }
 
 .w-lightbox-left {
@@ -672,29 +695,36 @@ body.w-lightbox-noscroll {
   left: 20px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  width: 50px !important;
-  height: 50px !important;
+  width: 48px !important;
+  height: 48px !important;
   background: #bf3b2b !important;
   color: white !important;
-  border: 2px solid white !important;
-  border-radius: 50% !important;
+  border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
-  display: block !important;
-  text-align: center !important;
-  line-height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   text-decoration: none !important;
   font-size: 0 !important;
   z-index: 99999 !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
 }
 
-.w-lightbox-left::after {
-  content: "◀" !important;
-  font-size: 24px !important;
-  font-weight: bold !important;
-  color: white !important;
-  display: block !important;
-  line-height: 46px !important;
+.w-lightbox-left:hover {
+  background: #a03020 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.w-lightbox-left::before {
+  content: "" !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  border-right: 12px solid white !important;
+  margin-left: 4px !important;
 }
 
 .w-lightbox-right {
@@ -702,29 +732,36 @@ body.w-lightbox-noscroll {
   right: 20px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  width: 50px !important;
-  height: 50px !important;
+  width: 48px !important;
+  height: 48px !important;
   background: #bf3b2b !important;
   color: white !important;
-  border: 2px solid white !important;
-  border-radius: 50% !important;
+  border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
-  display: block !important;
-  text-align: center !important;
-  line-height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   text-decoration: none !important;
   font-size: 0 !important;
   z-index: 99999 !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
 }
 
-.w-lightbox-right::after {
-  content: "▶" !important;
-  font-size: 24px !important;
-  font-weight: bold !important;
-  color: white !important;
-  display: block !important;
-  line-height: 46px !important;
+.w-lightbox-right:hover {
+  background: #a03020 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.w-lightbox-right::before {
+  content: "" !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  border-left: 12px solid white !important;
+  margin-right: 4px !important;
 } 
 
 
