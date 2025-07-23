@@ -120,6 +120,12 @@ cursor: pointer;
 
 /* === 3. Webflow Lightbox Styling === */ 
 
+/* === Lightbox Backdrop - More Transparent === */
+.w-lightbox-backdrop {
+  background-color: rgba(0, 0, 0, 0.3) !important; /* More transparent background */
+  backdrop-filter: blur(2px) !important; /* Optional: slight blur effect */
+}
+
 .w-lightbox-close { 
 
   background-color: transparent !important; 
