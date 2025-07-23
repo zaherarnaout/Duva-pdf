@@ -2549,7 +2549,10 @@ opacity: 1 !important;
 /* === End FINAL BULLETPROOF TWO-COLUMN LAYOUT === */
 
 /* === PDF Icon Sizing and Spacing === */
-#pdf-container .pdf-cms-icon {
+#pdf-container .pdf-cms-icon,
+.pdf-cms-icon,
+.header-icons-wrapper .pdf-cms-icon,
+.header-icons-wrapper .icon-cms {
   width: 20px !important;
   height: 20px !important;
   display: flex !important;
@@ -2564,12 +2567,19 @@ opacity: 1 !important;
   border-radius: 4px !important;
   position: relative !important;
   top: 8px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
 }
-#pdf-container .pdf-cms-icon img {
+#pdf-container .pdf-cms-icon img,
+.pdf-cms-icon img,
+.header-icons-wrapper .pdf-cms-icon img,
+.header-icons-wrapper .icon-cms img {
   width: 100% !important;
   height: 100% !important;
-  max-width: 25px !important;
-  max-height: 25px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
   object-fit: contain !important;
   display: block !important;
   margin: 0 !important;
