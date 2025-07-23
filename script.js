@@ -2263,6 +2263,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up lightbox image and arrows
             setTimeout(function() {
               setupLightboxLayout();
+              
+              // Continuous monitoring for icons
+              const iconMonitor = setInterval(() => {
+                const lightboxStillOpen = document.querySelector('.w-lightbox-backdrop');
+                if (lightboxStillOpen) {
+                  ensureIconsVisible();
+                } else {
+                  clearInterval(iconMonitor);
+                }
+              }, 300);
             }, 100);
           }
         });
@@ -2307,7 +2317,57 @@ function setupLightboxLayout() {
     
     // Force create visible navigation icons
     createVisibleIcons();
+    
+    // Ensure icons stay visible
+    ensureIconsVisible();
   }
+}
+
+// === Ensure Icons Always Visible ===
+function ensureIconsVisible() {
+  const icons = document.querySelectorAll('.w-lightbox-close, .w-lightbox-left, .w-lightbox-right');
+  
+  icons.forEach(icon => {
+    // Force visibility
+    icon.style.display = 'flex';
+    icon.style.opacity = '1';
+    icon.style.visibility = 'visible';
+    icon.style.pointerEvents = 'auto';
+    
+    // Remove any hiding classes
+    icon.classList.remove('w-hidden');
+    icon.classList.remove('w-invisible');
+    
+    // Ensure click events work
+    if (icon.classList.contains('w-lightbox-close')) {
+      icon.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const lightbox = document.querySelector('.w-lightbox-overlay');
+        if (lightbox) {
+          lightbox.style.display = 'none';
+        }
+      };
+    } else if (icon.classList.contains('w-lightbox-left')) {
+      icon.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const prevButton = document.querySelector('.w-lightbox-prev');
+        if (prevButton) {
+          prevButton.click();
+        }
+      };
+    } else if (icon.classList.contains('w-lightbox-right')) {
+      icon.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const nextButton = document.querySelector('.w-lightbox-next');
+        if (nextButton) {
+          nextButton.click();
+        }
+      };
+    }
+  });
 }
 
 // === Force Create Visible Icons ===
@@ -2336,6 +2396,24 @@ function createVisibleIcons() {
     closeButton.style.zIndex = '99999';
     closeButton.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
     closeButton.style.transition = 'all 0.3s ease';
+    closeButton.style.opacity = '1';
+    closeButton.style.visibility = 'visible';
+    closeButton.style.pointerEvents = 'auto';
+    
+    // Ensure click functionality
+    closeButton.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      // Trigger the original close functionality
+      if (window.Webflow && window.Webflow.destroy) {
+        window.Webflow.destroy();
+      }
+      // Close lightbox
+      const lightbox = document.querySelector('.w-lightbox-overlay');
+      if (lightbox) {
+        lightbox.style.display = 'none';
+      }
+    };
     
     // Create X using CSS
     const xLine1 = document.createElement('div');
@@ -2377,6 +2455,20 @@ function createVisibleIcons() {
     leftArrow.style.zIndex = '99999';
     leftArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
     leftArrow.style.transition = 'all 0.3s ease';
+    leftArrow.style.opacity = '1';
+    leftArrow.style.visibility = 'visible';
+    leftArrow.style.pointerEvents = 'auto';
+    
+    // Ensure click functionality
+    leftArrow.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      // Trigger previous image
+      const prevButton = document.querySelector('.w-lightbox-prev');
+      if (prevButton) {
+        prevButton.click();
+      }
+    };
     
     // Create left arrow using CSS
     const leftArrowShape = document.createElement('div');
@@ -2411,6 +2503,20 @@ function createVisibleIcons() {
     rightArrow.style.zIndex = '99999';
     rightArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
     rightArrow.style.transition = 'all 0.3s ease';
+    rightArrow.style.opacity = '1';
+    rightArrow.style.visibility = 'visible';
+    rightArrow.style.pointerEvents = 'auto';
+    
+    // Ensure click functionality
+    rightArrow.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      // Trigger next image
+      const nextButton = document.querySelector('.w-lightbox-next');
+      if (nextButton) {
+        nextButton.click();
+      }
+    };
     
     // Create right arrow using CSS
     const rightArrowShape = document.createElement('div');
