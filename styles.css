@@ -1554,6 +1554,7 @@ opacity: 1 !important;
   margin-right: 8px;
   text-align: right;
   flex-shrink: 0;
+  align-self: flex-end;
 }
 
 .header-icon {
@@ -1726,7 +1727,7 @@ opacity: 1 !important;
 
 .header-right-wrapper {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 4px;
   margin-left: auto;
   flex-direction: row;
