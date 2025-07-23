@@ -553,28 +553,17 @@ body.w-lightbox-noscroll {
 /* === Thumbnail Image Styling === */ 
 
 .thumbnail-image { 
-  width: 80px !important;
-  height: 60px !important;
-  object-fit: cover !important;
   border: 1px solid #d8d8d8; 
   border-radius: 4px; 
-  transition: border 0.3s ease, transform 0.3s ease; 
+  transition: border 0.3s ease; 
   cursor: pointer; 
 } 
 
-.thumbnail-image:hover {
-  transform: scale(1.05) !important;
-  border-color: #bf3b2b !important;
-}
-
 .thumbnail-image.is-active { 
-  border: 2px solid #bf3b2b !important;
-  transform: scale(1.1) !important;
+  border: 1px solid #c0392b; 
 }
 
-/* === Gallery Thumbnails === */
-.gallery-thumbnail,
-.product-thumbnail,
+/* === Lightbox Thumbnails Only === */
 .w-lightbox-thumbnail {
   width: 80px !important;
   height: 60px !important;
@@ -585,20 +574,23 @@ body.w-lightbox-noscroll {
   border: 2px solid transparent !important;
 }
 
-.gallery-thumbnail:hover,
-.product-thumbnail:hover,
 .w-lightbox-thumbnail:hover {
   transform: scale(1.05) !important;
   border-color: #bf3b2b !important;
 }
 
-/* === Thumbnail Container === */
-.thumbnail-container,
-.gallery-container {
+.w-lightbox-thumbnail.w-lightbox-active {
+  border: 2px solid #bf3b2b !important;
+  transform: scale(1.1) !important;
+}
+
+/* === Lightbox Thumbnail Container === */
+.w-lightbox-thumbnails {
   display: flex !important;
   gap: 10px !important;
   flex-wrap: wrap !important;
   margin-top: 10px !important;
+  justify-content: center !important;
 } 
 
 
