@@ -2296,11 +2296,13 @@ function setupLightboxLayout() {
   const lightboxImage = document.querySelector('.w-lightbox-image img, .w-lightbox-image');
   if (lightboxImage) {
     // Set fixed dimensions
-    lightboxImage.style.width = '600px';
-    lightboxImage.style.height = '600px';
+    lightboxImage.style.width = '400px';
+    lightboxImage.style.height = '400px';
     lightboxImage.style.objectFit = 'contain';
     lightboxImage.style.borderRadius = '8px';
     lightboxImage.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+    lightboxImage.style.maxWidth = '90vw';
+    lightboxImage.style.maxHeight = '90vh';
     
     // Position arrows relative to the image
     const leftArrow = document.querySelector('.w-lightbox-left');
