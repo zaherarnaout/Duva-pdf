@@ -655,7 +655,7 @@ body.w-lightbox-noscroll {
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -663,8 +663,9 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-close:hover {
-  background: #a03020 !important;
+  background: #bf3b2b !important;
   transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(191, 59, 43, 0.4) !important;
 }
 
 .w-lightbox-close::before {
@@ -703,7 +704,7 @@ body.w-lightbox-noscroll {
   text-decoration: none !important;
   font-size: 0 !important;
   z-index: 99999 !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -711,8 +712,9 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-left:hover {
-  background: #a03020 !important;
+  background: #bf3b2b !important;
   transform: translateY(-50%) scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(191, 59, 43, 0.4) !important;
 }
 
 .w-lightbox-left::before {
@@ -743,7 +745,7 @@ body.w-lightbox-noscroll {
   text-decoration: none !important;
   font-size: 0 !important;
   z-index: 99999 !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -751,8 +753,9 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-right:hover {
-  background: #a03020 !important;
+  background: #bf3b2b !important;
   transform: translateY(-50%) scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(191, 59, 43, 0.4) !important;
 }
 
 .w-lightbox-right::before {
