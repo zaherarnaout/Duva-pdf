@@ -777,7 +777,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }); 
 
-  } 
+  }
+
+  // === Gallery Navigation & Thumbnail Switch ===
+  const galleryThumbnails = document.querySelectorAll('.thumbnail');
+  const galleryMainImage = document.getElementById('main-product-image');
+  let currentIndex = 0;
+
+  function updateMainImage(index) {
+    if (galleryMainImage && galleryThumbnails[index]) {
+      galleryMainImage.src = galleryThumbnails[index].src;
+      galleryThumbnails.forEach(t => t.classList.remove('active'));
+      galleryThumbnails[index].classList.add('active');
+      currentIndex = index;
+    }
+  }
+
+  galleryThumbnails.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => updateMainImage(index));
+  });
+
+  document.querySelector('.arrow-right')?.addEventListener('click', () => {
+    const next = (currentIndex + 1) % galleryThumbnails.length;
+    updateMainImage(next);
+  });
+
+  document.querySelector('.arrow-left')?.addEventListener('click', () => {
+    const prev = (currentIndex - 1 + galleryThumbnails.length) % galleryThumbnails.length;
+    updateMainImage(prev);
+  });
+
+  // === Optional Close Button for Lightbox Mode ===
+  document.querySelector('.gallery-close-icon')?.addEventListener('click', () => {
+    document.querySelector('.product-gallery-wrapper')?.classList.remove('fullscreen');
+  }); 
 
  
 
