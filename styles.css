@@ -1509,7 +1509,9 @@ opacity: 1 !important;
   width: 4px;
   height: 40px;
   background-color: #C0392B;
-  margin: 0 !important;
+  margin: 0 12px 0 0 !important;
+  display: block !important;
+  flex-shrink: 0 !important;
 }
 
 /* === Center Section === */
@@ -2581,7 +2583,7 @@ opacity: 1 !important;
   width: 4px !important;
   height: 40px !important;
   background: #C0392B !important;
-  margin: 0 !important;
+  margin: 0 12px 0 0 !important;
   display: block !important;
   box-sizing: border-box !important;
   flex-shrink: 0 !important;
