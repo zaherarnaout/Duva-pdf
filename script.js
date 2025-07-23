@@ -2259,6 +2259,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.height = '100%';
             document.body.style.top = '0';
             document.body.style.left = '0';
+            
+            // Set up lightbox image and arrows
+            setTimeout(function() {
+              setupLightboxLayout();
+            }, 100);
           }
         });
         
@@ -2284,3 +2289,45 @@ document.addEventListener('DOMContentLoaded', function() {
     subtree: true
   });
 });
+
+// === Setup Lightbox Layout ===
+function setupLightboxLayout() {
+  // Find the lightbox image
+  const lightboxImage = document.querySelector('.w-lightbox-image img, .w-lightbox-image');
+  if (lightboxImage) {
+    // Set fixed dimensions
+    lightboxImage.style.width = '600px';
+    lightboxImage.style.height = '600px';
+    lightboxImage.style.objectFit = 'contain';
+    lightboxImage.style.borderRadius = '8px';
+    lightboxImage.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+    
+    // Position arrows relative to the image
+    const leftArrow = document.querySelector('.w-lightbox-left');
+    const rightArrow = document.querySelector('.w-lightbox-right');
+    const closeButton = document.querySelector('.w-lightbox-close');
+    
+    if (leftArrow) {
+      leftArrow.style.position = 'absolute';
+      leftArrow.style.left = '20px';
+      leftArrow.style.top = '50%';
+      leftArrow.style.transform = 'translateY(-50%)';
+      leftArrow.style.zIndex = '10';
+    }
+    
+    if (rightArrow) {
+      rightArrow.style.position = 'absolute';
+      rightArrow.style.right = '20px';
+      rightArrow.style.top = '50%';
+      rightArrow.style.transform = 'translateY(-50%)';
+      rightArrow.style.zIndex = '10';
+    }
+    
+    if (closeButton) {
+      closeButton.style.position = 'absolute';
+      closeButton.style.top = '20px';
+      closeButton.style.right = '20px';
+      closeButton.style.zIndex = '10';
+    }
+  }
+}
