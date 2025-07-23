@@ -2343,27 +2343,44 @@ function ensureIconsVisible() {
       icon.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        const lightbox = document.querySelector('.w-lightbox-overlay');
+        // Close lightbox using Webflow's method
+        const lightbox = document.querySelector('.w-lightbox-backdrop');
         if (lightbox) {
-          lightbox.style.display = 'none';
+          lightbox.remove();
+        }
+        // Also try alternative close methods
+        const closeEvent = new Event('click', { bubbles: true });
+        const originalClose = document.querySelector('.w-lightbox-close');
+        if (originalClose) {
+          originalClose.dispatchEvent(closeEvent);
         }
       };
     } else if (icon.classList.contains('w-lightbox-left')) {
       icon.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
+        // Trigger previous image using multiple methods
         const prevButton = document.querySelector('.w-lightbox-prev');
         if (prevButton) {
           prevButton.click();
+        } else {
+          // Alternative method - trigger keyboard event
+          const prevEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true });
+          document.dispatchEvent(prevEvent);
         }
       };
     } else if (icon.classList.contains('w-lightbox-right')) {
       icon.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
+        // Trigger next image using multiple methods
         const nextButton = document.querySelector('.w-lightbox-next');
         if (nextButton) {
           nextButton.click();
+        } else {
+          // Alternative method - trigger keyboard event
+          const nextEvent = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true });
+          document.dispatchEvent(nextEvent);
         }
       };
     }
@@ -2404,14 +2421,16 @@ function createVisibleIcons() {
     closeButton.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
-      // Trigger the original close functionality
-      if (window.Webflow && window.Webflow.destroy) {
-        window.Webflow.destroy();
-      }
-      // Close lightbox
-      const lightbox = document.querySelector('.w-lightbox-overlay');
+      // Close lightbox using Webflow's method
+      const lightbox = document.querySelector('.w-lightbox-backdrop');
       if (lightbox) {
-        lightbox.style.display = 'none';
+        lightbox.remove();
+      }
+      // Also try alternative close methods
+      const closeEvent = new Event('click', { bubbles: true });
+      const originalClose = document.querySelector('.w-lightbox-close');
+      if (originalClose) {
+        originalClose.dispatchEvent(closeEvent);
       }
     };
     
@@ -2463,10 +2482,14 @@ function createVisibleIcons() {
     leftArrow.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
-      // Trigger previous image
+      // Trigger previous image using multiple methods
       const prevButton = document.querySelector('.w-lightbox-prev');
       if (prevButton) {
         prevButton.click();
+      } else {
+        // Alternative method - trigger keyboard event
+        const prevEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true });
+        document.dispatchEvent(prevEvent);
       }
     };
     
@@ -2511,10 +2534,14 @@ function createVisibleIcons() {
     rightArrow.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
-      // Trigger next image
+      // Trigger next image using multiple methods
       const nextButton = document.querySelector('.w-lightbox-next');
       if (nextButton) {
         nextButton.click();
+      } else {
+        // Alternative method - trigger keyboard event
+        const nextEvent = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true });
+        document.dispatchEvent(nextEvent);
       }
     };
     
