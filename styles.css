@@ -2780,18 +2780,24 @@ opacity: 1 !important;
   border-radius: 4px;
 }
 
-/* === Arrows (inside modal) === */
-.gallery-arrow {
-  position: absolute;
-  top: 50%;
-  width: 32px;
-  height: 32px;
-  transform: translateY(-50%);
+/* === DUVA Lightbox Arrows and Close Icon (Final Version) === */
+.gallery-arrow,
+.gallery-close {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  cursor: pointer;
   z-index: 10000;
+  position: absolute;
+  cursor: pointer;
+  display: block;
+}
+
+/* === Arrows === */
+.gallery-arrow {
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .arrow-left {
@@ -2806,16 +2812,11 @@ opacity: 1 !important;
 
 /* === Close Button === */
 .gallery-close {
-  position: absolute;
-  top: -40px;
-  right: -40px;
   width: 24px;
   height: 24px;
+  top: -40px;
+  right: -40px;
   background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/688095bac6205760a0e4f4b2_Close-X-White.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 /* === Disable background scroll === */
