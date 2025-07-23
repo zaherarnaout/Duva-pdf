@@ -2242,3 +2242,61 @@ function injectSelectedAccessories() {
 
   console.log(`✅ Total accessories injected: ${selectedAccessories.length}`);
 }
+
+// === DUVA Fullscreen Lightbox with Arrows ===
+document.addEventListener('DOMContentLoaded', () => {
+  const trigger = document.getElementById('main-lightbox-trigger');
+  const modal = document.getElementById('duva-lightbox-modal');
+  const modalImg = document.getElementById('duva-lightbox-image');
+  const closeBtn = modal.querySelector('.gallery-close');
+  const backdrop = modal.querySelector('.duva-lightbox-backdrop');
+  const arrowLeft = modal.querySelector('.arrow-left');
+  const arrowRight = modal.querySelector('.arrow-right');
+  const thumbnails = document.querySelectorAll('.thumb');
+
+  let imageSources = [];
+  let currentIndex = 0;
+
+  if (!trigger || !modal || !modalImg || thumbnails.length === 0) return;
+
+  // Store thumbnail image sources
+  thumbnails.forEach(thumb => imageSources.push(thumb.getAttribute('src')));
+
+  // Open modal on main image click
+  trigger.addEventListener('click', () => {
+    const currentSrc = trigger.getAttribute('src');
+    currentIndex = imageSources.indexOf(currentSrc);
+    if (currentIndex === -1) currentIndex = 0;
+    openLightbox(imageSources[currentIndex]);
+  });
+
+  // Helper: Open Lightbox
+  const openLightbox = (src) => {
+    modalImg.setAttribute('src', src);
+    modal.classList.remove('hidden');
+    document.body.classList.add('duva-lock-scroll');
+  };
+
+  // Helper: Close Lightbox
+  const closeLightbox = () => {
+    modal.classList.add('hidden');
+    document.body.classList.remove('duva-lock-scroll');
+  };
+
+  // Navigation
+  const showPrev = () => {
+    currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+    modalImg.setAttribute('src', imageSources[currentIndex]);
+  };
+
+  const showNext = () => {
+    currentIndex = (currentIndex + 1) % imageSources.length;
+    modalImg.setAttribute('src', imageSources[currentIndex]);
+  };
+
+  // Event Listeners
+  closeBtn.addEventListener('click', closeLightbox);
+  backdrop.addEventListener('click', closeLightbox);
+  arrowLeft.addEventListener('click', showPrev);
+  arrowRight.addEventListener('click', showNext);
+});
