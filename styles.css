@@ -1550,6 +1550,8 @@ opacity: 1 !important;
   flex-direction: row;
   gap: 4px;
   align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .header-icon {
