@@ -122,11 +122,11 @@ cursor: pointer;
 
 /* === Frosted Glass Lightbox Background === */
 .w-lightbox-backdrop {
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 /* === Body Scroll Prevention === */
@@ -146,44 +146,76 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-close { 
-  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef59d29de9f4afd08f52_Close-X-White.png') !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 24px 24px !important;
-  background-color: transparent !important;
-  color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 36px !important;
   height: 36px !important;
-  font-size: 0 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
   top: 20px !important;
   right: 20px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  z-index: 10 !important;
 } 
+
+.w-lightbox-close::before {
+  content: "×" !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+}
 
 /* === DUVA Lightbox Arrows === */ 
 .w-lightbox-left { 
-  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef5902e311c1a22c5086_arrow-red-left-white.png') !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 48px 48px !important;
-  background-color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
+  z-index: 10 !important;
 } 
 
+.w-lightbox-left::before {
+  content: "‹" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
+
 .w-lightbox-right { 
-  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef59b929fb7d96d535ae_arrow-red-right-white.png') !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 48px 48px !important;
-  background-color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
+  z-index: 10 !important;
+} 
+
+.w-lightbox-right::before {
+  content: "›" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
 }
 
 /* === Lightbox Image Container === */
@@ -196,12 +228,14 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-image {
-  width: 600px !important;
-  height: 600px !important;
+  width: 400px !important;
+  height: 400px !important;
   object-fit: contain !important;
   position: relative !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  max-width: 90vw !important;
+  max-height: 90vh !important;
 }
 
 /* === Position Arrows Inside Image === */
@@ -519,23 +553,52 @@ body.w-lightbox-noscroll {
 /* === Thumbnail Image Styling === */ 
 
 .thumbnail-image { 
-
+  width: 80px !important;
+  height: 60px !important;
+  object-fit: cover !important;
   border: 1px solid #d8d8d8; 
-
   border-radius: 4px; 
-
-  transition: border 0.3s ease; 
-
+  transition: border 0.3s ease, transform 0.3s ease; 
   cursor: pointer; 
-
 } 
 
-
+.thumbnail-image:hover {
+  transform: scale(1.05) !important;
+  border-color: #bf3b2b !important;
+}
 
 .thumbnail-image.is-active { 
+  border: 2px solid #bf3b2b !important;
+  transform: scale(1.1) !important;
+}
 
-  border: 1px solid #c0392b; 
+/* === Gallery Thumbnails === */
+.gallery-thumbnail,
+.product-thumbnail,
+.w-lightbox-thumbnail {
+  width: 80px !important;
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease, border 0.3s ease !important;
+  border: 2px solid transparent !important;
+}
 
+.gallery-thumbnail:hover,
+.product-thumbnail:hover,
+.w-lightbox-thumbnail:hover {
+  transform: scale(1.05) !important;
+  border-color: #bf3b2b !important;
+}
+
+/* === Thumbnail Container === */
+.thumbnail-container,
+.gallery-container {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  margin-top: 10px !important;
 } 
 
 
