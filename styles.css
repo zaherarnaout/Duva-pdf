@@ -230,6 +230,15 @@ cursor: pointer;
 
   color: white !important; 
 
+}
+
+/* === Lightbox Arrow Margins === */
+.w-lightbox-left {
+  left: 100px !important; /* 100px margin from left edge */
+}
+
+.w-lightbox-right {
+  right: 100px !important; /* 100px margin from right edge */
 } 
 
 
@@ -254,7 +263,7 @@ cursor: pointer;
 
   top: 20px; 
 
-  right: 20px; 
+  right: 100px; /* 100px margin from right edge */
 
   width: 44px; 
 
