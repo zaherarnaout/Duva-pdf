@@ -1636,9 +1636,9 @@ opacity: 1 !important;
 
 .header-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 0;
   border-bottom: 1px solid #ccc;
   padding-bottom: 16px;
 }
@@ -1646,6 +1646,7 @@ opacity: 1 !important;
 .header-left-wrapper {
   display: flex;
   align-items: baseline;
+  margin-right: 32px;
 }
 
 .series-label {
@@ -1716,6 +1717,7 @@ opacity: 1 !important;
   display: flex;
   align-items: baseline;
   gap: 8px;
+  margin-left: auto;
 }
 
 .icon-cms {
