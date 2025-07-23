@@ -657,19 +657,14 @@ body.w-lightbox-noscroll {
   text-decoration: none !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
   transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .w-lightbox-close:hover {
   background: #a03020 !important;
   transform: scale(1.1) !important;
-}
-
-.w-lightbox-close::before {
-  content: "" !important;
-  width: 16px !important;
-  height: 16px !important;
-  position: relative !important;
-  display: block !important;
 }
 
 .w-lightbox-close::before {
@@ -710,6 +705,9 @@ body.w-lightbox-noscroll {
   z-index: 99999 !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
   transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .w-lightbox-left:hover {
@@ -747,6 +745,9 @@ body.w-lightbox-noscroll {
   z-index: 99999 !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
   transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .w-lightbox-right:hover {
@@ -762,6 +763,35 @@ body.w-lightbox-noscroll {
   border-bottom: 8px solid transparent !important;
   border-left: 12px solid white !important;
   margin-right: 4px !important;
+}
+
+/* === Force Icons to Always Show === */
+.w-lightbox-close,
+.w-lightbox-left,
+.w-lightbox-right {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* === Override any hiding styles === */
+.w-lightbox-close[style*="display: none"],
+.w-lightbox-left[style*="display: none"],
+.w-lightbox-right[style*="display: none"] {
+  display: flex !important;
+}
+
+.w-lightbox-close[style*="opacity: 0"],
+.w-lightbox-left[style*="opacity: 0"],
+.w-lightbox-right[style*="opacity: 0"] {
+  opacity: 1 !important;
+}
+
+.w-lightbox-close[style*="visibility: hidden"],
+.w-lightbox-left[style*="visibility: hidden"],
+.w-lightbox-right[style*="visibility: hidden"] {
+  visibility: visible !important;
 } 
 
 
