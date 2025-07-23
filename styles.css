@@ -1552,7 +1552,7 @@ opacity: 1 !important;
   align-items: flex-end;
   justify-content: flex-end;
   margin-left: auto;
-  margin-right: 16px;
+  margin-right: 4px;
   text-align: right;
 }
 
@@ -1745,7 +1745,7 @@ opacity: 1 !important;
 .logo-img .image-8 {
   height: 48px;
   width: auto;
-  margin-left: 4px;
+  margin-left: 0px;
 }
 
 .hero-section, #pdf-container .hero-section {
