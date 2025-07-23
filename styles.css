@@ -1552,6 +1552,7 @@ opacity: 1 !important;
   align-items: center;
   justify-content: flex-end;
   margin-left: auto;
+  text-align: right;
 }
 
 .header-icon {
@@ -1672,7 +1673,7 @@ opacity: 1 !important;
   width: 3px !important;
   height: 50px !important;
   background: #c0392b !important;
-  margin-left: 20px !important;
+  margin-left: 4px !important;
   border: none !important;
 }
 
@@ -1725,7 +1726,7 @@ opacity: 1 !important;
 .header-right-wrapper {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 4px;
   margin-left: auto;
 }
 
@@ -1743,7 +1744,7 @@ opacity: 1 !important;
 .logo-img .image-8 {
   height: 48px;
   width: auto;
-  margin-left: 12px;
+  margin-left: 4px;
 }
 
 .hero-section, #pdf-container .hero-section {
@@ -2546,15 +2547,15 @@ opacity: 1 !important;
 
 /* === PDF Icon Sizing and Spacing === */
 #pdf-container .pdf-cms-icon {
-  width: 25px !important;
-  height: 25px !important;
+  width: 20px !important;
+  height: 20px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   margin: 0 1px !important;
   background: none !important;
   box-sizing: border-box !important;
-  flex: 0 0 25px !important;
+  flex: 0 0 20px !important;
   padding: 0 !important;
   border: 1px solid #ccc !important;
   border-radius: 4px !important;
