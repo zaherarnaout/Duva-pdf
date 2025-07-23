@@ -1647,7 +1647,7 @@ opacity: 1 !important;
 
 .header-left-wrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
 }
 
 .series-label {
@@ -1716,7 +1716,7 @@ opacity: 1 !important;
 
 .header-right-wrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 8px;
 }
 
