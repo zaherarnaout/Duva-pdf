@@ -1541,7 +1541,15 @@ opacity: 1 !important;
 
 .header-icons {
   display: flex;
+  flex-direction: row;
   gap: 4px;
+}
+
+.header-icons-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
 }
 
 .header-icon {
