@@ -122,11 +122,11 @@ cursor: pointer;
 
 /* === Frosted Glass Lightbox Background === */
 .w-lightbox-backdrop {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.7) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
 }
 
 /* === Body Scroll Prevention === */
@@ -146,44 +146,73 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-close { 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19.29 19.18'%3E%3Cdefs%3E%3Cstyle%3E.st0%7Bfill:%23f4f5f6%7D%3C/style%3E%3C/defs%3E%3Cpath class='st0' d='M17.65.48H1.64C.99.48.45,1.01.45,1.67v15.83c0,.66.53,1.19,1.19,1.19h16c.66,0,1.19-.53,1.19-1.19V1.67c0-.66-.53-1.19-1.19-1.19ZM17.64,16.84c0,.37-.3.66-.66.66H2.3c-.37,0-.66-.3-.66-.66V2.33c0-.37.3-.66.66-.66h14.68c.37,0,.66.3.66.66v14.51Z'/%3E%3Cpath class='st0' d='M14.36,3.87l-4.72,4.72L4.93,3.87c-.97-.83-1.83.03-1,1l4.72,4.72-4.74,4.74c-.31.36-.38.76-.25,1.06l.19.19c.3.13.7.06,1.06-.25l4.74-4.74,4.74,4.74c.36.31.76.38,1.06.25l.19-.19c.13-.3.06-.7-.25-1.06l-4.74-4.74,4.72-4.72c.83-.97-.03-1.83-1-1Z'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 24px 24px !important;
-  background-color: transparent !important;
-  color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 36px !important;
   height: 36px !important;
-  font-size: 0 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
   top: 20px !important;
   right: 20px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
 } 
+
+.w-lightbox-close::before {
+  content: "×" !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+}
 
 /* === DUVA Lightbox Arrows === */ 
 .w-lightbox-left { 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.53 13.05'%3E%3Cdefs%3E%3Cstyle%3E.st0%7Bfill:%23bf3b2b%7D.st1%7Bfill:%23f4f5f6%7D%3C/style%3E%3C/defs%3E%3Crect class='st0' x='.18' y='.21' width='14.17' height='12.63' rx='1' ry='1'/%3E%3Cpath class='st1' d='M9.44,1.89s-.15,0-.2,0c-.12.01-.28.09-.38.16l-4.16,3.75c-.48.43-.44,1.02,0,1.46,1.34,1.29,2.8,2.47,4.15,3.75.68.47,1.55-.22,1.24-.99-.06-.15-.22-.3-.33-.41-.95-.91-1.97-1.77-2.95-2.66-.13-.12-.29-.25-.41-.37-.02-.02-.05-.04-.04-.06l3.4-3.08c.64-.43.46-1.45-.33-1.55Z'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 48px 48px !important;
-  background-color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
 } 
 
+.w-lightbox-left::before {
+  content: "‹" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
+
 .w-lightbox-right { 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.53 13.05'%3E%3Cdefs%3E%3Cstyle%3E.st0%7Bfill:%23bf3b2b%7D.st1%7Bfill:%23f4f5f6%7D%3C/style%3E%3C/defs%3E%3Crect class='st0' x='.18' y='.21' width='14.17' height='12.63' rx='1' ry='1'/%3E%3Cpath class='st1' d='M5.09,1.89s.15,0,.2,0c.12.01.28.09.38.16l4.16,3.75c.48.43.44,1.02,0,1.46-1.34,1.29-2.8,2.47-4.15,3.75-.68.47-1.55-.22-1.24-.99.06-.15.22-.3.33-.41.95-.91,1.97-1.77,2.95-2.66.13-.12.29-.25.41-.37.02-.02.05-.04.04-.06l-3.4-3.08c-.64-.43-.46-1.45.33-1.55Z'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 48px 48px !important;
-  background-color: transparent !important;
+  background: #bf3b2b !important;
+  color: white !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
+  border-radius: 4px !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
+} 
+
+.w-lightbox-right::before {
+  content: "›" !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
 }
 
 .w-lightbox-left::before, 
