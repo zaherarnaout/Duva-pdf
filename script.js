@@ -2319,71 +2319,108 @@ function createVisibleIcons() {
   // Create close button
   const closeButton = document.querySelector('.w-lightbox-close');
   if (closeButton) {
-    closeButton.innerHTML = '<span class="duva-lightbox-icon">✕</span>';
+    closeButton.innerHTML = ''; // Clear any existing content
     closeButton.style.position = 'absolute';
     closeButton.style.top = '20px';
     closeButton.style.right = '20px';
-    closeButton.style.width = '40px';
-    closeButton.style.height = '40px';
+    closeButton.style.width = '36px';
+    closeButton.style.height = '36px';
     closeButton.style.background = '#bf3b2b';
     closeButton.style.color = 'white';
-    closeButton.style.border = '2px solid white';
-    closeButton.style.borderRadius = '50%';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '4px';
     closeButton.style.cursor = 'pointer';
-    closeButton.style.display = 'block';
-    closeButton.style.textAlign = 'center';
-    closeButton.style.lineHeight = '36px';
+    closeButton.style.display = 'flex';
+    closeButton.style.alignItems = 'center';
+    closeButton.style.justifyContent = 'center';
     closeButton.style.zIndex = '99999';
     closeButton.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-    closeButton.style.fontSize = '20px';
-    closeButton.style.fontWeight = 'bold';
+    closeButton.style.transition = 'all 0.3s ease';
+    
+    // Create X using CSS
+    const xLine1 = document.createElement('div');
+    xLine1.style.width = '16px';
+    xLine1.style.height = '2px';
+    xLine1.style.background = 'white';
+    xLine1.style.position = 'absolute';
+    xLine1.style.transform = 'rotate(45deg)';
+    
+    const xLine2 = document.createElement('div');
+    xLine2.style.width = '16px';
+    xLine2.style.height = '2px';
+    xLine2.style.background = 'white';
+    xLine2.style.position = 'absolute';
+    xLine2.style.transform = 'rotate(-45deg)';
+    
+    closeButton.appendChild(xLine1);
+    closeButton.appendChild(xLine2);
   }
   
   // Create left arrow
   const leftArrow = document.querySelector('.w-lightbox-left');
   if (leftArrow) {
-    leftArrow.innerHTML = '<span class="duva-lightbox-icon">◀</span>';
+    leftArrow.innerHTML = ''; // Clear any existing content
     leftArrow.style.position = 'absolute';
     leftArrow.style.left = '20px';
     leftArrow.style.top = '50%';
     leftArrow.style.transform = 'translateY(-50%)';
-    leftArrow.style.width = '50px';
-    leftArrow.style.height = '50px';
+    leftArrow.style.width = '48px';
+    leftArrow.style.height = '48px';
     leftArrow.style.background = '#bf3b2b';
     leftArrow.style.color = 'white';
-    leftArrow.style.border = '2px solid white';
-    leftArrow.style.borderRadius = '50%';
+    leftArrow.style.border = 'none';
+    leftArrow.style.borderRadius = '4px';
     leftArrow.style.cursor = 'pointer';
-    leftArrow.style.display = 'block';
-    leftArrow.style.textAlign = 'center';
-    leftArrow.style.lineHeight = '46px';
+    leftArrow.style.display = 'flex';
+    leftArrow.style.alignItems = 'center';
+    leftArrow.style.justifyContent = 'center';
     leftArrow.style.zIndex = '99999';
     leftArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-    leftArrow.style.fontSize = '24px';
-    leftArrow.style.fontWeight = 'bold';
+    leftArrow.style.transition = 'all 0.3s ease';
+    
+    // Create left arrow using CSS
+    const leftArrowShape = document.createElement('div');
+    leftArrowShape.style.width = '0';
+    leftArrowShape.style.height = '0';
+    leftArrowShape.style.borderTop = '8px solid transparent';
+    leftArrowShape.style.borderBottom = '8px solid transparent';
+    leftArrowShape.style.borderRight = '12px solid white';
+    leftArrowShape.style.marginLeft = '4px';
+    
+    leftArrow.appendChild(leftArrowShape);
   }
   
   // Create right arrow
   const rightArrow = document.querySelector('.w-lightbox-right');
   if (rightArrow) {
-    rightArrow.innerHTML = '<span class="duva-lightbox-icon">▶</span>';
+    rightArrow.innerHTML = ''; // Clear any existing content
     rightArrow.style.position = 'absolute';
     rightArrow.style.right = '20px';
     rightArrow.style.top = '50%';
     rightArrow.style.transform = 'translateY(-50%)';
-    rightArrow.style.width = '50px';
-    rightArrow.style.height = '50px';
+    rightArrow.style.width = '48px';
+    rightArrow.style.height = '48px';
     rightArrow.style.background = '#bf3b2b';
     rightArrow.style.color = 'white';
-    rightArrow.style.border = '2px solid white';
-    rightArrow.style.borderRadius = '50%';
+    rightArrow.style.border = 'none';
+    rightArrow.style.borderRadius = '4px';
     rightArrow.style.cursor = 'pointer';
-    rightArrow.style.display = 'block';
-    rightArrow.style.textAlign = 'center';
-    rightArrow.style.lineHeight = '46px';
+    rightArrow.style.display = 'flex';
+    rightArrow.style.alignItems = 'center';
+    rightArrow.style.justifyContent = 'center';
     rightArrow.style.zIndex = '99999';
     rightArrow.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-    rightArrow.style.fontSize = '24px';
-    rightArrow.style.fontWeight = 'bold';
+    rightArrow.style.transition = 'all 0.3s ease';
+    
+    // Create right arrow using CSS
+    const rightArrowShape = document.createElement('div');
+    rightArrowShape.style.width = '0';
+    rightArrowShape.style.height = '0';
+    rightArrowShape.style.borderTop = '8px solid transparent';
+    rightArrowShape.style.borderBottom = '8px solid transparent';
+    rightArrowShape.style.borderLeft = '12px solid white';
+    rightArrowShape.style.marginRight = '4px';
+    
+    rightArrow.appendChild(rightArrowShape);
   }
 }
