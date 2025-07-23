@@ -48,19 +48,29 @@ document.querySelectorAll('.accessory-image').forEach(container => {
 
 /* === 2. Thumbnail Image Selector === */ 
 
-// DISABLED: Duplicate thumbnail handler - using the one below instead
-// document.addEventListener("DOMContentLoaded", function () { 
-//     const mainImage = document.getElementById("main-lightbox-trigger"); 
-//     const thumbnails = document.querySelectorAll(".thumbnail-image"); 
-//     thumbnails.forEach(thumb => { 
-//         thumb.addEventListener("click", function () { 
-//             thumbnails.forEach(t => t.classList.remove("is-active")); 
-//             this.classList.add("is-active"); 
-//             const newImg = this.getAttribute("data-image"); 
-//             if (mainImage) mainImage.setAttribute("href", newImg); 
-//         }); 
-//     }); 
-// }); 
+document.addEventListener("DOMContentLoaded", function () { 
+
+    const mainImage = document.getElementById("main-lightbox-trigger"); 
+
+    const thumbnails = document.querySelectorAll(".thumbnail-image"); 
+
+    thumbnails.forEach(thumb => { 
+
+        thumb.addEventListener("click", function () { 
+
+            thumbnails.forEach(t => t.classList.remove("is-active")); 
+
+            this.classList.add("is-active"); 
+
+            const newImg = this.getAttribute("data-image"); 
+
+            if (mainImage) mainImage.setAttribute("href", newImg); 
+
+        }); 
+
+    }); 
+
+}); 
 
  
 
@@ -118,21 +128,37 @@ document.querySelectorAll('.accessory-image').forEach(container => {
 
  
 
-  // DISABLED: Duplicate thumbnail handler - using the complete one below instead
-  // document.addEventListener("DOMContentLoaded", function () { 
-  //   const mainImage = document.getElementById("main-lightbox-trigger"); 
-  //   const thumbnails = document.querySelectorAll(".thumbnail-image"); 
-  //   thumbnails.forEach((thumb) => { 
-  //     thumb.addEventListener("click", function () { 
-  //       // === Get the source of the clicked thumbnail 
-  //       const newSrc = thumb.getAttribute("src"); 
-  //       // === Update the main image 
-  //       if (newSrc && mainImage) { 
-  //         mainImage.setAttribute("src", newSrc); 
-  //       } 
-  //     }); 
-  //   }); 
-  // }); 
+  document.addEventListener("DOMContentLoaded", function () { 
+
+    const mainImage = document.getElementById("main-lightbox-trigger"); 
+
+    const thumbnails = document.querySelectorAll(".thumbnail-image"); 
+
+ 
+
+    thumbnails.forEach((thumb) => { 
+
+      thumb.addEventListener("click", function () { 
+
+        // === Get the source of the clicked thumbnail 
+
+        const newSrc = thumb.getAttribute("src"); 
+
+ 
+
+        // === Update the main image 
+
+        if (newSrc && mainImage) { 
+
+          mainImage.setAttribute("src", newSrc); 
+
+        } 
+
+      }); 
+
+    }); 
+
+  }); 
 
  
 
@@ -140,18 +166,27 @@ document.querySelectorAll('.accessory-image').forEach(container => {
 
  
 
-  // DISABLED: Duplicate Webflow lightbox handler - Custom Gallery Lightbox handles this now
-  // document.addEventListener("DOMContentLoaded", function () { 
-  //   const mainTrigger = document.getElementById("main-lightbox-trigger"); 
-  //   const firstGalleryItem = document.querySelector(".first-gallery-image"); 
-  //   // === When main image is clicked, open the Webflow lightbox 
-  //   // DISABLED: Custom Gallery Lightbox handles this now
-  //   // if (mainTrigger && firstGalleryItem) { 
-  //   //   mainTrigger.addEventListener("click", () => { 
-  //   //     firstGalleryItem.click(); 
-  //   //   }); 
-  //   // } 
-  // }); 
+  document.addEventListener("DOMContentLoaded", function () { 
+
+    const mainTrigger = document.getElementById("main-lightbox-trigger"); 
+
+    const firstGalleryItem = document.querySelector(".first-gallery-image"); 
+
+ 
+
+    // === When main image is clicked, open the Webflow lightbox 
+
+    if (mainTrigger && firstGalleryItem) { 
+
+      mainTrigger.addEventListener("click", () => { 
+
+        firstGalleryItem.click(); 
+
+      }); 
+
+    } 
+
+  }); 
 
  
 
@@ -731,13 +766,18 @@ document.addEventListener("DOMContentLoaded", function () {
  
 
   /* === Trigger Hidden Webflow Lightbox Gallery === */ 
-  // DISABLED: Custom Gallery Lightbox handles this now
-  // const firstGalleryItem = document.querySelector(".first-gallery-image"); 
-  // if (mainImage && firstGalleryItem) { 
-  //   mainImage.addEventListener("click", () => { 
-  //     firstGalleryItem.click(); 
-  //   }); 
-  // } 
+
+  const firstGalleryItem = document.querySelector(".first-gallery-image"); 
+
+  if (mainImage && firstGalleryItem) { 
+
+    mainImage.addEventListener("click", () => { 
+
+      firstGalleryItem.click(); 
+
+    }); 
+
+  } 
 
  
 
