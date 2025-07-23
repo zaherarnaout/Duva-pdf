@@ -2750,3 +2750,75 @@ opacity: 1 !important;
   color: transparent !important;
   z-index: 9999 !important;
 }
+
+/* === DUVA Lightbox Modal === */
+.duva-lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.duva-lightbox.hidden {
+  display: none;
+}
+
+.duva-lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+#duva-lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+/* === Arrows (inside modal) === */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.arrow-left {
+  left: -50px;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/688095ba1420fd12f2c3faf4_arrow-red-left-white.svg');
+}
+
+.arrow-right {
+  right: -50px;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/688095baaa7eee6e11ced3c8_arrow-red-right-white.svg');
+}
+
+/* === Close Button === */
+.gallery-close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 24px;
+  height: 24px;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/688095bac6205760a0e4f4b2_Close-X-White.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+/* === Disable background scroll === */
+body.duva-lock-scroll {
+  overflow: hidden;
+}
