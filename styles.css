@@ -146,73 +146,44 @@ body.w-lightbox-noscroll {
 }
 
 .w-lightbox-close { 
-  background: #bf3b2b !important;
-  color: white !important;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef59d29de9f4afd08f52_Close-X-White.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  background-color: transparent !important;
+  color: transparent !important;
   width: 36px !important;
   height: 36px !important;
-  font-size: 18px !important;
-  font-weight: bold !important;
+  font-size: 0 !important;
   top: 20px !important;
   right: 20px !important;
   border: none !important;
-  border-radius: 4px !important;
   cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-decoration: none !important;
-  line-height: 1 !important;
 } 
-
-.w-lightbox-close::before {
-  content: "×" !important;
-  font-size: 24px !important;
-  line-height: 1 !important;
-}
 
 /* === DUVA Lightbox Arrows === */ 
 .w-lightbox-left { 
-  background: #bf3b2b !important;
-  color: white !important;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef5902e311c1a22c5086_arrow-red-left-white.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 48px 48px !important;
+  background-color: transparent !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
-  border-radius: 4px !important;
   cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-decoration: none !important;
-  font-size: 0 !important;
 } 
-
-.w-lightbox-left::before {
-  content: "‹" !important;
-  font-size: 32px !important;
-  line-height: 1 !important;
-  font-weight: bold !important;
-}
 
 .w-lightbox-right { 
-  background: #bf3b2b !important;
-  color: white !important;
+  background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880ef59b929fb7d96d535ae_arrow-red-right-white.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 48px 48px !important;
+  background-color: transparent !important;
   width: 48px !important;
   height: 48px !important;
   border: none !important;
-  border-radius: 4px !important;
   cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-decoration: none !important;
-  font-size: 0 !important;
-} 
-
-.w-lightbox-right::before {
-  content: "›" !important;
-  font-size: 32px !important;
-  line-height: 1 !important;
-  font-weight: bold !important;
 }
 
 /* === Lightbox Image Container === */
