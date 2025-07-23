@@ -2713,54 +2713,40 @@ opacity: 1 !important;
   margin: 0 !important;
 }
 
-/* === Custom Lightbox Icons Override === */
-.w-lightbox-left,
-.w-lightbox-right {
-  width: 70px !important;
-  height: auto !important;
-  min-width: 70px !important;
-  min-height: 0 !important;
-  opacity: 1 !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
+/* === Custom Lightbox Icons Override (Final, Highly Specific) === */
 .w-lightbox-left {
+  width: 40px !important;
+  height: 40px !important;
   background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880a6c2661dd4e527fcb949_arrow-red-left-white.svg') !important;
-  background-repeat: no-repeat;
-  background-size: 60% 60%;
-  background-position: center;
+  background-repeat: no-repeat !important;
+  background-size: 60% 60% !important;
+  background-position: center !important;
   background-color: transparent !important;
+  z-index: 9999 !important;
 }
-
 .w-lightbox-right {
+  width: 40px !important;
+  height: 40px !important;
   background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880a6c4f4e926ebdf6e3f2b_arrow-red-right-white.svg') !important;
-  background-repeat: no-repeat;
-  background-size: 60% 60%;
-  background-position: center;
+  background-repeat: no-repeat !important;
+  background-size: 60% 60% !important;
+  background-position: center !important;
   background-color: transparent !important;
+  z-index: 9999 !important;
 }
-
 .w-lightbox-left::before,
 .w-lightbox-right::before {
   display: none !important;
 }
-
 .w-lightbox-close {
-  width: 50px !important;
-  height: auto !important;
-  min-width: 50px !important;
-  min-height: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
   background-image: url('https://cdn.prod.website-files.com/684a5d9b82bae84c8dbeb42f/6880a6c5437cc6d660cd135f_close-x-white.svg') !important;
-  background-repeat: no-repeat;
-  background-size: 70% 70%;
-  background-position: center;
+  background-repeat: no-repeat !important;
+  background-size: 70% 70% !important;
+  background-position: center !important;
   background-color: transparent !important;
   border: none !important;
   color: transparent !important;
-  opacity: 1 !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+  z-index: 9999 !important;
 }
