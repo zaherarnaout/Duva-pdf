@@ -757,7 +757,7 @@ display: none !important;
   margin: 0; 
 }
 
-.accessories-wrapper.open {
+.accessories-section.open .accessories-wrapper {
   box-shadow: 0 2px 5px 0 var(--border-main-shadow);
 } 
 
