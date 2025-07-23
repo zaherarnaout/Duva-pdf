@@ -118,54 +118,69 @@ cursor: pointer;
 
 
 
-/* === 3. Webflow Lightbox Styling === */ 
+/* === 3. DUVA Lightbox Navigation Styling === */ 
+
+/* === Frosted Glass Lightbox Background === */
+.w-lightbox-backdrop {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+}
+
+/* === Body Scroll Prevention === */
+body.w-lightbox-noscroll {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
 
 .w-lightbox-close { 
-
-  background-color: transparent !important; 
-
-  color: white !important; 
-
-  width: 36px; 
-
-  height: 36px; 
-
-  font-size: 24px; 
-
-  top: 20px; 
-
-  right: 20px; 
-
+  background-image: url('./Close-X-White.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  background-color: transparent !important;
+  color: transparent !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 0 !important;
+  top: 20px !important;
+  right: 20px !important;
+  border: none !important;
+  cursor: pointer !important;
 } 
 
-
-
-/* === Webflow Lightbox Arrows === */ 
-
-.w-lightbox-left, 
+/* === DUVA Lightbox Arrows === */ 
+.w-lightbox-left { 
+  background-image: url('./arrow-red-left-white.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 48px 48px !important;
+  background-color: transparent !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: none !important;
+  cursor: pointer !important;
+} 
 
 .w-lightbox-right { 
-
-  background-color: rgba(0, 0, 0, 0.5) !important; 
-
-  width: 40px; 
-
-  height: 40px; 
-
-  border-radius: 50%; 
-
-} 
-
-
+  background-image: url('./arrow-red-right-white.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 48px 48px !important;
+  background-color: transparent !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
 
 .w-lightbox-left::before, 
-
 .w-lightbox-right::before { 
-
-  color: white !important; 
-
-  font-size: 24px; 
-
+  display: none !important;
 } 
 
 
@@ -194,25 +209,29 @@ cursor: pointer;
 
 
 
-/* === Lightbox Navigation Arrows Styling (Bottom, Bold, Red) === */ 
+/* === DUVA Lightbox Navigation Arrows Styling (Bottom) === */ 
 
-.w-lightbox-left, 
-
-.w-lightbox-right { 
+.w-lightbox-left { 
 
   bottom: 40px !important; 
 
   top: auto !important; 
 
-  background-color: #C0392B !important; 
+  background-image: url('./arrow-red-left-white.svg') !important;
 
-  width: 48px; 
+  background-repeat: no-repeat !important;
 
-  height: 48px; 
+  background-position: center !important;
 
-  font-weight: bold; 
+  background-size: 48px 48px !important;
 
-  border-radius: 4px; 
+  background-color: transparent !important;
+
+  width: 48px !important; 
+
+  height: 48px !important; 
+
+  border: none !important;
 
   display: flex !important; 
 
@@ -222,51 +241,93 @@ cursor: pointer;
 
   z-index: 9999; 
 
-  color: white !important; 
+  color: transparent !important; 
+
+  cursor: pointer !important;
 
 } 
 
+.w-lightbox-right { 
 
+  bottom: 40px !important; 
+
+  top: auto !important; 
+
+  background-image: url('./arrow-red-right-white.svg') !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  background-size: 48px 48px !important;
+
+  background-color: transparent !important;
+
+  width: 48px !important; 
+
+  height: 48px !important; 
+
+  border: none !important;
+
+  display: flex !important; 
+
+  align-items: center; 
+
+  justify-content: center; 
+
+  z-index: 9999; 
+
+  color: transparent !important; 
+
+  cursor: pointer !important;
+
+}
 
 .w-lightbox-left::before, 
 
 .w-lightbox-right::before { 
 
-  color: white !important; 
-
-  font-size: 24px; 
-
-  font-weight: 700; 
+  display: none !important;
 
 } 
 
 
 
-/* === Lightbox Close Button Styling (Square with Border) === */ 
+/* === DUVA Lightbox Close Button Styling === */ 
 
 .w-lightbox-close { 
 
-  top: 20px; 
+  top: 20px !important; 
 
-  right: 20px; 
+  right: 20px !important; 
 
-  width: 44px; 
+  width: 44px !important; 
 
-  height: 44px; 
+  height: 44px !important; 
 
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-image: url('./Close-X-White.svg') !important;
 
-  border: 2px solid white !important; 
+  background-repeat: no-repeat !important;
 
-  border-radius: 0 !important; /* Square corners */ 
+  background-position: center !important;
 
-  color: white !important; 
+  background-size: 24px 24px !important;
 
-  font-size: 20px; 
+  background-color: transparent !important;
 
-  font-weight: bold; 
+  border: none !important; 
 
-  z-index: 9999; 
+  border-radius: 0 !important;
+
+  color: transparent !important; 
+
+  font-size: 0 !important;
+
+  font-weight: bold !important; 
+
+  z-index: 9999 !important;
+
+  cursor: pointer !important;
 
 } 
 
@@ -420,51 +481,89 @@ cursor: pointer;
 
 
 
-/* === Webflow Lightbox Styling (Close Button + Arrows) === */ 
+/* === DUVA Lightbox Styling (Close Button + Arrows) === */ 
 
 .w-lightbox-close { 
 
+  background-image: url('./Close-X-White.svg') !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  background-size: 24px 24px !important;
+
   background-color: transparent !important; 
 
-  color: white !important; 
+  color: transparent !important; 
 
-  width: 36px; 
+  width: 36px !important; 
 
-  height: 36px; 
+  height: 36px !important; 
 
-  font-size: 24px; 
+  font-size: 0 !important; 
 
-  top: 20px; 
+  top: 20px !important; 
 
-  right: 20px; 
+  right: 20px !important; 
+
+  border: none !important;
+
+  cursor: pointer !important;
 
 } 
 
 
 
-.w-lightbox-left, 
+.w-lightbox-left { 
+
+  background-image: url('./arrow-red-left-white.svg') !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  background-size: 48px 48px !important;
+
+  background-color: transparent !important; 
+
+  width: 48px !important; 
+
+  height: 48px !important; 
+
+  border: none !important;
+
+  cursor: pointer !important;
+
+} 
 
 .w-lightbox-right { 
 
-  background-color: rgba(0, 0, 0, 0.5) !important; 
+  background-image: url('./arrow-red-right-white.svg') !important;
 
-  width: 40px; 
+  background-repeat: no-repeat !important;
 
-  height: 40px; 
+  background-position: center !important;
 
-  border-radius: 50%; 
+  background-size: 48px 48px !important;
 
-} 
+  background-color: transparent !important; 
 
+  width: 48px !important; 
 
+  height: 48px !important; 
+
+  border: none !important;
+
+  cursor: pointer !important;
+
+}
 
 .w-lightbox-left::before, 
 
 .w-lightbox-right::before { 
 
-  color: white !important; 
-
-  font-size: 24px; 
+  display: none !important;
 
 } 
 
@@ -488,23 +587,27 @@ cursor: pointer;
 
 
 
-.w-lightbox-left, 
-
-.w-lightbox-right { 
+.w-lightbox-left { 
 
   bottom: 40px !important; 
 
   top: auto !important; 
 
-  background-color: #C0392B !important; 
+  background-image: url('./arrow-red-left-white.svg') !important;
 
-  width: 48px; 
+  background-repeat: no-repeat !important;
 
-  height: 48px; 
+  background-position: center !important;
 
-  font-weight: bold; 
+  background-size: 48px 48px !important;
 
-  border-radius: 4px; 
+  background-color: transparent !important; 
+
+  width: 48px !important; 
+
+  height: 48px !important; 
+
+  border: none !important;
 
   display: flex !important; 
 
@@ -512,19 +615,55 @@ cursor: pointer;
 
   justify-content: center; 
 
-  z-index: 9999; 
+  z-index: 9999 !important; 
 
-  color: white !important; 
+  color: transparent !important; 
+
+  cursor: pointer !important;
 
 } 
 
+.w-lightbox-right { 
 
+  bottom: 40px !important; 
+
+  top: auto !important; 
+
+  background-image: url('./arrow-red-right-white.svg') !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  background-size: 48px 48px !important;
+
+  background-color: transparent !important; 
+
+  width: 48px !important; 
+
+  height: 48px !important; 
+
+  border: none !important;
+
+  display: flex !important; 
+
+  align-items: center; 
+
+  justify-content: center; 
+
+  z-index: 9999 !important; 
+
+  color: transparent !important; 
+
+  cursor: pointer !important;
+
+}
 
 .w-lightbox-left::before, 
 
 .w-lightbox-right::before { 
 
-  font-weight: 700; 
+  display: none !important;
 
 } 
 
@@ -532,23 +671,33 @@ cursor: pointer;
 
 .w-lightbox-close { 
 
-  width: 44px; 
+  width: 44px !important; 
 
-  height: 44px; 
+  height: 44px !important; 
 
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-image: url('./Close-X-White.svg') !important;
 
-  border: 2px solid white !important; 
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  background-size: 24px 24px !important;
+
+  background-color: transparent !important; 
+
+  border: none !important; 
 
   border-radius: 0 !important; 
 
-  color: white !important; 
+  color: transparent !important; 
 
-  font-size: 20px; 
+  font-size: 0 !important; 
 
-  font-weight: bold; 
+  font-weight: bold !important; 
 
-  z-index: 9999; 
+  z-index: 9999 !important; 
+
+  cursor: pointer !important;
 
 } 
 
