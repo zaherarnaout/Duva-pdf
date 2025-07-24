@@ -677,7 +677,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ensureProductCode();
     // Get current product code dynamically from CMS
     const baseCode = getCurrentProductCode();
-    console.log("updateOrderingCode: product =", baseCode); 
+    console.log("🔄 updateOrderingCode: product =", baseCode); 
 
     const keys = ["watt", "ip-rating", "beam", "cct", "cri", "finish"]; 
 
@@ -685,6 +685,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const codeElement = document.querySelector(".ordering-code-value"); 
     const pdfCodeElement = document.getElementById("pdf-code"); // <-- Add this
+
+    console.log("🔍 updateOrderingCode: codeElement found =", !!codeElement);
+    console.log("🔍 updateOrderingCode: pdfCodeElement found =", !!pdfCodeElement);
 
   if (codeElement) { 
     const styledParts = keys.map((key, i) => { 
@@ -695,16 +698,23 @@ document.addEventListener("DOMContentLoaded", function () {
       return `<span title="${labels[i]}" style="color:${color}; font-weight: bold;">${val}</span>`; 
     }); 
 
+    const newOrderingCode = `<span title="Product Code" style="color: #111; font-weight: bold;">${baseCode}</span>.` + styledParts.join(".");
+    console.log("🔄 updateOrderingCode: Setting new ordering code =", newOrderingCode);
+
     // For on-screen display
-    codeElement.innerHTML = `<span title="Product Code" style="color: #111; font-weight: bold;">${baseCode}</span>.` + styledParts.join(".");
+    codeElement.innerHTML = newOrderingCode;
+    console.log("✅ updateOrderingCode: Ordering code updated successfully");
 
     // For PDF filename (plain text, no HTML)
     if (pdfCodeElement) {
       // Build plain code string for filename
       const plainParts = keys.map(key => getTextValue(key) || "XX");
-      pdfCodeElement.textContent = `${baseCode}.${plainParts.join(".")}`;
-      console.log("updateOrderingCode: pdfCodeElement.textContent =", pdfCodeElement.textContent);
+      const plainCode = `${baseCode}.${plainParts.join(".")}`;
+      pdfCodeElement.textContent = plainCode;
+      console.log("📄 updateOrderingCode: PDF code set =", plainCode);
     }
+  } else {
+    console.log("⚠️ updateOrderingCode: No ordering-code-value element found!");
   } 
 } 
 
@@ -1770,20 +1780,36 @@ function injectPdfContent() {
 
 // Get current product code dynamically from CMS
 function getCurrentProductCode() {
+  console.log('🔍 Searching for current product code...');
+  
   // Try multiple selectors to find the current product code
   const selectors = [
     '#product-code',
     '.product-code-heading',
     '.product-code',
     '[data-product-code]',
-    '.product-title-source'
+    '.product-title-source',
+    '.product-code-heading',
+    'h1.product-code',
+    '.product-title'
   ];
   
   for (const selector of selectors) {
     const element = document.querySelector(selector);
+    console.log(`🔍 Checking selector "${selector}":`, element);
     if (element && element.textContent.trim()) {
       const code = element.textContent.trim();
       console.log(`✅ Found product code from ${selector}:`, code);
+      return code;
+    }
+  }
+  
+  // Also check for any element containing a product code pattern
+  const allElements = document.querySelectorAll('*');
+  for (const element of allElements) {
+    if (element.textContent && element.textContent.match(/^C\d{3,4}$/)) {
+      const code = element.textContent.trim();
+      console.log(`✅ Found product code pattern in element:`, element, 'Code:', code);
       return code;
     }
   }
@@ -1795,6 +1821,7 @@ function getCurrentProductCode() {
   }
   
   console.log('⚠️ No product code found, using fallback: CXXX');
+  console.log('🔍 Available elements with text:', Array.from(document.querySelectorAll('*')).filter(el => el.textContent && el.textContent.trim().length < 20).map(el => ({tag: el.tagName, text: el.textContent.trim()})));
   return 'CXXX';
 }
 
@@ -2143,10 +2170,71 @@ window.refreshProductCode = function() {
   refreshOrderingCode();
 };
 
+// Debug function to test product code detection
+window.debugProductCode = function() {
+  console.log('🔍 Debugging product code detection...');
+  console.log('Current product code:', getCurrentProductCode());
+  console.log('Window currentSelection:', window.currentSelection);
+  console.log('All elements with product code pattern:');
+  document.querySelectorAll('*').forEach(el => {
+    if (el.textContent && el.textContent.match(/^C\d{3,4}$/)) {
+      console.log('Found:', el.tagName, el.className, el.textContent.trim());
+    }
+  });
+};
+
+// Force refresh function for testing
+window.forceRefreshOrderingCode = function() {
+  console.log('🔄 Force refreshing ordering code...');
+  updateOrderingCode();
+  updateProductCodeInjection();
+  updateGeneratedCodeInjection();
+};
+
+// Test function to simulate product change
+window.testProductChange = function(newProductCode) {
+  console.log('🧪 Testing product change to:', newProductCode);
+  
+  // Find and update a product code element
+  const selectors = ['#product-code', '.product-code-heading', '.product-code', '.product-title-source'];
+  let updated = false;
+  
+  for (const selector of selectors) {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.textContent = newProductCode;
+      console.log(`✅ Updated ${selector} to ${newProductCode}`);
+      updated = true;
+      break;
+    }
+  }
+  
+  if (!updated) {
+    console.log('⚠️ No product code element found to update');
+  }
+  
+  // Force refresh
+  setTimeout(() => {
+    forceRefreshOrderingCode();
+  }, 100);
+};
+
 // Observer to refresh ordering code when page content changes
 function setupOrderingCodeObserver() {
+  console.log('🔧 Setting up ordering code observer...');
+  
   // Watch for changes in the product code element
-  const productCodeElement = document.querySelector('#product-code, .product-code-heading, .product-code');
+  const selectors = ['#product-code', '.product-code-heading', '.product-code', '.product-title-source'];
+  let productCodeElement = null;
+  
+  for (const selector of selectors) {
+    productCodeElement = document.querySelector(selector);
+    if (productCodeElement) {
+      console.log(`✅ Found element to observe: ${selector}`);
+      break;
+    }
+  }
+  
   if (productCodeElement) {
     const observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
@@ -2167,8 +2255,36 @@ function setupOrderingCodeObserver() {
       subtree: true
     });
     
-    console.log('✅ Ordering code observer set up');
+    console.log('✅ Ordering code observer set up for:', productCodeElement);
+  } else {
+    console.log('⚠️ No product code element found for observer, setting up periodic check');
+    // Set up periodic check as backup
+    setInterval(() => {
+      const currentCode = getCurrentProductCode();
+      if (currentCode !== 'CXXX' && currentCode !== window.lastProductCode) {
+        console.log('🔄 Product code changed via periodic check:', currentCode);
+        window.lastProductCode = currentCode;
+        updateOrderingCode();
+        updateProductCodeInjection();
+        updateGeneratedCodeInjection();
+      }
+    }, 2000); // Check every 2 seconds
   }
+  
+  // Also watch for URL changes (for SPA navigation)
+  let lastUrl = location.href;
+  new MutationObserver(() => {
+    const url = location.href;
+    if (url !== lastUrl) {
+      lastUrl = url;
+      console.log('🔄 URL changed, refreshing ordering code...');
+      setTimeout(() => {
+        updateOrderingCode();
+        updateProductCodeInjection();
+        updateGeneratedCodeInjection();
+      }, 500);
+    }
+  }).observe(document, {subtree: true, childList: true});
 }
 
 // === Inject PDF Icons from CMS to #pdf-container ===
