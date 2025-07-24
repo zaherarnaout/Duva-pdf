@@ -2515,3 +2515,66 @@ function injectSelectedAccessories() {
 
   console.log(`✅ Total accessories injected: ${selectedAccessories.length}`);
 }
+
+// === Scroll-triggered Fade-in Animations ===
+function initializeScrollAnimations() {
+  console.log('✨ Initializing scroll animations...');
+  
+  // Intersection Observer for Related Items section
+  const relatedSection = document.querySelector('.related-section');
+  if (relatedSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          console.log('🎬 Related section fade-in triggered');
+        }
+      });
+    }, {
+      threshold: 0.3, // Trigger when 30% of section is visible
+      rootMargin: '0px 0px -50px 0px' // Trigger slightly before section comes into view
+    });
+    
+    observer.observe(relatedSection);
+    console.log('✅ Related section observer set up');
+  }
+  
+  // Enhanced accessories dropdown animation
+  const accessoriesToggle = document.querySelector('.accessories-toggle');
+  if (accessoriesToggle) {
+    accessoriesToggle.addEventListener('click', function() {
+      const accessoriesSection = this.closest('.accessories-section');
+      const accessoriesItems = accessoriesSection.querySelectorAll('.accessories-item');
+      
+      // Add staggered animation delays to accessories items
+      accessoriesItems.forEach((item, index) => {
+        item.style.setProperty('--item-index', index);
+      });
+      
+      console.log('🎬 Accessories dropdown animation triggered');
+    });
+  }
+}
+
+// === Smooth Scroll to Related Section ===
+function scrollToRelatedSection() {
+  const relatedSection = document.querySelector('.related-section');
+  if (relatedSection) {
+    relatedSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+    console.log('📜 Smooth scrolling to related section');
+  }
+}
+
+// Initialize animations when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  initializeScrollAnimations();
+  
+  // Add smooth scroll button if needed (optional)
+  const scrollToRelatedBtn = document.querySelector('.scroll-to-related');
+  if (scrollToRelatedBtn) {
+    scrollToRelatedBtn.addEventListener('click', scrollToRelatedSection);
+  }
+});
