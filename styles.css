@@ -2743,9 +2743,8 @@ opacity: 1 !important;
   position: relative !important;
   /* Calculate proper padding to show exactly 3 cards */
   /* 3 cards = (500px × 3) + (24px gap × 2) = 1500px + 48px = 1548px */
-  /* Need extra padding to ensure 4th card is completely hidden */
-  /* Arrows are at 10px from edges, so we need enough padding to hide the 4th card behind the arrow */
-  padding: 0 200px !important; /* Increased padding to completely hide 4th card */
+  /* Since we removed arrows, we can reduce padding */
+  padding: 0 40px !important; /* Reduced padding since arrows are hidden */
   /* Hide scrollbar */
   scrollbar-width: none !important; /* Firefox */
   -ms-overflow-style: none !important; /* Internet Explorer 10+ */
@@ -2756,35 +2755,10 @@ opacity: 1 !important;
   display: none !important;
 }
 
+/* Hide arrows since we're using mouse wheel scrolling */
 .related-arrow-left,
 .related-arrow-right {
-  position: absolute !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  z-index: 10 !important;
-  cursor: pointer !important;
-  transition: box-shadow 0.3s ease !important;
-}
-
-.related-arrow-left {
-  left: 10px !important;
-}
-
-.related-arrow-right {
-  right: 10px !important;
-}
-
-.related-arrow-left:hover,
-.related-arrow-right:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Only target images within your specific arrow classes */
-.related-arrow-left .arrow-left,
-.related-arrow-right .arrow-right {
-  width: 60px !important;
-  height: 60px !important;
-  object-fit: contain !important;
+  display: none !important;
 }
 
 @media screen and (max-width: 991px) {
