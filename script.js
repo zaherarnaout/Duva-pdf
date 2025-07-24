@@ -1782,46 +1782,62 @@ function injectPdfContent() {
 function getCurrentProductCode() {
   console.log('🔍 Searching for current product code...');
   
-  // Try multiple selectors to find the current product code
-  const selectors = [
-    '#product-code',
-    '.product-code-heading',
-    '.product-code',
-    '[data-product-code]',
-    '.product-title-source',
-    '.product-code-heading',
-    'h1.product-code',
-    '.product-title'
-  ];
-  
-  for (const selector of selectors) {
-    const element = document.querySelector(selector);
-    console.log(`🔍 Checking selector "${selector}":`, element);
-    if (element && element.textContent.trim()) {
-      const code = element.textContent.trim();
-      console.log(`✅ Found product code from ${selector}:`, code);
-      return code;
-    }
-  }
-  
-  // Also check for any element containing a product code pattern
-  const allElements = document.querySelectorAll('*');
-  for (const element of allElements) {
-    if (element.textContent && element.textContent.match(/^C\d{3,4}$/)) {
-      const code = element.textContent.trim();
-      console.log(`✅ Found product code pattern in element:`, element, 'Code:', code);
-      return code;
-    }
-  }
-  
-  // Fallback to window.currentSelection if available
+  // PRIORITY 1: Check window.currentSelection first (most current)
   if (window.currentSelection && window.currentSelection.product) {
     console.log('✅ Using product code from window.currentSelection:', window.currentSelection.product);
     return window.currentSelection.product;
   }
   
+  // PRIORITY 2: Check for visible product code elements (not hidden)
+  const visibleSelectors = [
+    '.product-code-heading:not([style*="display: none"])',
+    '.product-code:not([style*="display: none"])',
+    '[data-product-code]:not([style*="display: none"])',
+    '.product-title-source:not([style*="display: none"])',
+    'h1.product-code:not([style*="display: none"])',
+    '.product-title:not([style*="display: none"])'
+  ];
+  
+  for (const selector of visibleSelectors) {
+    const element = document.querySelector(selector);
+    console.log(`🔍 Checking visible selector "${selector}":`, element);
+    if (element && element.textContent.trim()) {
+      const code = element.textContent.trim();
+      console.log(`✅ Found visible product code from ${selector}:`, code);
+      return code;
+    }
+  }
+  
+  // PRIORITY 3: Check for any visible element containing a product code pattern
+  const allElements = document.querySelectorAll('*:not([style*="display: none"])');
+  for (const element of allElements) {
+    if (element.textContent && element.textContent.match(/^C\d{3,4}$/)) {
+      const code = element.textContent.trim();
+      console.log(`✅ Found visible product code pattern in element:`, element, 'Code:', code);
+      return code;
+    }
+  }
+  
+  // PRIORITY 4: Fallback to hidden elements (last resort)
+  const hiddenSelectors = [
+    '#product-code',
+    '.product-code-heading',
+    '.product-code',
+    '[data-product-code]',
+    '.product-title-source'
+  ];
+  
+  for (const selector of hiddenSelectors) {
+    const element = document.querySelector(selector);
+    console.log(`🔍 Checking hidden selector "${selector}":`, element);
+    if (element && element.textContent.trim()) {
+      const code = element.textContent.trim();
+      console.log(`⚠️ Using hidden product code from ${selector}:`, code);
+      return code;
+    }
+  }
+  
   console.log('⚠️ No product code found, using fallback: CXXX');
-  console.log('🔍 Available elements with text:', Array.from(document.querySelectorAll('*')).filter(el => el.textContent && el.textContent.trim().length < 20).map(el => ({tag: el.tagName, text: el.textContent.trim()})));
   return 'CXXX';
 }
 
