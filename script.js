@@ -675,8 +675,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateOrderingCode() { 
 
     ensureProductCode();
-    console.log("updateOrderingCode: product =", window.currentSelection.product);
-    const baseCode = window.currentSelection.product || "CXXX"; 
+    // Get current product code dynamically from CMS
+    const baseCode = getCurrentProductCode();
+    console.log("updateOrderingCode: product =", baseCode); 
 
     const keys = ["watt", "ip-rating", "beam", "cct", "cri", "finish"]; 
 
@@ -1189,7 +1190,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateOrderingCode() { 
 
-    const baseCode = window.currentSelection.product || "CXXX"; 
+    // Get current product code dynamically from CMS
+    const baseCode = getCurrentProductCode(); 
 
     const keys = ["watt", "ip-rating", "beam", "cct", "cri", "finish"]; 
 
@@ -1256,7 +1258,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const selection = window.currentSelection || {}; 
 
-    const code = selection.code || 'C329'; 
+    // Get current product code dynamically from CMS
+    const code = getCurrentProductCode(); 
 
     const watt = selection.watt || '12'; 
 
@@ -1763,6 +1766,45 @@ function injectPdfContent() {
   injectSelectedAccessories();
 }
 
+// === Dynamic Product Code Functions ===
+
+// Get current product code dynamically from CMS
+function getCurrentProductCode() {
+  // Try multiple selectors to find the current product code
+  const selectors = [
+    '#product-code',
+    '.product-code-heading',
+    '.product-code',
+    '[data-product-code]',
+    '.product-title-source'
+  ];
+  
+  for (const selector of selectors) {
+    const element = document.querySelector(selector);
+    if (element && element.textContent.trim()) {
+      const code = element.textContent.trim();
+      console.log(`✅ Found product code from ${selector}:`, code);
+      return code;
+    }
+  }
+  
+  // Fallback to window.currentSelection if available
+  if (window.currentSelection && window.currentSelection.product) {
+    console.log('✅ Using product code from window.currentSelection:', window.currentSelection.product);
+    return window.currentSelection.product;
+  }
+  
+  console.log('⚠️ No product code found, using fallback: CXXX');
+  return 'CXXX';
+}
+
+// Get current product family from CMS
+function getCurrentProductFamily() {
+  // This should pull from your CMS - adjust selector as needed
+  const familyElement = document.querySelector('.product-title-source');
+  return familyElement ? familyElement.textContent.trim() : null;
+}
+
 function generatePDF() {
   if (isExporting) return; // Prevent double export
   isExporting = true;
@@ -2080,7 +2122,54 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.accessory-checkbox').forEach(cb => {
     cb.addEventListener('change', updateAccessoriesSectionVisibility);
   });
+  
+  // Set up observer to refresh ordering code when content changes
+  setupOrderingCodeObserver();
 });
+
+// Manual refresh function for ordering code
+function refreshOrderingCode() {
+  console.log('🔄 Manually refreshing ordering code...');
+  setTimeout(() => {
+    updateOrderingCode();
+    updateProductCodeInjection();
+    updateGeneratedCodeInjection();
+  }, 100);
+}
+
+// Global function that can be called from Webflow
+window.refreshProductCode = function() {
+  console.log('🌐 Global refresh called from Webflow');
+  refreshOrderingCode();
+};
+
+// Observer to refresh ordering code when page content changes
+function setupOrderingCodeObserver() {
+  // Watch for changes in the product code element
+  const productCodeElement = document.querySelector('#product-code, .product-code-heading, .product-code');
+  if (productCodeElement) {
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+          console.log('🔄 Product code changed, refreshing ordering code...');
+          setTimeout(() => {
+            updateOrderingCode();
+            updateProductCodeInjection();
+            updateGeneratedCodeInjection();
+          }, 100);
+        }
+      });
+    });
+    
+    observer.observe(productCodeElement, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+    
+    console.log('✅ Ordering code observer set up');
+  }
+}
 
 // === Inject PDF Icons from CMS to #pdf-container ===
 function injectPdfIcons() {
