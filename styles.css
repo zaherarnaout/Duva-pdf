@@ -2771,3 +2771,43 @@ opacity: 1 !important;
     padding: 0 20px !important; /* Reduce padding on mobile */
   }
 }
+
+/* === Fade-in Animations === */
+
+/* Related Items Section Fade-in on Scroll */
+.related-section {
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+  transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+.related-section.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Accessories Dropdown Fade-in Animation */
+.accessories-content {
+  opacity: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: opacity 0.4s ease, max-height 0.4s ease !important;
+}
+
+.accessories-section.open .accessories-content {
+  opacity: 1 !important;
+  max-height: 1000px !important; /* Adjust based on your content height */
+}
+
+/* Smooth fade-in for accessories items */
+.accessories-item {
+  opacity: 0 !important;
+  transform: translateY(10px) !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+  transition-delay: calc(var(--item-index, 0) * 0.1s) !important;
+}
+
+.accessories-section.open .accessories-item {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
