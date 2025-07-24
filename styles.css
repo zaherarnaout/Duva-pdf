@@ -2744,7 +2744,8 @@ opacity: 1 !important;
   /* Calculate proper padding to show exactly 3 cards */
   /* 3 cards = (500px × 3) + (24px gap × 2) = 1500px + 48px = 1548px */
   /* Need extra padding to ensure 4th card is completely hidden */
-  padding: 0 100px !important; /* Increased padding to completely hide 4th card */
+  /* Arrows are at 10px from edges, so we need enough padding to hide the 4th card behind the arrow */
+  padding: 0 200px !important; /* Increased padding to completely hide 4th card */
   /* Hide scrollbar */
   scrollbar-width: none !important; /* Firefox */
   -ms-overflow-style: none !important; /* Internet Explorer 10+ */
