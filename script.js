@@ -2240,11 +2240,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const scrollContainer = document.querySelector(".collection-list-6");
   const leftArrow = document.querySelector(".related-arrow-left");
   const rightArrow = document.querySelector(".related-arrow-right");
-
-  const scrollAmount = 500; // Match card width
+  
+  // Calculate scroll amount for 3 cards (500px each + 24px gap)
+  const cardWidth = 500;
+  const gap = 24;
+  const scrollAmount = (cardWidth + gap) * 3; // Scroll by 3 cards at a time
 
   if (scrollContainer && leftArrow && rightArrow) {
     console.log('✅ Related items scroll logic initialized');
+    console.log('📏 Scroll amount for 3 cards:', scrollAmount, 'px');
     
     leftArrow.addEventListener("click", () => {
       scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
