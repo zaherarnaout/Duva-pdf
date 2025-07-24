@@ -2235,54 +2235,55 @@ window.testProductChange = function(newProductCode) {
   }, 100);
 };
 
-// === Related Items Arrow Scroll Logic ===
+// === Related Items Mouse Wheel Scroll Logic ===
 document.addEventListener("DOMContentLoaded", function () {
   const scrollContainer = document.querySelector(".collection-list-6");
-  const leftArrow = document.querySelector(".related-arrow-left");
-  const rightArrow = document.querySelector(".related-arrow-right");
-  
-  // Calculate scroll amount for 3 cards (500px each + 24px gap)
-  const cardWidth = 500;
-  const gap = 24;
-  const scrollAmount = (cardWidth + gap) * 3; // Scroll by 3 cards at a time
 
-  if (scrollContainer && leftArrow && rightArrow) {
-    console.log('✅ Related items scroll logic initialized');
-    console.log('📏 Scroll amount for 3 cards:', scrollAmount, 'px');
+  if (scrollContainer) {
+    console.log('✅ Related items mouse wheel scroll logic initialized');
     
-    leftArrow.addEventListener("click", () => {
-      scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      console.log('🔄 Scrolling left by', scrollAmount, 'px');
-    });
-
-    rightArrow.addEventListener("click", () => {
-      scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      console.log('🔄 Scrolling right by', scrollAmount, 'px');
-    });
-    
-    // Hide arrows when at the beginning/end
-    const updateArrowVisibility = () => {
-      const isAtStart = scrollContainer.scrollLeft <= 0;
-      const isAtEnd = scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth;
+    // Smooth mouse wheel scrolling
+    scrollContainer.addEventListener('wheel', function(e) {
+      e.preventDefault(); // Prevent default vertical scrolling
       
-      leftArrow.style.opacity = isAtStart ? '0.3' : '1';
-      leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      // Get scroll direction and amount
+      const delta = e.deltaY || e.deltaX;
+      const scrollSpeed = 50; // Adjust this value to control scroll sensitivity
       
-      rightArrow.style.opacity = isAtEnd ? '0.3' : '1';
-      rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
-    };
+      // Smooth scroll horizontally
+      scrollContainer.scrollBy({
+        left: delta > 0 ? scrollSpeed : -scrollSpeed,
+        behavior: 'smooth'
+      });
+      
+      console.log('🔄 Mouse wheel scrolling:', delta > 0 ? 'right' : 'left');
+    }, { passive: false }); // Required for preventDefault to work
     
-    // Update arrow visibility on scroll
-    scrollContainer.addEventListener('scroll', updateArrowVisibility);
+    // Add touch/swipe support for mobile
+    let isScrolling = false;
+    let startX = 0;
+    let scrollLeft = 0;
     
-    // Initial arrow visibility check
-    updateArrowVisibility();
+    scrollContainer.addEventListener('touchstart', function(e) {
+      isScrolling = true;
+      startX = e.touches[0].pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+    });
+    
+    scrollContainer.addEventListener('touchmove', function(e) {
+      if (!isScrolling) return;
+      e.preventDefault();
+      const x = e.touches[0].pageX - scrollContainer.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+    
+    scrollContainer.addEventListener('touchend', function() {
+      isScrolling = false;
+    });
+    
   } else {
-    console.log('⚠️ Related items scroll elements not found:', {
-      scrollContainer: !!scrollContainer,
-      leftArrow: !!leftArrow,
-      rightArrow: !!rightArrow
-    });
+    console.log('⚠️ Related items scroll container not found');
   }
 });
 
