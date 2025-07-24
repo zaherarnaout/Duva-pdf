@@ -2778,8 +2778,9 @@ opacity: 1 !important;
   transform: translateY(-50%) scale(1.05) !important;
 }
 
-.related-arrow-left img,
-.related-arrow-right img {
+/* Only target images within your specific arrow classes */
+.related-arrow-left .arrow-left,
+.related-arrow-right .arrow-right {
   width: 20px !important;
   height: 20px !important;
   object-fit: contain !important;
