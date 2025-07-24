@@ -2235,6 +2235,53 @@ window.testProductChange = function(newProductCode) {
   }, 100);
 };
 
+// === Related Items Arrow Scroll Logic ===
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollContainer = document.querySelector(".collection-list-6");
+  const leftArrow = document.querySelector(".related-arrow-left");
+  const rightArrow = document.querySelector(".related-arrow-right");
+
+  const scrollAmount = 500; // Match card width
+
+  if (scrollContainer && leftArrow && rightArrow) {
+    console.log('✅ Related items scroll logic initialized');
+    
+    leftArrow.addEventListener("click", () => {
+      scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      console.log('🔄 Scrolling left by', scrollAmount, 'px');
+    });
+
+    rightArrow.addEventListener("click", () => {
+      scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      console.log('🔄 Scrolling right by', scrollAmount, 'px');
+    });
+    
+    // Hide arrows when at the beginning/end
+    const updateArrowVisibility = () => {
+      const isAtStart = scrollContainer.scrollLeft <= 0;
+      const isAtEnd = scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      
+      leftArrow.style.opacity = isAtStart ? '0.3' : '1';
+      leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+      
+      rightArrow.style.opacity = isAtEnd ? '0.3' : '1';
+      rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+    };
+    
+    // Update arrow visibility on scroll
+    scrollContainer.addEventListener('scroll', updateArrowVisibility);
+    
+    // Initial arrow visibility check
+    updateArrowVisibility();
+  } else {
+    console.log('⚠️ Related items scroll elements not found:', {
+      scrollContainer: !!scrollContainer,
+      leftArrow: !!leftArrow,
+      rightArrow: !!rightArrow
+    });
+  }
+});
+
 // Observer to refresh ordering code when page content changes
 function setupOrderingCodeObserver() {
   console.log('🔧 Setting up ordering code observer...');
