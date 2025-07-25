@@ -2520,23 +2520,31 @@ function injectSelectedAccessories() {
 function initializeScrollAnimations() {
   console.log('✨ Initializing scroll animations...');
   
-  // Intersection Observer for Related Items section
+  // Create a single observer for all sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        console.log(`🎬 ${entry.target.className} fade-in triggered`);
+      }
+    });
+  }, {
+    threshold: 0.3, // Trigger when 30% of section is visible
+    rootMargin: '0px 0px -50px 0px' // Trigger slightly before section comes into view
+  });
+  
+  // Observe Related Items section
   const relatedSection = document.querySelector('.related-section');
   if (relatedSection) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-          console.log('🎬 Related section fade-in triggered');
-        }
-      });
-    }, {
-      threshold: 0.3, // Trigger when 30% of section is visible
-      rootMargin: '0px 0px -50px 0px' // Trigger slightly before section comes into view
-    });
-    
     observer.observe(relatedSection);
     console.log('✅ Related section observer set up');
+  }
+  
+  // Observe Gallery section
+  const gallerySection = document.querySelector('.gallery-section');
+  if (gallerySection) {
+    observer.observe(gallerySection);
+    console.log('✅ Gallery section observer set up');
   }
   
   // Enhanced accessories dropdown animation
@@ -2676,7 +2684,9 @@ function initializeGalleryAutoScroll() {
   function handleWheelScroll(event) {
     // Only handle wheel scroll when auto-scroll is paused (on hover)
     if (!isAutoScrolling) {
+      // Prevent default scroll behavior for the entire page
       event.preventDefault();
+      event.stopPropagation();
       
       // Determine scroll direction
       if (event.deltaY > 0) {
@@ -2686,6 +2696,9 @@ function initializeGalleryAutoScroll() {
         // Scroll up/left - go to previous image
         scrollToPrevious();
       }
+      
+      // Return false to prevent any further scroll events
+      return false;
     }
   }
 
