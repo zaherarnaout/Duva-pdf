@@ -2846,6 +2846,14 @@ opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
+/* Ensure gallery images are always visible when section is visible */
+.gallery-section.fade-in .gallery-section-cms,
+.gallery-section.fade-in .gallery-image,
+.gallery-section.fade-in img {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 /* Accessories Dropdown Fade-in Animation */
 .accessories-content {
   opacity: 0 !important;
@@ -2891,6 +2899,8 @@ opacity: 1 !important;
   position: relative !important;
   width: 100% !important;
   overflow: hidden !important;
+  visibility: visible !important;
+  display: block !important;
 }
 
 .gallery-section-wrapper {
@@ -2899,6 +2909,8 @@ opacity: 1 !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden !important;
+  visibility: visible !important;
+  display: block !important;
 }
 
 .gallery-section-cms {
@@ -2910,6 +2922,8 @@ opacity: 1 !important;
   gap: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  visibility: visible !important;
+  min-height: 200px !important; /* Ensure minimum height for visibility */
 }
 
 /* Target Collection List 7 specifically */
@@ -2918,6 +2932,8 @@ opacity: 1 !important;
   gap: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  visibility: visible !important;
+  min-height: 200px !important;
 }
 
 /* Target Collection Item 5 specifically */
@@ -2928,6 +2944,9 @@ opacity: 1 !important;
   scroll-snap-align: start !important;
   margin: 0 !important;
   padding: 0 !important;
+  visibility: visible !important;
+  display: block !important;
+  min-height: 200px !important;
 }
 
 /* Target gallery-Image specifically */
