@@ -2606,6 +2606,19 @@ function initializeGalleryAutoScroll() {
   const images = gallery.querySelectorAll('img');
   console.log('🖼️ Number of images found:', images.length);
   
+  // Additional check: if no images found, hide gallery section
+  if (images.length === 0) {
+    console.log('⚠️ No images found in gallery - hiding gallery section');
+    if (gallerySection) {
+      gallerySection.style.display = 'none';
+      gallerySection.style.visibility = 'hidden';
+      gallerySection.style.opacity = '0';
+      gallerySection.style.height = '0';
+      gallerySection.style.overflow = 'hidden';
+    }
+    return; // Exit the function early
+  }
+  
   images.forEach((img, index) => {
     console.log(`🖼️ Image ${index + 1}:`, {
       src: img.src,
@@ -2625,6 +2638,29 @@ function initializeGalleryAutoScroll() {
   // Check for collection items
   const collectionItems = gallery.querySelectorAll('.w-dyn-item');
   console.log('📦 Number of collection items:', collectionItems.length);
+  
+  // Check if gallery has any images and hide section if empty
+  const gallerySection = document.querySelector('.gallery-section');
+  if (collectionItems.length === 0) {
+    console.log('⚠️ No images found in gallery - hiding gallery section');
+    if (gallerySection) {
+      gallerySection.style.display = 'none';
+      gallerySection.style.visibility = 'hidden';
+      gallerySection.style.opacity = '0';
+      gallerySection.style.height = '0';
+      gallerySection.style.overflow = 'hidden';
+    }
+    return; // Exit the function early
+  } else {
+    console.log(`✅ Gallery has ${collectionItems.length} images - showing gallery section`);
+    if (gallerySection) {
+      gallerySection.style.display = 'block';
+      gallerySection.style.visibility = 'visible';
+      gallerySection.style.opacity = '1';
+      gallerySection.style.height = 'auto';
+      gallerySection.style.overflow = 'visible';
+    }
+  }
   
   // Debug collection item dimensions
   collectionItems.forEach((item, index) => {
@@ -2728,32 +2764,28 @@ function initializeGalleryAutoScroll() {
 
   // Mouse wheel scroll handler
   function handleWheelScroll(event) {
-    // Only handle wheel scroll when auto-scroll is paused (on hover)
-    if (!isAutoScrolling) {
-      // Prevent default scroll behavior for the entire page
-      event.preventDefault();
-      event.stopPropagation();
-      
-      // Determine scroll direction
-      if (event.deltaY > 0) {
-        // Scroll down/right - go to next image
-        scrollToNext();
-      } else {
-        // Scroll up/left - go to previous image
-        scrollToPrevious();
-      }
-      
-      // Return false to prevent any further scroll events
-      return false;
+    // Always handle wheel scroll when hovering (ignore auto-scroll state)
+    // Prevent default scroll behavior for the entire page
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // Determine scroll direction
+    if (event.deltaY > 0) {
+      // Scroll down/right - go to next image
+      scrollToNext();
+    } else {
+      // Scroll up/left - go to previous image
+      scrollToPrevious();
     }
+    
+    // Return false to prevent any further scroll events
+    return false;
   }
 
-  // Add event listeners for pause on hover
-  gallery.addEventListener('mouseenter', stopScrolling);
-  gallery.addEventListener('mouseleave', startScrolling);
-  
-  // Add mouse wheel event listener
+  // Add mouse wheel event listener (always active)
   gallery.addEventListener('wheel', handleWheelScroll, { passive: false });
+  
+  console.log('🎯 Mouse wheel navigation always active');
   
   // Force scroll to first image to ensure it's visible (no auto-scroll for testing)
   setTimeout(() => {
