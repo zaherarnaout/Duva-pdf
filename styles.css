@@ -195,7 +195,7 @@ body.menu-open {
   grid-row-gap: 0px;
   color: #000;
   flex-flow: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   margin-top: 0;
   padding-top: 60px;
@@ -203,6 +203,7 @@ body.menu-open {
   padding-right: 20px;
   display: flex;
   gap: 15px;
+  height: 100%;
 }
 
 .link-13 {
@@ -250,6 +251,7 @@ body.menu-open {
   top: 0;
   right: 0;
   z-index: 10;
+  pointer-events: auto;
 }
 
 .menu-close {
