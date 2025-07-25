@@ -2595,6 +2595,7 @@ function initializeGalleryAutoScroll() {
   console.log('📏 Gallery clientWidth:', gallery.clientWidth);
 
   let scrollInterval;
+  let isAutoScrolling = true;
   const scrollSpeed = 5000; // time between slides (ms)
 
   function scrollToNext() {
@@ -2626,11 +2627,39 @@ function initializeGalleryAutoScroll() {
     }
   }
 
+  function scrollToPrevious() {
+    if (!gallery) return;
+    
+    const currentScroll = gallery.scrollLeft;
+    const viewportWidth = window.innerWidth;
+    
+    console.log(`🔄 Scrolling to previous image`);
+    
+    // Check if we're at the beginning
+    if (currentScroll <= 10) {
+      // Loop to the end
+      const maxScroll = gallery.scrollWidth - viewportWidth;
+      gallery.scrollTo({
+        left: maxScroll,
+        behavior: "smooth"
+      });
+      console.log('🔄 Looping to end');
+    } else {
+      // Scroll to previous full image
+      gallery.scrollTo({
+        left: currentScroll - viewportWidth,
+        behavior: "smooth"
+      });
+      console.log(`🔄 Scrolling to: ${currentScroll - viewportWidth}px`);
+    }
+  }
+
   function startScrolling() {
     if (scrollInterval) {
       clearInterval(scrollInterval);
     }
     scrollInterval = setInterval(scrollToNext, scrollSpeed);
+    isAutoScrolling = true;
     console.log('▶️ Auto-scroll started');
   }
 
@@ -2638,7 +2667,25 @@ function initializeGalleryAutoScroll() {
     if (scrollInterval) {
       clearInterval(scrollInterval);
       scrollInterval = null;
+      isAutoScrolling = false;
       console.log('⏸️ Auto-scroll paused');
+    }
+  }
+
+  // Mouse wheel scroll handler
+  function handleWheelScroll(event) {
+    // Only handle wheel scroll when auto-scroll is paused (on hover)
+    if (!isAutoScrolling) {
+      event.preventDefault();
+      
+      // Determine scroll direction
+      if (event.deltaY > 0) {
+        // Scroll down/right - go to next image
+        scrollToNext();
+      } else {
+        // Scroll up/left - go to previous image
+        scrollToPrevious();
+      }
     }
   }
 
@@ -2646,12 +2693,15 @@ function initializeGalleryAutoScroll() {
   gallery.addEventListener('mouseenter', stopScrolling);
   gallery.addEventListener('mouseleave', startScrolling);
   
+  // Add mouse wheel event listener
+  gallery.addEventListener('wheel', handleWheelScroll, { passive: false });
+  
   // Start auto-scrolling after a short delay
   setTimeout(() => {
     startScrolling();
   }, 1000);
   
-  console.log('✅ Gallery auto-scroll initialized with 5-second intervals');
+  console.log('✅ Gallery auto-scroll initialized with 5-second intervals and mouse wheel support');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
