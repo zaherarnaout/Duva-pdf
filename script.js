@@ -2613,6 +2613,28 @@ function initializeGalleryAutoScroll() {
   // Check for collection items
   const collectionItems = gallery.querySelectorAll('.w-dyn-item');
   console.log('📦 Number of collection items:', collectionItems.length);
+  
+  // Debug collection item dimensions
+  collectionItems.forEach((item, index) => {
+    const rect = item.getBoundingClientRect();
+    console.log(`📦 Item ${index + 1}:`, {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left,
+      top: rect.top,
+      offsetWidth: item.offsetWidth,
+      clientWidth: item.clientWidth
+    });
+  });
+  
+  // Check gallery container dimensions
+  const galleryRect = gallery.getBoundingClientRect();
+  console.log('📏 Gallery container dimensions:', {
+    width: galleryRect.width,
+    height: galleryRect.height,
+    scrollWidth: gallery.scrollWidth,
+    clientWidth: gallery.clientWidth
+  });
 
   let scrollInterval;
   let isAutoScrolling = true;
