@@ -2287,86 +2287,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// === Gallery Auto-Scroll with Mouse Wheel Control ===
-document.addEventListener("DOMContentLoaded", function () {
-  const galleryContainer = document.querySelector(".gallery-section-cms");
-  
-  if (galleryContainer) {
-    console.log('✅ Gallery auto-scroll with mouse wheel control initialized');
-    
-    // Mouse wheel scrolling functionality
-    galleryContainer.addEventListener('wheel', function(e) {
-      e.preventDefault(); // Prevent default vertical scrolling
-      
-      // Pause auto-scroll animation when user scrolls
-      galleryContainer.style.animationPlayState = 'paused';
-      
-      const delta = e.deltaY || e.deltaX;
-      const scrollSpeed = 100; // Increased for better viewport-based scrolling
-      
-      galleryContainer.scrollBy({
-        left: delta > 0 ? scrollSpeed : -scrollSpeed,
-        behavior: 'smooth'
-      });
-      
-      console.log('🔄 Gallery mouse wheel scrolling:', delta > 0 ? 'right' : 'left');
-      
-      // Resume auto-scroll after a delay when user stops scrolling
-      clearTimeout(galleryContainer.scrollTimeout);
-      galleryContainer.scrollTimeout = setTimeout(() => {
-        galleryContainer.style.animationPlayState = 'running';
-      }, 2000); // Resume after 2 seconds of no scrolling
-    }, { passive: false }); // Required for preventDefault to work
-    
-    // Touch/swipe support for mobile
-    let isGalleryScrolling = false;
-    let galleryStartX = 0;
-    let galleryScrollLeft = 0;
-    
-    galleryContainer.addEventListener('touchstart', function(e) {
-      isGalleryScrolling = true;
-      galleryStartX = e.touches[0].pageX - galleryContainer.offsetLeft;
-      galleryScrollLeft = galleryContainer.scrollLeft;
-      
-      // Pause auto-scroll on touch
-      galleryContainer.style.animationPlayState = 'paused';
-    });
-    
-    galleryContainer.addEventListener('touchmove', function(e) {
-      if (!isGalleryScrolling) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - galleryContainer.offsetLeft;
-      const walk = (x - galleryStartX) * 2; // Scroll speed multiplier
-      galleryContainer.scrollLeft = galleryScrollLeft - walk;
-    });
-    
-    galleryContainer.addEventListener('touchend', function() {
-      isGalleryScrolling = false;
-      
-      // Resume auto-scroll after touch ends
-      clearTimeout(galleryContainer.scrollTimeout);
-      galleryContainer.scrollTimeout = setTimeout(() => {
-        galleryContainer.style.animationPlayState = 'running';
-      }, 2000);
-    });
-    
-    // Pause auto-scroll when gallery is hovered
-    galleryContainer.addEventListener('mouseenter', function() {
-      galleryContainer.style.animationPlayState = 'paused';
-      console.log('⏸️ Gallery auto-scroll paused on hover');
-    });
-    
-    // Resume auto-scroll when mouse leaves gallery
-    galleryContainer.addEventListener('mouseleave', function() {
-      galleryContainer.style.animationPlayState = 'running';
-      console.log('▶️ Gallery auto-scroll resumed');
-    });
-    
-  } else {
-    console.log('⚠️ Gallery container not found');
-  }
-});
-
 // Observer to refresh ordering code when page content changes
 function setupOrderingCodeObserver() {
   console.log('🔧 Setting up ordering code observer...');
@@ -2617,25 +2537,6 @@ function initializeScrollAnimations() {
     
     observer.observe(relatedSection);
     console.log('✅ Related section observer set up');
-  }
-  
-  // Intersection Observer for Gallery section
-  const gallerySection = document.querySelector('.gallery-section');
-  if (gallerySection) {
-    const galleryObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-          console.log('🎬 Gallery section fade-in triggered');
-        }
-      });
-    }, {
-      threshold: 0.3, // Trigger when 30% of section is visible
-      rootMargin: '0px 0px -50px 0px' // Trigger slightly before section comes into view
-    });
-    
-    galleryObserver.observe(gallerySection);
-    console.log('✅ Gallery section observer set up');
   }
   
   // Enhanced accessories dropdown animation
