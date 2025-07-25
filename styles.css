@@ -109,29 +109,35 @@ html, body {
 .menu-wrapper:hover {
   border-radius: var(--border-4px-cornner);
   background-color: #f4f5f6;
-  transform: translateY(-1px);
 }
 
 /* === Menu Panel === */
 .menu-panel {
   z-index: 1000;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   background-color: #ffffff;
   border-radius: 8px;
-  flex-direction: column;
+  flex-flow: column;
+  flex: 0 auto;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
   justify-content: flex-start;
   align-items: flex-start;
   width: 520px;
   max-width: 90vw;
   height: auto;
-  max-height: 80vh;
   margin-left: auto;
-  padding: 40px 30px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 11px;
   display: none;
   position: fixed;
-  top: 20px;
-  left: 20px;
-  overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  top: 0; /* Will be dynamically set by JavaScript to header bottom */
+  left: 60px;
+  overflow: visible;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(-30px) scale(0.95);
   opacity: 0;
@@ -185,31 +191,27 @@ body.menu-open {
 }
 
 .link-12 {
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   color: #000;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-flow: column;
+  justify-content: center;
   align-items: flex-start;
   margin-top: 0;
-  padding-top: 0;
+  padding-top: 39px;
   display: flex;
-  width: 100%;
 }
 
 .link-13 {
   color: #212121;
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin-top: 52px;
   font-family: Gotham, Georgia, sans-serif;
   font-size: 18px;
   font-weight: 300;
-  line-height: 1.4;
+  line-height: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
   position: relative;
-  display: block;
-  width: 100%;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .link-13:hover {
@@ -236,29 +238,21 @@ body.menu-open {
 
 .menu-close-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .menu-close {
   background-color: #212121;
   color: #f4f5f6;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  position: relative;
-  top: 0;
-  right: 0;
+  border-radius: 3px;
+  margin-left: 366px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 16px;
+  position: absolute;
+  left: 21px;
   transition: background-color 0.3s ease;
   cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .menu-close:hover {
