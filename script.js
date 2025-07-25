@@ -2787,6 +2787,12 @@ function initializeGalleryAutoScroll() {
   
   console.log('🎯 Mouse wheel navigation always active');
   
+  // Add hover pause functionality
+  gallery.addEventListener('mouseenter', stopScrolling);
+  gallery.addEventListener('mouseleave', startScrolling);
+  
+  console.log('⏸️ Hover pause functionality enabled');
+  
   // Start auto-scrolling after a short delay
   setTimeout(() => {
     startScrolling();
