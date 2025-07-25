@@ -2590,34 +2590,66 @@ function initializeGalleryAutoScroll() {
     return;
   }
 
+  console.log('📏 Gallery found:', gallery);
+  console.log('📏 Gallery scrollWidth:', gallery.scrollWidth);
+  console.log('📏 Gallery clientWidth:', gallery.clientWidth);
+
   let scrollInterval;
   const scrollSpeed = 5000; // time between slides (ms)
 
   function scrollToNext() {
     if (!gallery) return;
-    const scrollAmount = gallery.clientWidth;
-    const atEnd = gallery.scrollLeft + scrollAmount >= gallery.scrollWidth - 5;
-
-    gallery.scrollTo({
-      left: atEnd ? 0 : gallery.scrollLeft + scrollAmount,
-      behavior: "smooth"
-    });
+    
+    const currentScroll = gallery.scrollLeft;
+    const viewportWidth = window.innerWidth;
+    const maxScroll = gallery.scrollWidth - viewportWidth;
+    
+    console.log(`🔄 Current scroll: ${currentScroll}px, Max scroll: ${maxScroll}px`);
+    
+    // Check if we're at the end
+    const atEnd = currentScroll >= maxScroll - 10;
+    
+    if (atEnd) {
+      // Loop back to the beginning
+      gallery.scrollTo({
+        left: 0,
+        behavior: "smooth"
+      });
+      console.log('🔄 Looping back to start');
+    } else {
+      // Scroll to next full image
+      gallery.scrollTo({
+        left: currentScroll + viewportWidth,
+        behavior: "smooth"
+      });
+      console.log(`🔄 Scrolling to: ${currentScroll + viewportWidth}px`);
+    }
   }
 
   function startScrolling() {
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+    }
     scrollInterval = setInterval(scrollToNext, scrollSpeed);
+    console.log('▶️ Auto-scroll started');
   }
 
   function stopScrolling() {
-    clearInterval(scrollInterval);
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+      console.log('⏸️ Auto-scroll paused');
+    }
   }
 
   // Add event listeners for pause on hover
   gallery.addEventListener('mouseenter', stopScrolling);
   gallery.addEventListener('mouseleave', startScrolling);
   
-  // Start auto-scrolling
-  startScrolling();
+  // Start auto-scrolling after a short delay
+  setTimeout(() => {
+    startScrolling();
+  }, 1000);
   
   console.log('✅ Gallery auto-scroll initialized with 5-second intervals');
 }
