@@ -2302,7 +2302,7 @@ document.addEventListener("DOMContentLoaded", function () {
       galleryContainer.style.animationPlayState = 'paused';
       
       const delta = e.deltaY || e.deltaX;
-      const scrollSpeed = 50; // Adjust this value to control scroll sensitivity
+      const scrollSpeed = 100; // Increased for better viewport-based scrolling
       
       galleryContainer.scrollBy({
         left: delta > 0 ? scrollSpeed : -scrollSpeed,
