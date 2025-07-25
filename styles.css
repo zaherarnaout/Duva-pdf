@@ -2874,6 +2874,21 @@ opacity: 1 !important;
   padding: 0;
 }
 
+/* === Gallery Section - Webflow Structure Specific === */
+.gallery-section {
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.gallery-section-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
 .gallery-section-cms {
   display: flex !important;
   overflow-x: auto !important;
@@ -2885,7 +2900,16 @@ opacity: 1 !important;
   margin: 0 !important;
 }
 
-.gallery-section-cms .collection-item {
+/* Target Collection List 7 specifically */
+.gallery-section-cms .w-dyn-items {
+  display: flex !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Target Collection Item 5 specifically */
+.gallery-section-cms .w-dyn-item {
   flex-shrink: 0 !important;
   width: 100vw !important;
   min-width: 100vw !important;
@@ -2894,6 +2918,7 @@ opacity: 1 !important;
   padding: 0 !important;
 }
 
+/* Target gallery-Image specifically */
 .gallery-image {
   width: 100% !important;
   height: auto !important;
@@ -2905,8 +2930,9 @@ opacity: 1 !important;
 }
 
 /* Force full width for any image inside collection items */
-.gallery-section-cms .collection-item img,
-.gallery-section-cms img {
+.gallery-section-cms .w-dyn-item img,
+.gallery-section-cms img,
+.gallery-image img {
   width: 100% !important;
   height: auto !important;
   max-width: 100% !important;
