@@ -2578,3 +2578,44 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToRelatedBtn.addEventListener('click', scrollToRelatedSection);
   }
 });
+
+// === Auto-scroll Gallery Script ===
+function initializeGalleryAutoScroll() {
+  console.log('🎠 Initializing gallery auto-scroll...');
+  
+  const gallery = document.querySelector('.gallery-section-cms');
+  
+  if (!gallery) {
+    console.log('⚠️ Gallery section not found');
+    return;
+  }
+
+  let scrollInterval;
+
+  function startScrolling() {
+    scrollInterval = setInterval(() => {
+      gallery.scrollLeft += 1;
+      if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1) {
+        gallery.scrollLeft = 0;
+      }
+    }, 20); // Adjust scroll speed here
+  }
+
+  function stopScrolling() {
+    clearInterval(scrollInterval);
+  }
+
+  // Add event listeners for pause on hover
+  gallery.addEventListener('mouseenter', stopScrolling);
+  gallery.addEventListener('mouseleave', startScrolling);
+  
+  // Start auto-scrolling
+  startScrolling();
+  
+  console.log('✅ Gallery auto-scroll initialized');
+}
+
+// Initialize gallery auto-scroll when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  initializeGalleryAutoScroll();
+});
