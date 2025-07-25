@@ -2958,7 +2958,7 @@ opacity: 1 !important;
   position: relative !important;
   flex-flow: row !important;
   justify-content: center !important;
-  align-items: center !important;
+  align-items: flex-start !important; /* Changed from center to flex-start */
 }
 
 /* Force single image viewport */
