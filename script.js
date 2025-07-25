@@ -2601,6 +2601,18 @@ function initializeGalleryAutoScroll() {
   console.log('📏 Gallery found:', gallery);
   console.log('📏 Gallery scrollWidth:', gallery.scrollWidth);
   console.log('📏 Gallery clientWidth:', gallery.clientWidth);
+  
+  // Check for images in the gallery
+  const images = gallery.querySelectorAll('img');
+  console.log('🖼️ Number of images found:', images.length);
+  
+  images.forEach((img, index) => {
+    console.log(`🖼️ Image ${index + 1}:`, img.src, 'Loaded:', img.complete);
+  });
+  
+  // Check for collection items
+  const collectionItems = gallery.querySelectorAll('.w-dyn-item');
+  console.log('📦 Number of collection items:', collectionItems.length);
 
   let scrollInterval;
   let isAutoScrolling = true;
