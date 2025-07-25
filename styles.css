@@ -2924,6 +2924,20 @@ opacity: 1 !important;
   margin: 0 !important;
   visibility: visible !important;
   min-height: 200px !important; /* Ensure minimum height for visibility */
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+/* Force single image viewport */
+.gallery-section-cms .w-dyn-items {
+  display: flex !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: visible !important;
+  min-height: 200px !important;
+  width: max-content !important;
+  flex-wrap: nowrap !important;
 }
 
 /* Target Collection List 7 specifically */
@@ -2941,12 +2955,26 @@ opacity: 1 !important;
   flex-shrink: 0 !important;
   width: 100vw !important;
   min-width: 100vw !important;
+  max-width: 100vw !important;
   scroll-snap-align: start !important;
   margin: 0 !important;
   padding: 0 !important;
   visibility: visible !important;
   display: block !important;
   min-height: 200px !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure only one item is visible at a time */
+.gallery-section-cms .w-dyn-item:not(:first-child) {
+  margin-left: 0 !important;
+}
+
+/* Force single image display */
+.gallery-section-cms .w-dyn-item {
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
 /* Target gallery-Image specifically */
@@ -2973,6 +3001,27 @@ opacity: 1 !important;
   padding: 0 !important;
   cursor: pointer !important;
   transition: cursor 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure single image display - override any Webflow grid */
+.gallery-section-cms .w-dyn-item {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  flex: 0 0 100vw !important;
+  flex-basis: 100vw !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Override any Webflow grid classes that might interfere */
+.gallery-section-cms .w-dyn-item[class*="w-col"],
+.gallery-section-cms .w-dyn-item[class*="column"] {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  flex: 0 0 100vw !important;
 }
 
 /* Pointer cursor for gallery images on hover */
