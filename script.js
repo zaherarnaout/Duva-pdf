@@ -2591,12 +2591,12 @@ function initializeGalleryAutoScroll() {
   }
 
   let scrollInterval;
-  const scrollSpeed = 4000; // time per slide (ms)
+  const scrollSpeed = 5000; // time between slides (ms)
 
   function scrollToNext() {
     if (!gallery) return;
     const scrollAmount = gallery.clientWidth;
-    const atEnd = gallery.scrollLeft + scrollAmount >= gallery.scrollWidth;
+    const atEnd = gallery.scrollLeft + scrollAmount >= gallery.scrollWidth - 5;
 
     gallery.scrollTo({
       left: atEnd ? 0 : gallery.scrollLeft + scrollAmount,
@@ -2619,7 +2619,7 @@ function initializeGalleryAutoScroll() {
   // Start auto-scrolling
   startScrolling();
   
-  console.log('✅ Gallery auto-scroll initialized with 4-second intervals');
+  console.log('✅ Gallery auto-scroll initialized with 5-second intervals');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
