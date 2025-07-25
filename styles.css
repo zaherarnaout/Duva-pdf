@@ -2932,6 +2932,10 @@ opacity: 1 !important;
   overflow: hidden !important;
   visibility: visible !important;
   display: block !important;
+  border: var(--border-main) solid var(--border-main-shadow) !important;
+  border-radius: var(--border-4px-cornner) !important;
+  background-color: var(--white) !important;
+  box-shadow: 0 2px 5px 0 var(--border-main-shadow) !important;
 }
 
 .gallery-section-cms {
