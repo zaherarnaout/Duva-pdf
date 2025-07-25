@@ -2834,6 +2834,18 @@ opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
+/* Gallery Section Fade-in on Scroll */
+.gallery-section {
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+  transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+.gallery-section.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 /* Accessories Dropdown Fade-in Animation */
 .accessories-content {
   opacity: 0 !important;
@@ -2858,4 +2870,105 @@ opacity: 1 !important;
 .accessories-section.open .accessories-item {
   opacity: 1 !important;
   transform: translateY(0) !important;
+}
+
+/* === Gallery Section Auto-Scroll === */
+
+/* Gallery section container */
+.gallery-section {
+  position: relative !important;
+  overflow: hidden !important;
+  margin: 0 auto !important;
+  max-width: 1200px !important;
+}
+
+/* Gallery CMS collection list for horizontal scrolling */
+.gallery-section-cms {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  flex-wrap: nowrap !important;
+  position: relative !important;
+  padding: 0 40px !important;
+  /* Hide scrollbar */
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.gallery-section-cms::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Gallery collection item styling */
+.gallery-section-cms .w-dyn-item {
+  display: flex !important;
+  flex-shrink: 0 !important;
+  width: 500px !important;
+  height: 400px !important;
+  position: relative !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.gallery-section-cms .w-dyn-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Gallery image styling */
+.gallery-Image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.3s ease !important;
+}
+
+.gallery-section-cms .w-dyn-item:hover .gallery-Image {
+  transform: scale(1.05) !important;
+}
+
+/* Auto-scroll animation */
+@keyframes galleryAutoScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Apply auto-scroll animation */
+.gallery-section-cms {
+  animation: galleryAutoScroll 30s linear infinite !important;
+}
+
+/* Pause animation on hover */
+.gallery-section:hover .gallery-section-cms {
+  animation-play-state: paused !important;
+}
+
+/* Responsive design for gallery */
+@media screen and (max-width: 991px) {
+  .gallery-section-cms {
+    padding: 0 20px !important;
+  }
+  
+  .gallery-section-cms .w-dyn-item {
+    width: 350px !important;
+    height: 300px !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .gallery-section-cms .w-dyn-item {
+    width: 280px !important;
+    height: 250px !important;
+  }
 }
