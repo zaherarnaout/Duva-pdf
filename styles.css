@@ -2879,8 +2879,9 @@ opacity: 1 !important;
   position: relative !important;
   overflow: hidden !important;
   margin: 0 auto !important;
-  max-width: 100vw !important;
-  width: 100% !important;
+  max-width: 2000px !important;
+  width: 2000px !important;
+  height: 600px !important;
 }
 
 /* Gallery CMS collection list for horizontal scrolling */
@@ -2896,6 +2897,7 @@ opacity: 1 !important;
   position: relative !important;
   padding: 0 !important;
   width: 100% !important;
+  height: 100% !important;
   /* Hide scrollbar */
   scrollbar-width: none !important; /* Firefox */
   -ms-overflow-style: none !important; /* Internet Explorer 10+ */
@@ -2910,7 +2912,7 @@ opacity: 1 !important;
 .gallery-section-cms .w-dyn-item {
   display: flex !important;
   flex-shrink: 0 !important;
-  width: 100vw !important;
+  width: 2000px !important;
   height: 600px !important;
   position: relative !important;
   overflow: hidden !important;
@@ -2935,13 +2937,13 @@ opacity: 1 !important;
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100vw); /* Move by one viewport width */
+    transform: translateX(-2000px); /* Move by one gallery item width */
   }
 }
 
 /* Apply auto-scroll animation */
 .gallery-section-cms {
-  animation: galleryAutoScroll 15s linear infinite !important;
+  animation: galleryAutoScroll 20s linear infinite !important;
 }
 
 /* Pause animation on hover */
@@ -2951,15 +2953,27 @@ opacity: 1 !important;
 
 /* Responsive design for gallery */
 @media screen and (max-width: 991px) {
+  .gallery-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 400px !important;
+  }
+  
   .gallery-section-cms .w-dyn-item {
-    width: 100vw !important;
+    width: 100% !important;
     height: 400px !important;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .gallery-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 300px !important;
+  }
+  
   .gallery-section-cms .w-dyn-item {
-    width: 100vw !important;
+    width: 100% !important;
     height: 300px !important;
   }
 }
