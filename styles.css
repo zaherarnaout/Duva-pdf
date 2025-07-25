@@ -2859,3 +2859,41 @@ opacity: 1 !important;
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+
+/* === Gallery Section === */
+.gallery-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-section-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.gallery-section-cms {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+}
+
+.gallery-section-cms .collection-item {
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  scroll-snap-align: start;
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 972px;
+  object-fit: cover;
+}
