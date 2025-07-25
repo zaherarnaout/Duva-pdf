@@ -123,18 +123,26 @@ html, body {
   width: 520px;
   max-width: 90vw;
   height: auto;
+  max-height: 80vh;
   margin-left: auto;
   padding: 40px 30px;
   display: none;
   position: fixed;
-  top: 0;
-  left: 60px;
-  overflow: visible;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  top: 20px;
+  left: 20px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(-30px) scale(0.95);
   opacity: 0;
   pointer-events: none;
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
 }
 
 .menu-panel.active {
@@ -148,14 +156,14 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  backdrop-filter: none;
+  backdrop-filter: blur(2px);
 }
 
 .menu-overlay.active {
