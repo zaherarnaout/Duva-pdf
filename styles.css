@@ -2882,6 +2882,10 @@ opacity: 1 !important;
   max-width: 2000px !important;
   width: 2000px !important;
   height: 600px !important;
+  border: var(--border-main) solid var(--border-main-shadow) !important;
+  border-radius: var(--border-4px-cornner) !important;
+  background-color: var(--white) !important;
+  box-shadow: 0 2px 5px 0 var(--border-main-shadow) !important;
 }
 
 /* Gallery CMS collection list for horizontal scrolling */
