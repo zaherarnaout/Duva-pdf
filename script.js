@@ -118,6 +118,9 @@ function initializeMenuPanel() {
       menuOverlay.classList.add('active');
     }
     
+    // Prevent body scroll
+    document.body.classList.add('menu-open');
+    
     // Update ARIA attributes
     menuWrapper.setAttribute('aria-expanded', 'true');
     menuPanel.setAttribute('aria-hidden', 'false');
@@ -132,6 +135,9 @@ function initializeMenuPanel() {
     if (menuOverlay) {
       menuOverlay.classList.remove('active');
     }
+    
+    // Re-enable body scroll
+    document.body.classList.remove('menu-open');
     
     // Hide menu panel after animation
     setTimeout(() => {
