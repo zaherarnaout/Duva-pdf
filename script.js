@@ -1,5 +1,1257 @@
 console.log("DUVA script.js loaded!");
 
+// === Header JavaScript Functionality ===
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🎨 Header functionality initialized');
+
+  // === Theme Toggle Functionality ===
+  initializeThemeToggle();
+  
+  // === Menu Panel Functionality ===
+  initializeMenuPanel();
+  
+  // === Search Functionality ===
+  initializeSearch();
+  
+  // === Filter System ===
+  initializeFilterSystem();
+  
+  // === Language Toggle ===
+  initializeLanguageToggle();
+  
+  // === Accessibility Improvements ===
+  initializeAccessibility();
+});
+
+// === Theme Toggle ===
+function initializeThemeToggle() {
+  const themeToggle = document.querySelector('.theme-toggle-wrapper');
+  const body = document.body;
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      body.classList.toggle('dark-theme');
+      
+      // Save theme preference
+      const isDark = body.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      
+      console.log('🌙 Theme toggled:', isDark ? 'dark' : 'light');
+    });
+    
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-theme');
+    }
+  }
+}
+
+// === Menu Panel ===
+function initializeMenuPanel() {
+  const menuWrapper = document.querySelector('.menu-wrapper');
+  const menuPanel = document.querySelector('.menu-panel');
+  const menuClose = document.querySelector('.menu-close');
+  const menuOverlay = document.querySelector('.menu-overlay');
+  
+  if (menuWrapper && menuPanel) {
+    // Open menu
+    menuWrapper.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openMenu();
+    });
+    
+    // Close menu
+    if (menuClose) {
+      menuClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && menuPanel.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+    
+    // Close menu on overlay click
+    if (menuOverlay) {
+      menuOverlay.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeMenu();
+      });
+    }
+    
+    // Close menu on outside click (backup method)
+    document.addEventListener('click', function(e) {
+      if (menuPanel.classList.contains('active') && 
+          !menuPanel.contains(e.target) && 
+          !menuWrapper.contains(e.target) &&
+          !menuOverlay.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    
+    // Prevent menu panel clicks from closing the menu
+    menuPanel.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+  
+  function openMenu() {
+    const headerSection = document.querySelector('.header-section');
+    const headerHeight = headerSection ? headerSection.offsetHeight : 100;
+    
+    // Position menu panel at the bottom of the header
+    menuPanel.style.top = headerHeight + 'px';
+    
+    // Show menu panel and overlay
+    menuPanel.style.display = 'block';
+    menuPanel.classList.add('active');
+    
+    if (menuOverlay) {
+      menuOverlay.classList.add('active');
+    }
+    
+    // Update ARIA attributes
+    menuWrapper.setAttribute('aria-expanded', 'true');
+    menuPanel.setAttribute('aria-hidden', 'false');
+    
+    console.log('🍔 Menu opened');
+  }
+  
+  function closeMenu() {
+    // Hide menu panel and overlay
+    menuPanel.classList.remove('active');
+    
+    if (menuOverlay) {
+      menuOverlay.classList.remove('active');
+    }
+    
+    // Hide menu panel after animation
+    setTimeout(() => {
+      menuPanel.style.display = 'none';
+    }, 400);
+    
+    // Update ARIA attributes
+    menuWrapper.setAttribute('aria-expanded', 'false');
+    menuPanel.setAttribute('aria-hidden', 'true');
+    
+    console.log('🍔 Menu closed');
+  }
+}
+
+// === Filter System ===
+let activeFilters = {
+  categories: [],
+  types: [],
+  shapes: [],
+  wattages: []
+};
+
+function initializeFilterSystem() {
+  // Create filter button next to search
+  createFilterButton();
+  
+  // Load saved filters
+  loadSavedFilters();
+}
+
+function createFilterButton() {
+  const searchWrapper = document.querySelector('.search-wrapper');
+  if (!searchWrapper) return;
+  
+  const filterButton = document.createElement('button');
+  filterButton.className = 'filter-button';
+  filterButton.innerHTML = `
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+    </svg>
+    <span>Filters</span>
+  `;
+  filterButton.style.cssText = `
+    background: #f4f5f6;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #666;
+    transition: all 0.3s ease;
+  `;
+  
+  filterButton.addEventListener('click', function() {
+    showFilterPanel();
+  });
+  
+  // Add hover effect
+  filterButton.addEventListener('mouseenter', function() {
+    this.style.backgroundColor = '#e8e9ea';
+    this.style.borderColor = '#C0392B';
+  });
+  
+  filterButton.addEventListener('mouseleave', function() {
+    this.style.backgroundColor = '#f4f5f6';
+    this.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+  });
+  
+  searchWrapper.appendChild(filterButton);
+}
+
+function showFilterPanel() {
+  // Remove existing filter panel
+  hideFilterPanel();
+  
+  const filterPanel = document.createElement('div');
+  filterPanel.className = 'filter-panel';
+  filterPanel.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    padding: 24px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+  `;
+  
+  filterPanel.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="margin: 0; color: #212121;">Filter Products</h3>
+      <button class="close-filter-btn" style="background: #C0392B; color: white; border: none; border-radius: 4px; padding: 8px 16px; cursor: pointer; font-size: 14px;">Close</button>
+    </div>
+    
+    <div class="filter-section">
+      <h4 style="margin: 0 0 12px 0; color: #212121; font-size: 16px;">Category</h4>
+      <div class="filter-options">
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="categories" data-value="outdoor" style="margin-right: 8px;">
+          <span>Outdoor</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="categories" data-value="indoor" style="margin-right: 8px;">
+          <span>Indoor</span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="filter-section">
+      <h4 style="margin: 0 0 12px 0; color: #212121; font-size: 16px;">Type</h4>
+      <div class="filter-options">
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="types" data-value="downlight" style="margin-right: 8px;">
+          <span>Downlight</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="types" data-value="spotlight" style="margin-right: 8px;">
+          <span>Spotlight</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="types" data-value="flex strip" style="margin-right: 8px;">
+          <span>Flex Strip</span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="filter-section">
+      <h4 style="margin: 0 0 12px 0; color: #212121; font-size: 16px;">Shape</h4>
+      <div class="filter-options">
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="shapes" data-value="square" style="margin-right: 8px;">
+          <span>Square</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="shapes" data-value="round" style="margin-right: 8px;">
+          <span>Round</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="shapes" data-value="strip" style="margin-right: 8px;">
+          <span>Strip</span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="filter-section">
+      <h4 style="margin: 0 0 12px 0; color: #212121; font-size: 16px;">Wattage</h4>
+      <div class="filter-options">
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="12w" style="margin-right: 8px;">
+          <span>12W</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="15w" style="margin-right: 8px;">
+          <span>15W</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="18w" style="margin-right: 8px;">
+          <span>18W</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="20w" style="margin-right: 8px;">
+          <span>20W</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="24w" style="margin-right: 8px;">
+          <span>24W</span>
+        </label>
+        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+          <input type="checkbox" class="filter-checkbox" data-filter="wattages" data-value="30w" style="margin-right: 8px;">
+          <span>30W</span>
+        </label>
+      </div>
+    </div>
+    
+    <div style="display: flex; gap: 12px; margin-top: 24px;">
+      <button class="apply-filters-btn" style="background: #C0392B; color: white; border: none; border-radius: 4px; padding: 12px 24px; cursor: pointer; font-size: 14px; flex: 1;">Apply Filters</button>
+      <button class="clear-filters-btn" style="background: #f4f5f6; color: #666; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 4px; padding: 12px 24px; cursor: pointer; font-size: 14px;">Clear All</button>
+    </div>
+  `;
+  
+  // Add event listeners
+  const closeBtn = filterPanel.querySelector('.close-filter-btn');
+  const applyBtn = filterPanel.querySelector('.apply-filters-btn');
+  const clearBtn = filterPanel.querySelector('.clear-filters-btn');
+  const checkboxes = filterPanel.querySelectorAll('.filter-checkbox');
+  
+  closeBtn.addEventListener('click', hideFilterPanel);
+  applyBtn.addEventListener('click', applyFilters);
+  clearBtn.addEventListener('click', clearAllFilters);
+  
+  // Checkbox change events
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      updateFilterButton();
+    });
+  });
+  
+  // Load current filter state
+  loadFilterState(filterPanel);
+  
+  // Add overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'filter-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+  `;
+  
+  overlay.addEventListener('click', hideFilterPanel);
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(filterPanel);
+}
+
+function hideFilterPanel() {
+  const existingPanel = document.querySelector('.filter-panel');
+  const existingOverlay = document.querySelector('.filter-overlay');
+  
+  if (existingPanel) existingPanel.remove();
+  if (existingOverlay) existingOverlay.remove();
+}
+
+function loadFilterState(filterPanel) {
+  const checkboxes = filterPanel.querySelectorAll('.filter-checkbox');
+  
+  checkboxes.forEach(checkbox => {
+    const filterType = checkbox.dataset.filter;
+    const filterValue = checkbox.dataset.value;
+    
+    if (activeFilters[filterType].includes(filterValue)) {
+      checkbox.checked = true;
+    }
+  });
+}
+
+function applyFilters() {
+  const filterPanel = document.querySelector('.filter-panel');
+  if (!filterPanel) return;
+  
+  // Reset active filters
+  activeFilters = {
+    categories: [],
+    types: [],
+    shapes: [],
+    wattages: []
+  };
+  
+  // Get checked checkboxes
+  const checkedBoxes = filterPanel.querySelectorAll('.filter-checkbox:checked');
+  
+  checkedBoxes.forEach(checkbox => {
+    const filterType = checkbox.dataset.filter;
+    const filterValue = checkbox.dataset.value;
+    
+    if (activeFilters[filterType]) {
+      activeFilters[filterType].push(filterValue);
+    }
+  });
+  
+  // Save filters to localStorage
+  saveFilters();
+  
+  // Update filter button
+  updateFilterButton();
+  
+  // Hide filter panel
+  hideFilterPanel();
+  
+  // Perform search with current search term and filters
+  const searchInput = document.querySelector('.product-subtitle');
+  const currentSearchTerm = searchInput.textContent.trim();
+  
+  if (currentSearchTerm && currentSearchTerm !== 'Search products...') {
+    performSearch(currentSearchTerm);
+  } else {
+    // Show filtered results without search term
+    const filteredResults = getFilteredProducts();
+    displaySearchResults(filteredResults, 'Filtered Products');
+  }
+  
+  console.log('🔍 Filters applied:', activeFilters);
+}
+
+function clearAllFilters() {
+  activeFilters = {
+    categories: [],
+    types: [],
+    shapes: [],
+    wattages: []
+  };
+  
+  // Uncheck all checkboxes
+  const checkboxes = document.querySelectorAll('.filter-checkbox');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  
+  // Save filters
+  saveFilters();
+  
+  // Update filter button
+  updateFilterButton();
+  
+  console.log('🔍 All filters cleared');
+}
+
+function updateFilterButton() {
+  const filterButton = document.querySelector('.filter-button');
+  if (!filterButton) return;
+  
+  const totalActiveFilters = Object.values(activeFilters).flat().length;
+  
+  if (totalActiveFilters > 0) {
+    filterButton.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+      </svg>
+      <span>Filters (${totalActiveFilters})</span>
+    `;
+    filterButton.style.backgroundColor = '#C0392B';
+    filterButton.style.color = 'white';
+    filterButton.style.borderColor = '#C0392B';
+  } else {
+    filterButton.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+      </svg>
+      <span>Filters</span>
+    `;
+    filterButton.style.backgroundColor = '#f4f5f6';
+    filterButton.style.color = '#666';
+    filterButton.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+  }
+}
+
+function saveFilters() {
+  localStorage.setItem('duvaActiveFilters', JSON.stringify(activeFilters));
+}
+
+function loadSavedFilters() {
+  const saved = localStorage.getItem('duvaActiveFilters');
+  if (saved) {
+    activeFilters = JSON.parse(saved);
+    updateFilterButton();
+  }
+}
+
+function getFilteredProducts() {
+  let filteredProducts = productDatabase;
+  
+  // Apply category filter
+  if (activeFilters.categories.length > 0) {
+    filteredProducts = filteredProducts.filter(product => 
+      activeFilters.categories.includes(product.category)
+    );
+  }
+  
+  // Apply type filter
+  if (activeFilters.types.length > 0) {
+    filteredProducts = filteredProducts.filter(product => 
+      activeFilters.types.includes(product.type)
+    );
+  }
+  
+  // Apply shape filter
+  if (activeFilters.shapes.length > 0) {
+    filteredProducts = filteredProducts.filter(product => 
+      activeFilters.shapes.includes(product.shape)
+    );
+  }
+  
+  // Apply wattage filter
+  if (activeFilters.wattages.length > 0) {
+    filteredProducts = filteredProducts.filter(product => 
+      activeFilters.wattages.includes(product.wattage)
+    );
+  }
+  
+  return filteredProducts;
+}
+
+// === Search Functionality ===
+function initializeSearch() {
+  const searchWrapper = document.querySelector('.search-wrapper');
+  const searchInput = document.querySelector('.product-subtitle');
+  const searchIcon = document.querySelector('.search-icon');
+  
+  if (searchWrapper && searchInput) {
+    // Make search input focusable
+    searchInput.setAttribute('tabindex', '0');
+    searchInput.setAttribute('role', 'textbox');
+    searchInput.setAttribute('aria-label', 'Search products');
+    
+    // Store original content
+    const originalText = searchInput.textContent;
+    const originalIconDisplay = searchIcon ? searchIcon.style.display : 'block';
+    
+    // Handle search input click/focus
+    searchInput.addEventListener('click', function() {
+      clearSearchField();
+    });
+    
+    searchInput.addEventListener('focus', function() {
+      clearSearchField();
+    });
+    
+    // Handle search input blur (when user clicks outside)
+    searchInput.addEventListener('blur', function() {
+      if (!searchInput.textContent.trim()) {
+        restoreSearchField();
+      }
+    });
+    
+    // Handle search input
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        performSearch(searchInput.textContent);
+      }
+    });
+    
+    // Handle text input to resize the field
+    searchInput.addEventListener('input', function() {
+      adjustSearchFieldWidth();
+      // Show search suggestions as user types
+      showSearchSuggestions(searchInput.textContent);
+    });
+    
+    // Add loading state
+    searchWrapper.addEventListener('click', function(e) {
+      // Don't trigger if clicking on the input itself
+      if (e.target === searchInput) return;
+      
+      searchWrapper.classList.add('loading');
+      
+      // Simulate search (replace with actual search logic)
+      setTimeout(() => {
+        searchWrapper.classList.remove('loading');
+        console.log('🔍 Search performed');
+      }, 1000);
+    });
+  }
+  
+  function clearSearchField() {
+    // Clear the text
+    searchInput.textContent = '';
+    
+    // Hide the search icon
+    if (searchIcon) {
+      searchIcon.style.display = 'none';
+    }
+    
+    // Reset width to minimum
+    searchInput.style.width = '300px';
+    
+    // Focus the input for typing
+    searchInput.focus();
+    
+    // Hide search suggestions
+    hideSearchSuggestions();
+    
+    console.log('🔍 Search field cleared');
+  }
+  
+  function restoreSearchField() {
+    // Restore original text
+    searchInput.textContent = 'Search products...';
+    
+    // Show the search icon
+    if (searchIcon) {
+      searchIcon.style.display = 'block';
+    }
+    
+    // Reset width to minimum
+    searchInput.style.width = '300px';
+    
+    // Hide search suggestions
+    hideSearchSuggestions();
+    
+    console.log('🔍 Search field restored');
+  }
+  
+  function performSearch(query) {
+    console.log('🔍 Searching for:', query);
+    
+    if (!query.trim()) {
+      console.log('🔍 Empty search query');
+      return;
+    }
+    
+    // Add loading state
+    searchWrapper.classList.add('loading');
+    
+    // Get filtered products first
+    const filteredProducts = getFilteredProducts();
+    
+    // Perform the search on filtered products
+    const results = searchProductsInFiltered(query, filteredProducts);
+    
+    // Remove loading state
+    searchWrapper.classList.remove('loading');
+    
+    // Display results
+    displaySearchResults(results, query);
+  }
+  
+  function adjustSearchFieldWidth() {
+    // Create a temporary span to measure text width
+    const tempSpan = document.createElement('span');
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.style.position = 'absolute';
+    tempSpan.style.whiteSpace = 'nowrap';
+    tempSpan.style.font = window.getComputedStyle(searchInput).font;
+    tempSpan.textContent = searchInput.textContent || 'Search products...';
+    
+    document.body.appendChild(tempSpan);
+    
+    // Calculate the width needed for the text
+    const textWidth = tempSpan.offsetWidth;
+    document.body.removeChild(tempSpan);
+    
+    // Calculate total width needed (text + padding + icon space)
+    const paddingLeft = 40; // Left padding for icon
+    const paddingRight = 12; // Right padding
+    const minWidth = 300; // Minimum width
+    const calculatedWidth = Math.max(minWidth, textWidth + paddingLeft + paddingRight + 20); // +20 for buffer
+    
+    // Apply the calculated width
+    searchInput.style.width = calculatedWidth + 'px';
+    
+    console.log('🔍 Search field width adjusted to:', calculatedWidth + 'px');
+  }
+}
+
+// === Product Search Database ===
+const productDatabase = [
+  {
+    id: 1,
+    name: "Outdoor Square Downlight",
+    category: "outdoor",
+    type: "downlight",
+    shape: "square",
+    wattage: "18w",
+    lumen: "1900",
+    description: "Outdoor square downlight with 18W LED and 1900 lumens",
+    url: "/products/outdoor-square-downlight"
+  },
+  {
+    id: 2,
+    name: "Indoor Round Spotlight",
+    category: "indoor",
+    type: "spotlight",
+    shape: "round",
+    wattage: "12w",
+    lumen: "1200",
+    description: "Indoor round spotlight with 12W LED and 1200 lumens",
+    url: "/products/indoor-round-spotlight"
+  },
+  {
+    id: 3,
+    name: "Flex Strip LED",
+    category: "indoor",
+    type: "flex strip",
+    shape: "strip",
+    wattage: "24w",
+    lumen: "2400",
+    description: "Flexible LED strip with 24W and 2400 lumens",
+    url: "/products/flex-strip-led"
+  },
+  {
+    id: 4,
+    name: "Outdoor Round Downlight",
+    category: "outdoor",
+    type: "downlight",
+    shape: "round",
+    wattage: "15w",
+    lumen: "1500",
+    description: "Outdoor round downlight with 15W LED and 1500 lumens",
+    url: "/products/outdoor-round-downlight"
+  },
+  {
+    id: 5,
+    name: "Indoor Square Spotlight",
+    category: "indoor",
+    type: "spotlight",
+    shape: "square",
+    wattage: "20w",
+    lumen: "2000",
+    description: "Indoor square spotlight with 20W LED and 2000 lumens",
+    url: "/products/indoor-square-spotlight"
+  },
+  {
+    id: 6,
+    name: "Outdoor Flex Strip",
+    category: "outdoor",
+    type: "flex strip",
+    shape: "strip",
+    wattage: "30w",
+    lumen: "3000",
+    description: "Outdoor flexible LED strip with 30W and 3000 lumens",
+    url: "/products/outdoor-flex-strip"
+  }
+];
+
+// === Enhanced Search Functions ===
+function searchProductsInFiltered(query, filteredProducts) {
+  const searchTerm = query.toLowerCase().trim();
+  const results = [];
+  
+  // Search through filtered products only
+  filteredProducts.forEach(product => {
+    let score = 0;
+    let matchedFields = [];
+    
+    // Check product name
+    if (product.name.toLowerCase().includes(searchTerm)) {
+      score += 10;
+      matchedFields.push('name');
+    }
+    
+    // Check category
+    if (product.category.toLowerCase().includes(searchTerm)) {
+      score += 8;
+      matchedFields.push('category');
+    }
+    
+    // Check type
+    if (product.type.toLowerCase().includes(searchTerm)) {
+      score += 8;
+      matchedFields.push('type');
+    }
+    
+    // Check shape
+    if (product.shape.toLowerCase().includes(searchTerm)) {
+      score += 6;
+      matchedFields.push('shape');
+    }
+    
+    // Check wattage
+    if (product.wattage.toLowerCase().includes(searchTerm)) {
+      score += 5;
+      matchedFields.push('wattage');
+    }
+    
+    // Check lumen
+    if (product.lumen.toLowerCase().includes(searchTerm)) {
+      score += 5;
+      matchedFields.push('lumen');
+    }
+    
+    // Check description
+    if (product.description.toLowerCase().includes(searchTerm)) {
+      score += 3;
+      matchedFields.push('description');
+    }
+    
+    // If we found matches, add to results
+    if (score > 0) {
+      results.push({
+        ...product,
+        score,
+        matchedFields
+      });
+    }
+  });
+  
+  // Sort by score (highest first)
+  results.sort((a, b) => b.score - a.score);
+  
+  console.log('🔍 Search results (with filters):', results);
+  return results;
+}
+
+// === Search Suggestions ===
+function showSearchSuggestions(query) {
+  if (!query.trim()) {
+    hideSearchSuggestions();
+    return;
+  }
+  
+  const suggestions = getSearchSuggestions(query);
+  displaySearchSuggestions(suggestions);
+}
+
+function getSearchSuggestions(query) {
+  const searchTerm = query.toLowerCase().trim();
+  const suggestions = new Set();
+  
+  // Add category suggestions
+  if (searchTerm.includes('out') || searchTerm.includes('indoor')) {
+    suggestions.add('outdoor');
+    suggestions.add('indoor');
+  }
+  
+  if (searchTerm.includes('square') || searchTerm.includes('round')) {
+    suggestions.add('square');
+    suggestions.add('round');
+  }
+  
+  if (searchTerm.includes('flex') || searchTerm.includes('strip')) {
+    suggestions.add('flex strip');
+  }
+  
+  if (searchTerm.includes('down') || searchTerm.includes('light')) {
+    suggestions.add('downlight');
+  }
+  
+  if (searchTerm.includes('spot')) {
+    suggestions.add('spotlight');
+  }
+  
+  // Add wattage suggestions
+  if (searchTerm.includes('18') || searchTerm.includes('w')) {
+    suggestions.add('18w');
+  }
+  
+  if (searchTerm.includes('1900') || searchTerm.includes('lumen')) {
+    suggestions.add('1900 lumen');
+  }
+  
+  return Array.from(suggestions).slice(0, 5); // Limit to 5 suggestions
+}
+
+function displaySearchSuggestions(suggestions) {
+  // Remove existing suggestions
+  hideSearchSuggestions();
+  
+  if (suggestions.length === 0) return;
+  
+  const searchWrapper = document.querySelector('.search-wrapper');
+  const suggestionsContainer = document.createElement('div');
+  suggestionsContainer.className = 'search-suggestions';
+  suggestionsContainer.style.cssText = `
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+  `;
+  
+  suggestions.forEach(suggestion => {
+    const suggestionItem = document.createElement('div');
+    suggestionItem.className = 'search-suggestion-item';
+    suggestionItem.textContent = suggestion;
+    suggestionItem.style.cssText = `
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s;
+    `;
+    
+    suggestionItem.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = '#f4f5f6';
+    });
+    
+    suggestionItem.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = 'white';
+    });
+    
+    suggestionItem.addEventListener('click', function() {
+      const searchInput = document.querySelector('.product-subtitle');
+      searchInput.textContent = suggestion;
+      performSearch(suggestion);
+      hideSearchSuggestions();
+    });
+    
+    suggestionsContainer.appendChild(suggestionItem);
+  });
+  
+  searchWrapper.appendChild(suggestionsContainer);
+}
+
+function hideSearchSuggestions() {
+  const existingSuggestions = document.querySelector('.search-suggestions');
+  if (existingSuggestions) {
+    existingSuggestions.remove();
+  }
+}
+
+// === Search Results Display ===
+function displaySearchResults(results, query) {
+  // Remove existing results
+  hideSearchResults();
+  
+  if (results.length === 0) {
+    showNoResultsMessage(query);
+    return;
+  }
+  
+  const resultsContainer = document.createElement('div');
+  resultsContainer.className = 'search-results';
+  resultsContainer.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+  `;
+  
+  // Add header with filter info
+  const header = document.createElement('div');
+  const activeFilterCount = Object.values(activeFilters).flat().length;
+  const filterInfo = activeFilterCount > 0 ? ` (with ${activeFilterCount} active filters)` : '';
+  
+  header.innerHTML = `
+    <h3 style="margin: 0 0 15px 0; color: #212121;">Search Results for "${query}"${filterInfo}</h3>
+    <p style="margin: 0 0 20px 0; color: #666; font-size: 14px;">Found ${results.length} product(s)</p>
+  `;
+  resultsContainer.appendChild(header);
+  
+  // Add results
+  results.forEach(product => {
+    const resultItem = document.createElement('div');
+    resultItem.className = 'search-result-item';
+    resultItem.style.cssText = `
+      padding: 15px;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    `;
+    
+    resultItem.innerHTML = `
+      <h4 style="margin: 0 0 8px 0; color: #212121;">${product.name}</h4>
+      <p style="margin: 0 0 5px 0; color: #666; font-size: 14px;">${product.description}</p>
+      <div style="display: flex; gap: 10px; font-size: 12px; color: #888;">
+        <span>${product.category}</span>
+        <span>•</span>
+        <span>${product.type}</span>
+        <span>•</span>
+        <span>${product.wattage}</span>
+        <span>•</span>
+        <span>${product.lumen} lumen</span>
+      </div>
+    `;
+    
+    resultItem.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = '#f4f5f6';
+      this.style.borderColor = '#C0392B';
+    });
+    
+    resultItem.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = 'white';
+      this.style.borderColor = '#f0f0f0';
+    });
+    
+    resultItem.addEventListener('click', function() {
+      // Navigate to product page
+      window.location.href = product.url;
+    });
+    
+    resultsContainer.appendChild(resultItem);
+  });
+  
+  // Add close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = 'Close';
+  closeButton.style.cssText = `
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #C0392B;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+  `;
+  
+  closeButton.addEventListener('click', function() {
+    hideSearchResults();
+  });
+  
+  resultsContainer.appendChild(closeButton);
+  
+  // Add overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'search-results-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+  `;
+  
+  overlay.addEventListener('click', function() {
+    hideSearchResults();
+  });
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(resultsContainer);
+}
+
+function hideSearchResults() {
+  const existingResults = document.querySelector('.search-results');
+  const existingOverlay = document.querySelector('.search-results-overlay');
+  
+  if (existingResults) existingResults.remove();
+  if (existingOverlay) existingOverlay.remove();
+}
+
+function showNoResultsMessage(query) {
+  const messageContainer = document.createElement('div');
+  messageContainer.className = 'search-no-results';
+  messageContainer.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+  `;
+  
+  const activeFilterCount = Object.values(activeFilters).flat().length;
+  const filterInfo = activeFilterCount > 0 ? ` with ${activeFilterCount} active filters` : '';
+  
+  messageContainer.innerHTML = `
+    <h3 style="margin: 0 0 15px 0; color: #212121;">No Results Found</h3>
+    <p style="margin: 0 0 20px 0; color: #666;">No products found for "${query}"${filterInfo}</p>
+    <p style="margin: 0 0 20px 0; color: #888; font-size: 14px;">Try:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
+      <span style="background: #f4f5f6; padding: 5px 10px; border-radius: 15px; font-size: 12px;">outdoor</span>
+      <span style="background: #f4f5f6; padding: 5px 10px; border-radius: 15px; font-size: 12px;">indoor</span>
+      <span style="background: #f4f5f6; padding: 5px 10px; border-radius: 15px; font-size: 12px;">downlight</span>
+      <span style="background: #f4f5f6; padding: 5px 10px; border-radius: 15px; font-size: 12px;">18w</span>
+    </div>
+    <button class="clear-filters-no-results" style="background: #C0392B; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; margin-right: 10px;">Clear Filters</button>
+    <button style="background: #f4f5f6; color: #666; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 4px; padding: 10px 20px; cursor: pointer;">Close</button>
+  `;
+  
+  const closeButton = messageContainer.querySelector('button:last-child');
+  const clearFiltersButton = messageContainer.querySelector('.clear-filters-no-results');
+  
+  closeButton.addEventListener('click', function() {
+    hideSearchResults();
+  });
+  
+  clearFiltersButton.addEventListener('click', function() {
+    clearAllFilters();
+    hideSearchResults();
+    // Re-run search without filters
+    const searchInput = document.querySelector('.product-subtitle');
+    const currentSearchTerm = searchInput.textContent.trim();
+    if (currentSearchTerm && currentSearchTerm !== 'Search products...') {
+      performSearch(currentSearchTerm);
+    }
+  });
+  
+  // Add overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'search-results-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+  `;
+  
+  overlay.addEventListener('click', function() {
+    hideSearchResults();
+  });
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(messageContainer);
+}
+
+// === Language Toggle ===
+function initializeLanguageToggle() {
+  const langSwitches = document.querySelectorAll('.lang-toggle-switch');
+  
+  langSwitches.forEach(switch_ => {
+    const langOptions = switch_.querySelectorAll('.lang-en');
+    
+    langOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const language = this.querySelector('.text-block-3, .text-block-4')?.textContent;
+        if (language) {
+          console.log('🌍 Language changed to:', language);
+          // Add your language change logic here
+        }
+      });
+    });
+  });
+}
+
+// === Accessibility Improvements ===
+function initializeAccessibility() {
+  // Add ARIA labels
+  const menuWrapper = document.querySelector('.menu-wrapper');
+  if (menuWrapper) {
+    menuWrapper.setAttribute('aria-label', 'Open main menu');
+    menuWrapper.setAttribute('aria-expanded', 'false');
+  }
+  
+  const themeToggle = document.querySelector('.theme-toggle-wrapper');
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+  }
+  
+  // Add keyboard navigation
+  const focusableElements = document.querySelectorAll(
+    'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+  );
+  
+  focusableElements.forEach(element => {
+    element.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+  
+  // Update menu ARIA state
+  const menuPanel = document.querySelector('.menu-panel');
+  if (menuPanel && menuWrapper) {
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          const isExpanded = menuPanel.classList.contains('active');
+          menuWrapper.setAttribute('aria-expanded', isExpanded.toString());
+        }
+      });
+    });
+    
+    observer.observe(menuPanel, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+}
+
+// === Performance Optimizations ===
+function optimizePerformance() {
+  // Debounce search input
+  let searchTimeout;
+  const searchInput = document.querySelector('.product-subtitle');
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        performSearch(this.textContent);
+      }, 300);
+    });
+  }
+  
+  // Lazy load images
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src || img.src;
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+  }
+}
+
+// === Error Handling ===
+window.addEventListener('error', function(e) {
+  console.error('🚨 Header error:', e.error);
+});
+
+// === Initialize Performance Optimizations ===
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', optimizePerformance);
+} else {
+  optimizePerformance();
+}
+
+console.log('✅ Header JavaScript loaded successfully');
+
 /* === Accessories Image Zoom on Hover (Constrained to Container) === */ 
 
 document.querySelectorAll('.accessory-image').forEach(container => { 
