@@ -2781,6 +2781,7 @@ function initializeGalleryAutoScroll() {
   }, 500);
   
   console.log('✅ Gallery initialized for testing (auto-scroll disabled)');
+  console.log('💡 Note: Webflow may have built-in auto-scroll - this script is disabled to avoid conflicts');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
