@@ -2607,7 +2607,19 @@ function initializeGalleryAutoScroll() {
   console.log('🖼️ Number of images found:', images.length);
   
   images.forEach((img, index) => {
-    console.log(`🖼️ Image ${index + 1}:`, img.src, 'Loaded:', img.complete);
+    console.log(`🖼️ Image ${index + 1}:`, {
+      src: img.src,
+      loaded: img.complete,
+      naturalWidth: img.naturalWidth,
+      naturalHeight: img.naturalHeight,
+      offsetWidth: img.offsetWidth,
+      offsetHeight: img.offsetHeight,
+      style: {
+        display: img.style.display,
+        visibility: img.style.visibility,
+        opacity: img.style.opacity
+      }
+    });
   });
   
   // Check for collection items
@@ -2743,12 +2755,32 @@ function initializeGalleryAutoScroll() {
   // Add mouse wheel event listener
   gallery.addEventListener('wheel', handleWheelScroll, { passive: false });
   
-  // Start auto-scrolling after a short delay
+  // Force scroll to first image to ensure it's visible (no auto-scroll for testing)
   setTimeout(() => {
-    startScrolling();
-  }, 1000);
+    gallery.scrollTo({
+      left: 0,
+      behavior: "instant"
+    });
+    console.log('📍 Forced scroll to first image');
+    
+    // Check scroll position after forcing
+    console.log('📍 Gallery scroll position after reset:', gallery.scrollLeft);
+    
+    // Check if first item is visible
+    if (collectionItems.length > 0) {
+      const firstItem = collectionItems[0];
+      const firstItemRect = firstItem.getBoundingClientRect();
+      const galleryRect = gallery.getBoundingClientRect();
+      
+      console.log('📍 First item visibility check:', {
+        firstItemLeft: firstItemRect.left,
+        galleryLeft: galleryRect.left,
+        isVisible: firstItemRect.left >= galleryRect.left && firstItemRect.right <= galleryRect.right
+      });
+    }
+  }, 500);
   
-  console.log('✅ Gallery auto-scroll initialized with 5-second intervals and mouse wheel support');
+  console.log('✅ Gallery initialized for testing (auto-scroll disabled)');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
