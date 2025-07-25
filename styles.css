@@ -2951,7 +2951,7 @@ opacity: 1 !important;
   height: 700px !important; /* Match Webflow height */
   max-width: 2000px !important; /* Match Webflow max-width */
   gap: 24px !important; /* Match Webflow gap */
-  padding: 4px !important; /* Match Webflow padding */
+  padding: 2px !important; /* 2px padding all around */
   margin: 0 0 4px 0 !important; /* Match Webflow margin */
   visibility: visible !important;
   box-sizing: border-box !important;
