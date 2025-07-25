@@ -2928,14 +2928,18 @@ opacity: 1 !important;
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important; /* Changed from hidden to visible to show shadow */
+  padding: 1px !important; /* Match Webflow padding */
+  overflow: visible !important; /* Allow shadow to show */
   visibility: visible !important;
-  display: block !important;
+  display: flex !important; /* Match Webflow flex */
+  flex-flow: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
   border: var(--border-main) solid var(--border-main-shadow) !important;
   border-radius: var(--border-4px-cornner) !important;
   background-color: var(--white) !important;
-  /* Removed box-shadow to let Webflow handle it */
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px !important; /* Match Webflow shadow */
 }
 
 .gallery-section-cms {
@@ -2944,13 +2948,17 @@ opacity: 1 !important;
   scroll-behavior: smooth !important;
   scroll-snap-type: x mandatory !important;
   width: 100% !important;
-  gap: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  height: 700px !important; /* Match Webflow height */
+  max-width: 2000px !important; /* Match Webflow max-width */
+  gap: 24px !important; /* Match Webflow gap */
+  padding: 4px !important; /* Match Webflow padding */
+  margin: 0 0 4px 0 !important; /* Match Webflow margin */
   visibility: visible !important;
-  min-height: 200px !important; /* Ensure minimum height for visibility */
   box-sizing: border-box !important;
   position: relative !important;
+  flex-flow: row !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 /* Force single image viewport */
