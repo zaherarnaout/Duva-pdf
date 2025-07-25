@@ -2579,7 +2579,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// === Auto-scroll Gallery Script ===
+// === Auto-scroll Fullscreen Image Gallery ===
 function initializeGalleryAutoScroll() {
   console.log('🎠 Initializing gallery auto-scroll...');
   
@@ -2591,14 +2591,21 @@ function initializeGalleryAutoScroll() {
   }
 
   let scrollInterval;
+  const scrollSpeed = 4000; // time per slide (ms)
+
+  function scrollToNext() {
+    if (!gallery) return;
+    const scrollAmount = gallery.clientWidth;
+    const atEnd = gallery.scrollLeft + scrollAmount >= gallery.scrollWidth;
+
+    gallery.scrollTo({
+      left: atEnd ? 0 : gallery.scrollLeft + scrollAmount,
+      behavior: "smooth"
+    });
+  }
 
   function startScrolling() {
-    scrollInterval = setInterval(() => {
-      gallery.scrollLeft += 1;
-      if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1) {
-        gallery.scrollLeft = 0;
-      }
-    }, 20); // Adjust scroll speed here
+    scrollInterval = setInterval(scrollToNext, scrollSpeed);
   }
 
   function stopScrolling() {
@@ -2612,7 +2619,7 @@ function initializeGalleryAutoScroll() {
   // Start auto-scrolling
   startScrolling();
   
-  console.log('✅ Gallery auto-scroll initialized');
+  console.log('✅ Gallery auto-scroll initialized with 4-second intervals');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
