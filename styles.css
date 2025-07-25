@@ -2834,6 +2834,18 @@ opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
+/* Gallery Section Fade-in on Scroll */
+.gallery-section {
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+  transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+.gallery-section.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 /* Accessories Dropdown Fade-in Animation */
 .accessories-content {
   opacity: 0 !important;
@@ -2940,6 +2952,20 @@ opacity: 1 !important;
   display: block !important;
   margin: 0 !important;
   padding: 0 !important;
+  cursor: pointer !important;
+  transition: cursor 0.2s ease !important;
+}
+
+/* Pointer cursor for gallery images on hover */
+.gallery-section-cms .w-dyn-item:hover img,
+.gallery-section-cms:hover img,
+.gallery-image:hover img {
+  cursor: pointer !important;
+}
+
+/* Pointer cursor for gallery container when hovering */
+.gallery-section-cms:hover {
+  cursor: pointer !important;
 }
 
 /* Hide scrollbar for cleaner look */
