@@ -2787,6 +2787,11 @@ function initializeGalleryAutoScroll() {
   
   console.log('🎯 Mouse wheel navigation always active');
   
+  // Start auto-scrolling after a short delay
+  setTimeout(() => {
+    startScrolling();
+  }, 2000); // 2 second delay to let everything load properly
+  
   // Force scroll to first image to ensure it's visible (no auto-scroll for testing)
   setTimeout(() => {
     gallery.scrollTo({
@@ -2812,8 +2817,8 @@ function initializeGalleryAutoScroll() {
     }
   }, 500);
   
-  console.log('✅ Gallery initialized for testing (auto-scroll disabled)');
-  console.log('💡 Note: Webflow may have built-in auto-scroll - this script is disabled to avoid conflicts');
+  console.log('✅ Gallery initialized with auto-scroll enabled');
+  console.log('💡 Auto-scroll starts after 2 seconds, mouse wheel always available');
 }
 
 // Initialize gallery auto-scroll when DOM is ready
