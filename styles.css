@@ -2854,6 +2854,27 @@ opacity: 1 !important;
   visibility: visible !important;
 }
 
+/* Force all gallery images to be visible regardless of fade state */
+.gallery-section .gallery-section-cms,
+.gallery-section .gallery-image,
+.gallery-section img,
+.gallery-section .w-dyn-item img {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Ensure first few images are definitely visible */
+.gallery-section .w-dyn-item:nth-child(1),
+.gallery-section .w-dyn-item:nth-child(2),
+.gallery-section .w-dyn-item:nth-child(3) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
 /* Accessories Dropdown Fade-in Animation */
 .accessories-content {
   opacity: 0 !important;
