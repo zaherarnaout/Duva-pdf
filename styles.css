@@ -2886,14 +2886,14 @@ opacity: 1 !important;
 .gallery-section-cms {
   display: flex !important;
   flex-direction: row !important;
-  gap: 24px !important;
+  gap: 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   scroll-behavior: smooth !important;
   -webkit-overflow-scrolling: touch !important;
   flex-wrap: nowrap !important;
   position: relative !important;
-  padding: 0 40px !important;
+  padding: 0 !important;
   /* Hide scrollbar */
   scrollbar-width: none !important; /* Firefox */
   -ms-overflow-style: none !important; /* Internet Explorer 10+ */
@@ -2908,18 +2908,15 @@ opacity: 1 !important;
 .gallery-section-cms .w-dyn-item {
   display: flex !important;
   flex-shrink: 0 !important;
-  width: 500px !important;
-  height: 400px !important;
+  width: 2000px !important;
+  height: 600px !important;
   position: relative !important;
-  border-radius: 12px !important;
   overflow: hidden !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  transition: transform 0.3s ease !important;
 }
 
 .gallery-section-cms .w-dyn-item:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+  transform: scale(1.02) !important;
 }
 
 /* Gallery image styling */
@@ -2930,23 +2927,19 @@ opacity: 1 !important;
   transition: transform 0.3s ease !important;
 }
 
-.gallery-section-cms .w-dyn-item:hover .gallery-Image {
-  transform: scale(1.05) !important;
-}
-
 /* Auto-scroll animation */
 @keyframes galleryAutoScroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-2000px); /* Match the width of one gallery item */
   }
 }
 
 /* Apply auto-scroll animation */
 .gallery-section-cms {
-  animation: galleryAutoScroll 30s linear infinite !important;
+  animation: galleryAutoScroll 20s linear infinite !important;
 }
 
 /* Pause animation on hover */
@@ -2956,19 +2949,15 @@ opacity: 1 !important;
 
 /* Responsive design for gallery */
 @media screen and (max-width: 991px) {
-  .gallery-section-cms {
-    padding: 0 20px !important;
-  }
-  
   .gallery-section-cms .w-dyn-item {
-    width: 350px !important;
-    height: 300px !important;
+    width: 100vw !important;
+    height: 400px !important;
   }
 }
 
 @media screen and (max-width: 767px) {
   .gallery-section-cms .w-dyn-item {
-    width: 280px !important;
-    height: 250px !important;
+    width: 100vw !important;
+    height: 300px !important;
   }
 }
