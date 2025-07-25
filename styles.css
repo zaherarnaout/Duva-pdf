@@ -105,24 +105,16 @@ html, body {
 /* === Menu Panel === */
 .menu-panel {
   z-index: 1000;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
   background-color: #ffffff;
   border-radius: 8px;
-  flex-flow: column;
-  flex: 0 auto;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: 520px;
   max-width: 90vw;
   height: auto;
   margin-left: auto;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 11px;
+  padding: 40px 30px;
   display: none;
   position: fixed;
   top: 0;
@@ -175,31 +167,36 @@ html, body {
 }
 
 .link-12 {
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
   color: #000;
-  flex-flow: column;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-top: 0;
-  padding-top: 39px;
+  padding-top: 0;
   display: flex;
+  width: 100%;
 }
 
 .link-13 {
   color: #212121;
-  margin-top: 52px;
+  margin-top: 0;
+  margin-bottom: 20px;
   font-family: Gotham, Georgia, sans-serif;
   font-size: 18px;
   font-weight: 300;
-  line-height: 15px;
+  line-height: 1.4;
   text-decoration: none;
   transition: color 0.3s ease;
   position: relative;
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .link-13:hover {
   color: #C0392B;
+  padding-left: 10px;
 }
 
 .link-14 {
@@ -208,29 +205,37 @@ html, body {
   font-family: Exo, sans-serif;
   font-size: 16px;
   transition: color 0.3s ease;
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .link-14:hover {
   color: #C0392B;
+  padding-left: 10px;
 }
 
 .menu-close-wrapper {
   display: flex;
-  overflow: hidden;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .menu-close {
   background-color: #212121;
   color: #f4f5f6;
-  border-radius: 3px;
-  margin-left: 366px;
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size: 16px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
   position: absolute;
-  left: 21px;
+  top: 20px;
+  right: 20px;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  border: none;
 }
 
 .menu-close:hover {
