@@ -2919,7 +2919,7 @@ opacity: 1 !important;
 .gallery-section {
   position: relative !important;
   width: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important; /* Changed from hidden to visible to show shadow */
   visibility: visible !important;
   display: block !important;
 }
@@ -2929,7 +2929,7 @@ opacity: 1 !important;
   max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important; /* Changed from hidden to visible to show shadow */
   visibility: visible !important;
   display: block !important;
   border: var(--border-main) solid var(--border-main-shadow) !important;
